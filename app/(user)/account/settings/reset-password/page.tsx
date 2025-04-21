@@ -1,0 +1,36 @@
+import Aside from "@/components/Aside";
+import BackButton from "@/components/BackButton";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
+import SendResetPassword from "@/components/forms/SendResetPassword";
+import { getUser } from "@/app/auth/actions/authActions";
+import { settingsLinks } from "@/data/asideLinks";
+import { resetPasswordBreadcrumbs } from "@/data/breadCrumbsLinks";
+
+const page = async () => {
+  const { user } = await getUser();
+
+  return (
+    <div className="flex min-h-screen">
+      <Aside links={settingsLinks} />
+
+      <main className="flex-1 p-8">
+        <div className="mb-6 border-b border-gray-100 pb-4">
+          <div className="mb-6 space-y-4">
+            <BackButton />
+            <BreadcrumbNav items={resetPasswordBreadcrumbs} />
+          </div>
+
+          <h1 className="text-3xl font-bold text-gray-900">Reset Password</h1>
+          <p className="mt-1 text-base text-gray-600">
+            By clicking the button, a reset link will be sent to your registered
+            email address.
+          </p>
+        </div>
+
+        <SendResetPassword email={user.email} />
+      </main>
+    </div>
+  );
+};
+
+export default page;
