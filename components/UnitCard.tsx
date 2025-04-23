@@ -1,15 +1,15 @@
-import { Unit } from "@/types";
+import { UnitWithOwner } from "@/types";
+import { formatCurrency } from "@/utils/formatCurrency";
 import { generateSlug } from "@/utils/generateSlug";
 import Image from "next/image";
 import Link from "next/link";
 
 interface UnitCardProps {
-  unitData: Unit;
+  unitData: UnitWithOwner;
 }
 
 const UnitCard: React.FC<UnitCardProps> = ({ unitData }) => {
-  const { id, image_url, name, price_per_day, category, description } =
-    unitData;
+  const { id, image_url, name, price_per_day, category } = unitData;
 
   const slug = generateSlug(name);
 
@@ -30,7 +30,7 @@ const UnitCard: React.FC<UnitCardProps> = ({ unitData }) => {
           <h2 className="text-base font-medium">{name}</h2>
           <p className="text-base text-gray-600">{category}</p>
           <p className="mt-1 text-base font-bold">
-            ${price_per_day.toFixed(2)}
+            {formatCurrency(price_per_day)}
           </p>
           {/* <span
             className={`text-sm font-medium capitalize ${

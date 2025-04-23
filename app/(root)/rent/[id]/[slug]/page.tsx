@@ -1,12 +1,13 @@
-import { getAllOtherUnits } from "@/app/auth/actions/unitActions";
+import { getUnitById } from "@/app/auth/actions/unitActions";
 import { getUser } from "@/app/auth/actions/authActions";
 import { notFound } from "next/navigation";
 import { generateSlug } from "@/utils/generateSlug";
-import UnitCheckoutClient from "@/components/UnitCheckoutClient";
+import { AlertComponent } from "@/components/AlertComponent";
+import UnitRent from "@/components/UnitRent";
 
 type Props = {
   params: {
-    id: number;
+    id: string;
     slug: string;
   };
 };
@@ -14,15 +15,29 @@ type Props = {
 const page = async ({ params }: Props) => {
   const { id, slug } = params;
 
-  const { user } = await getUser();
-  const { data: units, error: unitsError } = await getAllOtherUnits();
+  const { user, error: userError } = await getUser();
+  if (!user || userError)
+    return (
+      <div className="px-24 py-20">
+        <AlertComponent
+          variant="destructive"
+          message="User is not authenticated."
+        />
+        ;
+      </div>
+    );
 
-  if (!units || unitsError) return notFound();
+  const { data: unit, error: unitError } = await getUnitById(id);
+  if (!unit || unitError)
+    return (
+      <div className="px-24 py-20">
+        <AlertComponent variant="destructive" message="No unit found." />;
+      </div>
+    );
 
-  const unit = units.find((u) => u.id === id);
   if (!unit || slug !== generateSlug(unit.name)) return notFound();
 
-  return <UnitCheckoutClient user={user} unit={unit} />;
+  return <UnitRent user={user} unit={unit} />;
 };
 
 export default page;

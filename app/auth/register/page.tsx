@@ -72,7 +72,6 @@ export default function SignupPage() {
 
     if (result?.success) {
       toast.success(result.success);
-      console.log(result.insertData);
       setLoading(false);
       router.push(result.redirectUrl);
     }

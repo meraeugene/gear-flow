@@ -3,7 +3,6 @@ import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { addUnitsBreadcrumbs } from "@/data/breadCrumbsLinks";
-import { dashboardLinks } from "@/data/asideLinks";
 import { getAllCategories } from "@/app/auth/actions/categoryActions";
 
 const page = async () => {
@@ -12,10 +11,10 @@ const page = async () => {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <Aside links={dashboardLinks} />
+      <Aside />
 
       {/* Main content */}
-      <main className="pb1 flex-1 p-8 pb-12">
+      <main className="pb1 flex-1 p-8 pt-11 pb-12">
         {/* Top nav for small screens */}
         <div className="mb-6 flex items-center justify-between md:hidden">
           <h2 className="text-2xl font-semibold tracking-tight">Dashboard</h2>

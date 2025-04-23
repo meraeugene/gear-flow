@@ -12,9 +12,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Unit } from "@/types";
+import { UnitWithOwner } from "@/types";
 
-export const columns: ColumnDef<Unit>[] = [
+export const columns: ColumnDef<UnitWithOwner>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => {

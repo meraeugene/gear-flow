@@ -43,11 +43,13 @@ const menuItems = [
 interface ProfileDropDownProps {
   profilePicture: string;
   fullName: string;
+  email: string;
 }
 
 const ProfileDropDown = ({
   profilePicture,
   fullName,
+  email,
 }: ProfileDropDownProps) => {
   const router = useRouter();
 
@@ -92,7 +94,12 @@ const ProfileDropDown = ({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          <div className="flex flex-col gap-1">
+            <span>My Account</span>
+            <span className="text-xs text-gray-500">{email}</span>
+          </div>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         {menuItems.map(({ label, icon, shortcut, action }) => (
           <DropdownMenuItem

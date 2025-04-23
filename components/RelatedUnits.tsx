@@ -1,28 +1,29 @@
 "use client";
 
-import UnitCard from "@/components/UnitCard";
-import { useState } from "react";
-import { GrNext, GrPrevious } from "react-icons/gr";
-import Link from "next/link";
-import { motion } from "framer-motion";
 import { UnitWithOwner } from "@/types";
+import { motion } from "framer-motion";
+import UnitCard from "./UnitCard";
+import { useState } from "react";
+import Link from "next/link";
+import { GrNext, GrPrevious } from "react-icons/gr";
 
-interface UnitsProps {
-  unitsData: UnitWithOwner[];
-  unitTitle: string;
-  href: string;
+interface RelatedUnitsProps {
+  relatedUnitsData: UnitWithOwner[];
 }
 
-const Units = ({ unitsData, unitTitle, href }: UnitsProps) => {
+const RelatedUnits = ({ relatedUnitsData }: RelatedUnitsProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 3;
 
   const indexOfLastUnit = currentPage * itemsPerPage;
   const indexOfFirstUnit = indexOfLastUnit - itemsPerPage;
-  const currentUnits = unitsData.slice(indexOfFirstUnit, indexOfLastUnit);
+  const currentUnits = relatedUnitsData.slice(
+    indexOfFirstUnit,
+    indexOfLastUnit,
+  );
 
   const nextPage = () => {
-    if (currentPage < Math.ceil(unitsData.length / itemsPerPage)) {
+    if (currentPage < Math.ceil(relatedUnitsData.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -34,17 +35,10 @@ const Units = ({ unitsData, unitTitle, href }: UnitsProps) => {
   };
 
   return (
-    <div>
-      <h1 className="text-2xl">Explore Our {unitTitle}</h1>
-
+    <div className="mt-24">
       <div className="mb-8 flex items-center justify-between">
-        <p className="text-base">{unitTitle}</p>
-
+        <h1 className="text-3xl font-semibold">Related Units</h1>
         <div className="next-prev__buttons flex items-center gap-3">
-          <Link href={href} className="mr-2">
-            View All
-          </Link>
-
           <button
             onClick={prevPage}
             disabled={currentPage === 1}
@@ -55,7 +49,7 @@ const Units = ({ unitsData, unitTitle, href }: UnitsProps) => {
           <button
             onClick={nextPage}
             disabled={
-              currentPage === Math.ceil(unitsData.length / itemsPerPage)
+              currentPage === Math.ceil(relatedUnitsData.length / itemsPerPage)
             }
             className="circle-button"
           >
@@ -63,7 +57,6 @@ const Units = ({ unitsData, unitTitle, href }: UnitsProps) => {
           </button>
         </div>
       </div>
-
       <div className="grid grid-cols-3 gap-x-4 gap-y-10">
         {currentUnits.map((unit, index) => (
           <motion.div
@@ -86,4 +79,4 @@ const Units = ({ unitsData, unitTitle, href }: UnitsProps) => {
   );
 };
 
-export default Units;
+export default RelatedUnits;

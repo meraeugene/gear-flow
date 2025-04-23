@@ -54,6 +54,7 @@ export async function updateSession(request: NextRequest) {
     "/account/complete-profile",
   ];
   const authPages = ["/auth/login", "/auth/register"];
+  const adminPages = ["/admin/manage-users"];
 
   // Redirect users who are logged in but haven't completed their profile (no address)
   // This applies both when they visit "/" or any protected page (except /account/complete-profile)
@@ -79,6 +80,21 @@ export async function updateSession(request: NextRequest) {
   if (user && !error && authPages.includes(pathname)) {
     url.pathname = "/";
     return NextResponse.redirect(url);
+  }
+
+  // Check if user is admin and restrict access to admin pages
+  if (user && !error) {
+    // If the user is not an admin and tries to access admin-only pages
+    if (user.role !== "admin" && adminPages.includes(pathname)) {
+      url.pathname = "/account/dashboard";
+      return NextResponse.redirect(url);
+    }
+
+    // If the user is an admin and tries to access /account/my-units
+    if (user.role === "admin" && pathname === "/account/my-units") {
+      url.pathname = "/account/dashboard";
+      return NextResponse.redirect(url);
+    }
   }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is.

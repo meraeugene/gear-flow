@@ -12,7 +12,7 @@ const page = async () => {
 
   return (
     <div className="flex min-h-screen">
-      <Aside links={settingsLinks} />
+      <Aside />
 
       <main className="flex-1 p-8">
         <div className="mb-6 border-b border-gray-100 pb-4">

@@ -8,26 +8,23 @@ import { isValidPhoneNumber } from "libphonenumber-js";
 export const signup = async (formData: FormData) => {
   const supabase = await createClient();
 
-  const fields = [
-    "firstName",
-    "lastName",
-    "phoneNumber",
-    "email",
-    "password",
-    "confirmPassword",
-  ];
-
   const formValues = Object.fromEntries(
-    fields.map((key) => [key, formData.get(key)?.toString().trim() || ""]),
+    [
+      "firstName",
+      "lastName",
+      "phoneNumber",
+      "email",
+      "password",
+      "confirmPassword",
+    ].map((key) => [key, formData.get(key)?.toString().trim() || ""]),
   );
 
-  const { firstName, lastName, email, phoneNumber, password, confirmPassword } =
-    formValues;
-
-  // SERVER VALIDATION
   if (Object.values(formValues).some((val) => !val)) {
     return { error: "Please input the required fields." };
   }
+
+  const { firstName, lastName, email, phoneNumber, password, confirmPassword } =
+    formValues;
 
   if (!isValidPhoneNumber(phoneNumber || "")) {
     return { error: "Invalid phone number." };
@@ -103,45 +100,45 @@ export const signup = async (formData: FormData) => {
 
 export const login = async (formData: FormData) => {
   const supabase = await createClient();
-
-  const fields = ["email", "password"];
-
   const formValues = Object.fromEntries(
-    fields.map((key) => [key, formData.get(key)?.toString().trim() || ""]),
+    ["email", "password"].map((key) => [
+      key,
+      formData.get(key)?.toString().trim() || "",
+    ]),
   );
 
-  //   SERVER VALIDATION
   if (Object.values(formValues).some((val) => !val)) {
     return { error: "Please input the required fields." };
   }
 
   const { email, password } = formValues;
 
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
+  // Check if the user exists and is not banned before signing in
+  const { data: userCheck, error: checkError } = await supabase
+    .from("users")
+    .select("is_banned")
+    .eq("email", email)
+    .single();
+
+  if (checkError) {
+    if (checkError.code === "PGRST116") {
+      return { error: "Account does not exist or has been deleted." };
+    }
+    return { error: checkError.message };
+  }
+
+  if (!userCheck) {
+    return { error: "Account does not exist or has been deleted." };
+  }
+
+  if (userCheck?.is_banned) {
+    return { error: "Your account has been banned. Please contact support." };
+  }
+
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
     return { error: error.message };
-  }
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return { error: "Failed to fetch user details." };
-  }
-
-  const { error: userFetchError } = await supabase
-    .from("users")
-    .select("address")
-    .eq("auth_user_id", user.id)
-    .single();
-
-  if (userFetchError) {
-    return { error: userFetchError.message };
   }
 
   revalidatePath("/", "layout");

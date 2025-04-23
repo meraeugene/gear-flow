@@ -5,6 +5,15 @@ import { createClient } from "@/utils/supabase/server";
 export const sendResetPasswordLink = async (formData: FormData) => {
   const supabase = await createClient();
 
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    return { error: "User not authenticated." };
+  }
+
   const email = formData.get("email")?.toString().trim();
 
   if (!email) {
@@ -33,6 +42,15 @@ export const sendResetPasswordLink = async (formData: FormData) => {
 
 export const updatePassword = async (formData: FormData) => {
   const supabase = await createClient();
+
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    return { error: "User not authenticated." };
+  }
 
   const password = formData.get("password")?.toString().trim();
 

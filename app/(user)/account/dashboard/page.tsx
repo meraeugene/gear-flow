@@ -2,7 +2,6 @@ import { getUser } from "@/app/auth/actions/authActions";
 import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
-import { dashboardLinks } from "@/data/asideLinks";
 import { dashboardBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { redirect } from "next/navigation";
 
@@ -16,10 +15,10 @@ const page = async () => {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <Aside links={dashboardLinks} />
+      <Aside userRole={user.role} />
 
       {/* Main content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-8 pt-11">
         {/* Top nav for small screens */}
         <div className="mb-6 flex items-center justify-between md:hidden">
           <h2 className="text-2xl font-semibold tracking-tight">Dashboard</h2>

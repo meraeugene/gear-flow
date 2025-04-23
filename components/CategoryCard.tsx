@@ -2,11 +2,16 @@
 
 import { cn } from "@/lib/utils";
 import { Category } from "@/types";
+import { generateSlug } from "@/utils/generateSlug";
+import Link from "next/link";
 
-const CategoryCard = ({ name, image_url, description }: Category) => {
+const CategoryCard = ({ name, image_url, description, id }: Category) => {
+  const slug = generateSlug(name);
+
   return (
     <div className="group/card w-full max-w-xs">
-      <div
+      <Link
+        href={`/category/${id}/${slug}`}
         className={cn(
           "card relative mx-auto flex h-[20rem] max-w-sm cursor-pointer flex-col items-center justify-center overflow-hidden rounded-md bg-cover p-4 shadow-xl",
         )}
@@ -27,7 +32,7 @@ const CategoryCard = ({ name, image_url, description }: Category) => {
             </p>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

@@ -1,5 +1,10 @@
 "use client";
 
+import {
+  adminDashboardLinks,
+  userDashboardLinks,
+  settingsLinks,
+} from "@/data/asideLinks";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,16 +17,25 @@ interface LinkItem {
 }
 
 interface AsideProps {
-  links: LinkItem[];
+  userRole?: string; // Pass user role as a prop
 }
 
-const Aside = ({ links }: AsideProps) => {
+const Aside = ({ userRole }: AsideProps) => {
   const pathname = usePathname();
+
+  // Select links based on user role
+  const dashboardLinks =
+    userRole === "admin" ? adminDashboardLinks : userDashboardLinks;
+
+  // Conditionally add settings links based on pathname
+  const links = pathname.startsWith("/account/settings")
+    ? settingsLinks
+    : dashboardLinks;
 
   return (
     <div className="flex min-h-screen text-black">
       <aside className="hidden w-72 flex-col p-8 shadow-sm md:flex">
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <Image
             src="/assets/images/logo.png"
             width={40}
@@ -29,7 +43,7 @@ const Aside = ({ links }: AsideProps) => {
             alt="logo"
           />
           <h1 className="text-xl font-semibold">GEARFLOW</h1>
-        </div>
+        </Link>
         <nav className="mt-8 flex flex-col space-y-4">
           {links.map((link) => {
             const isActive = pathname === link.href;

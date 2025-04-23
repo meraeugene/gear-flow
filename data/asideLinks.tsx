@@ -1,11 +1,15 @@
-import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  SettingOutlined,
+  UsergroupAddOutlined,
+} from "@ant-design/icons";
 import { FiBox, FiPackage, FiEdit, FiLock, FiMail } from "react-icons/fi";
 
-export const dashboardLinks = [
+export const userDashboardLinks = [
   {
     name: "Dashboard",
     href: "/account/dashboard",
-    icon: <AppstoreOutlined style={{ fontSize: 18 }} />,
+    icon: <AppstoreOutlined size={18} />,
   },
   {
     name: "My Units",
@@ -16,6 +20,19 @@ export const dashboardLinks = [
     name: "Rental Status",
     href: "/account/rental-status",
     icon: <FiBox size={18} />,
+  },
+];
+
+export const adminDashboardLinks = [
+  {
+    name: "Dashboard",
+    href: "/account/dashboard",
+    icon: <AppstoreOutlined size={18} />,
+  },
+  {
+    name: "Manage Users",
+    href: "/admin/manage-users",
+    icon: <UsergroupAddOutlined size={18} />,
   },
 ];
 

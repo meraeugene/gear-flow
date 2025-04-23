@@ -9,7 +9,7 @@ const Header = async () => {
 
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between bg-white px-24 py-3 shadow-sm">
-      <div className="logo">
+      <Link href="/" className="logo">
         <Image
           src="/assets/images/no-bg-logo.png"
           width={80}
@@ -17,7 +17,7 @@ const Header = async () => {
           alt="logo"
           className="h-auto w-auto"
         />
-      </div>
+      </Link>
 
       {/* <NavLinks /> */}
 
@@ -27,6 +27,7 @@ const Header = async () => {
           <ProfileDropDown
             profilePicture={user.profile_picture}
             fullName={`${user.first_name} ${user.last_name}`}
+            email={user.email}
           />
         </div>
       ) : (

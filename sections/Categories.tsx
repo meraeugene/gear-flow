@@ -45,7 +45,7 @@ const Categories = ({ categoriesData }: CategoriesProps) => {
         <h1 className="text-2xl">Browse by Category</h1>
 
         <div className="next-prev__buttons flex items-center gap-3">
-          <Link href="/categories" className="mr-2">
+          <Link href="/units" className="mr-2">
             View All
           </Link>
 

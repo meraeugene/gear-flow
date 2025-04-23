@@ -1,15 +1,17 @@
 import { notFound } from "next/navigation";
-import { unitsData } from "@/data/units";
 import { generateSlug } from "@/utils/generateSlug";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import Image from "next/image";
 import BackButton from "@/components/BackButton";
-import { getAllOtherUnits } from "@/app/auth/actions/unitActions";
+import { getRelatedUnits, getUnitById } from "@/app/auth/actions/unitActions";
 import Link from "next/link";
+import { formatCurrency } from "@/utils/formatCurrency";
+import { AlertComponent } from "@/components/AlertComponent";
+import RelatedUnits from "@/components/RelatedUnits";
 
 type Props = {
   params: {
-    id: number;
+    id: string;
     slug: string;
   };
 };
@@ -17,28 +19,36 @@ type Props = {
 const page = async ({ params }: Props) => {
   const { id, slug } = params;
 
-  const { data: units, error: unitsError } = await getAllOtherUnits();
-  if (!units || unitsError) return notFound();
+  const { data: unit, error: unitError } = await getUnitById(id);
+  const { data: relatedUnits, error: relatedUnitsError } =
+    await getRelatedUnits(unit.id, unit.category.id);
 
-  const unit = units.find((u) => u.id === id);
-  if (!unit) return notFound();
+  if (!unit || unitError)
+    return (
+      <div className="px-24 py-20">
+        <AlertComponent variant="destructive" message="No units found." />;
+      </div>
+    );
 
-  if (slug !== generateSlug(unit.name)) return notFound();
+  if (slug !== generateSlug(unit.name))
+    return (
+      <div className="px-24 py-20">
+        <AlertComponent variant="destructive" message="No units found." />;
+      </div>
+    );
 
   const breadcrumbs = [
     { title: "Home", href: "/" },
     { title: "Units", href: "/units" },
     {
       title: unit.name,
-      href: `/units/${unit.unit_id}/${generateSlug(unit.name)}`,
+      href: `/units/${id}/${slug}`,
     },
   ];
 
-  const isAvailable = unit.is_available;
-
   return (
     <main className="px-24 pt-12 pb-24">
-      <div className="space-y-4">
+      <div className="space-y-7">
         <BackButton />
         <BreadcrumbNav items={breadcrumbs} />
       </div>
@@ -61,7 +71,7 @@ const page = async ({ params }: Props) => {
             {unit.name}
           </h1>
           <div className="my-4 flex items-center gap-2">
-            <p className="text-base text-gray-500">{unit.category}</p>
+            <p className="text-base text-gray-500">{unit.category.name}</p>
             <span>|</span>
             <p
               className={`text-base capitalize ${
@@ -73,30 +83,36 @@ const page = async ({ params }: Props) => {
           </div>
           <p className="mb-4 text-base">
             Owner:{" "}
-            <span className="font-medium text-gray-500">Andrew Villalon</span>
+            <span className="font-medium text-gray-500">
+              {unit.owner.first_name} {unit.owner.last_name}
+            </span>
           </p>
           <p className="text-base text-gray-600">{unit.description}</p>
 
           <div className="my-6 flex items-center gap-2">
             <p className="text-3xl font-medium text-gray-900">
-              ${unit.price_per_day.toFixed(2)}
+              {formatCurrency(unit.price_per_day)}
             </p>
             <span className="text-base text-gray-500">/ Per Day</span>
           </div>
           <Link href={`/rent/${id}/${slug}`}>
             <button
-              className={`h-[50px] w-[250px] rounded-sm border transition duration-200 ${
-                isAvailable
+              className={`h-[50px] w-full rounded-sm border transition duration-200 ${
+                unit.is_available
                   ? "cursor-pointer border-gray-300 hover:bg-gray-100"
                   : "cursor-not-allowed border-gray-200 bg-gray-200"
               }`}
-              disabled={!isAvailable}
+              disabled={!unit.is_available}
             >
               Rent Now
             </button>
           </Link>
         </div>
       </div>
+
+      {relatedUnits && relatedUnits.length > 0 && (
+        <RelatedUnits relatedUnitsData={relatedUnits ?? []} />
+      )}
     </main>
   );
 };
