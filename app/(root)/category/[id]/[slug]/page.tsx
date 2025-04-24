@@ -6,7 +6,6 @@ import CategoryBanner from "@/components/CategoryBanner";
 import CategoryUnits from "@/components/CategoryUnits";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { generateSlug } from "@/utils/generateSlug";
-import { notFound } from "next/navigation";
 
 type Props = {
   params: {
@@ -19,14 +18,8 @@ const page = async ({ params }: Props) => {
   const { id, slug } = params;
 
   const { data, error } = await getUnitsByCategory(id);
-  if (!data || error)
-    return (
-      <div className="px-24 py-20">
-        <AlertComponent variant="destructive" message="No units found." />;
-      </div>
-    );
 
-  if (slug !== generateSlug(data[0]?.category || ""))
+  if (!data || error || slug !== generateSlug(data[0]?.category || ""))
     return (
       <div className="px-24 py-20">
         <AlertComponent variant="destructive" message="No units found." />;

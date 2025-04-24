@@ -1,31 +1,30 @@
 import Aside from "@/components/Aside";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
-import {
-  myRentalsBreadcrumbs,
-  usersBreadcrumbs,
-} from "@/data/breadCrumbsLinks";
-import { getUser } from "@/app/auth/actions/authActions";
+import { myRentalsBreadcrumbs } from "@/data/breadCrumbsLinks";
 import RentalsTable from "./rentals-table";
 import { getRentalStatus } from "@/app/auth/actions/rentalActions";
+import { AlertComponent } from "@/components/AlertComponent";
 
 const page = async () => {
-  const { user, error: userError } = await getUser();
   const { rentals, error: rentalsError } = await getRentalStatus();
+
+  if (rentalsError) {
+    return (
+      <div className="px-24 py-20">
+        <AlertComponent
+          variant="destructive"
+          message="Error fetching rentals."
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen">
-      <Aside userRole={user.role} />
+      <Aside />
 
       <main className="flex-1 p-8">
-        {/* Top nav for mobile */}
-        <div className="mb-6 flex items-center justify-between md:hidden">
-          <h2 className="text-2xl font-semibold tracking-tight">Dashboard</h2>
-          <button className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white shadow hover:opacity-90">
-            Menu
-          </button>
-        </div>
-
         <div className="mb-6 border-b border-gray-100 pb-6">
           <div className="mb-6 space-y-4">
             <BackButton />

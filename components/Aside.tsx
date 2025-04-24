@@ -5,27 +5,21 @@ import {
   userDashboardLinks,
   settingsLinks,
 } from "@/data/asideLinks";
+import { useAuthStore } from "@/stores/useAuthStore";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
 
-interface LinkItem {
-  name: string;
-  href: string;
-  icon: ReactNode;
-}
-
-interface AsideProps {
-  userRole?: string; // Pass user role as a prop
-}
-
-const Aside = ({ userRole }: AsideProps) => {
+const Aside = () => {
   const pathname = usePathname();
+
+  const { role } = useAuthStore();
+
+  console.log(role);
 
   // Select links based on user role
   const dashboardLinks =
-    userRole === "admin" ? adminDashboardLinks : userDashboardLinks;
+    role === "admin" ? adminDashboardLinks : userDashboardLinks;
 
   // Conditionally add settings links based on pathname
   const links = pathname.startsWith("/account/settings")

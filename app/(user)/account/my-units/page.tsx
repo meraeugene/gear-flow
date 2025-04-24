@@ -5,23 +5,27 @@ import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
 import { getUserUnits } from "@/app/auth/actions/unitActions";
 import { myUnitsBreadcrumbs } from "@/data/breadCrumbsLinks";
+import { AlertComponent } from "@/components/AlertComponent";
 
 const page = async () => {
   const { data: userUnitsData, error } = await getUserUnits();
+
+  if (error) {
+    return (
+      <div className="px-24 py-20">
+        <AlertComponent
+          variant="destructive"
+          message="Error fetching user units."
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen">
       <Aside />
 
       <main className="flex-1 p-8 pt-11">
-        {/* Top nav for mobile */}
-        <div className="mb-6 flex items-center justify-between md:hidden">
-          <h2 className="text-2xl font-semibold tracking-tight">Dashboard</h2>
-          <button className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white shadow hover:opacity-90">
-            Menu
-          </button>
-        </div>
-
         <div className="border-b border-gray-100 pb-4">
           <div className="mb-6 space-y-4">
             <BackButton />
@@ -33,7 +37,6 @@ const page = async () => {
           </p>
         </div>
 
-        {/* Items Table */}
         <DataTable columns={columns} data={userUnitsData ?? []} />
       </main>
     </div>

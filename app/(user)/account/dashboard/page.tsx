@@ -14,18 +14,9 @@ const page = async () => {
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
-      <Aside userRole={user.role} />
+      <Aside />
 
-      {/* Main content */}
       <main className="flex-1 p-8 pt-11">
-        {/* Top nav for small screens */}
-        <div className="mb-6 flex items-center justify-between md:hidden">
-          <h2 className="text-2xl font-semibold tracking-tight">Dashboard</h2>
-          <button>Menu</button>
-        </div>
-
-        {/* Dashboard Content */}
         <div className="space-y-8">
           <div className="mb-6 border-b border-gray-100 pb-4">
             <div className="mb-6 space-y-4">

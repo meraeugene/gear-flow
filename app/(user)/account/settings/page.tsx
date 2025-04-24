@@ -1,4 +1,5 @@
 import { getUser } from "@/app/auth/actions/authActions";
+import { AlertComponent } from "@/components/AlertComponent";
 import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
@@ -8,7 +9,18 @@ import { linkDescriptions } from "@/data/settingsLinks";
 import Link from "next/link";
 
 const page = async () => {
-  const { user } = await getUser();
+  const { user, error } = await getUser();
+
+  if (!user || error) {
+    return (
+      <div className="px-24 py-20">
+        <AlertComponent
+          variant="destructive"
+          message="User is not authenticated."
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen">

@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getInitials } from "@/utils/getInitials";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 const menuItems = [
   {
@@ -53,6 +54,8 @@ const ProfileDropDown = ({
 }: ProfileDropDownProps) => {
   const router = useRouter();
 
+  const { logout } = useAuthStore();
+
   useEffect(() => {
     const handleShortcut = (e: KeyboardEvent) => {
       if (e.ctrlKey) {
@@ -66,6 +69,7 @@ const ProfileDropDown = ({
         } else if (key === "l") {
           e.preventDefault();
           handleClientLogout();
+          logout();
         }
       }
     };
@@ -77,6 +81,7 @@ const ProfileDropDown = ({
   const handleClick = (action: string) => {
     if (action === "logout") {
       handleClientLogout();
+      logout();
     } else {
       router.push(action);
     }
@@ -96,7 +101,7 @@ const ProfileDropDown = ({
       <DropdownMenuContent>
         <DropdownMenuLabel>
           <div className="flex flex-col gap-1">
-            <span>My Account</span>
+            <span>{fullName}</span>
             <span className="text-xs text-gray-500">{email}</span>
           </div>
         </DropdownMenuLabel>

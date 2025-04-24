@@ -2,7 +2,6 @@
 
 import UserInfoCard from "@/components/UserInfoCard";
 import { TransactionData } from "@/types";
-import Image from "next/image";
 
 type Props = {
   transactions: TransactionData[];

@@ -141,8 +141,28 @@ export const login = async (formData: FormData) => {
     return { error: error.message };
   }
 
-  revalidatePath("/", "layout");
-  redirect("/");
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return { error: "User not found after login." };
+
+  const { data: userDetails, error: userDetailsError } = await supabase
+    .from("users")
+    .select("auth_user_id, role") // Add other fields if needed
+    .eq("auth_user_id", user.id)
+    .single();
+
+  if (userDetailsError) {
+    return { error: userDetailsError.message };
+  }
+
+  return {
+    userId: userDetails.auth_user_id,
+    role: userDetails.role,
+    success: true,
+    redirectUrl: "/",
+  };
 };
 
 export const signOut = async () => {

@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { generateSlug } from "@/utils/generateSlug";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import Image from "next/image";
@@ -23,14 +22,12 @@ const page = async ({ params }: Props) => {
   const { data: relatedUnits, error: relatedUnitsError } =
     await getRelatedUnits(unit.id, unit.category.id);
 
-  if (!unit || unitError)
-    return (
-      <div className="px-24 py-20">
-        <AlertComponent variant="destructive" message="No units found." />;
-      </div>
-    );
-
-  if (slug !== generateSlug(unit.name))
+  if (
+    !unit ||
+    unitError ||
+    relatedUnitsError ||
+    slug !== generateSlug(unit.name)
+  )
     return (
       <div className="px-24 py-20">
         <AlertComponent variant="destructive" message="No units found." />;

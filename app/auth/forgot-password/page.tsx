@@ -16,10 +16,7 @@ export default function page() {
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
-    const email = formData.get("email")?.toString().trim();
-
-    // Log the email to verify if it's being captured correctly
-    console.log("Email being sent:", email);
+    formData.get("email")?.toString().trim();
 
     const result = await sendResetPasswordLink(formData);
 

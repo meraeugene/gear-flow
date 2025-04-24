@@ -8,8 +8,12 @@ import Loader from "@/components/Loader";
 import PasswordField from "@/components/forms/PasswordField";
 import TextField from "@/components/forms/TextField";
 import { login } from "../actions/authActions";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -19,11 +23,15 @@ export default function LoginPage() {
     const form = new FormData(event.currentTarget);
     const result = await login(form);
 
-    console.log(form);
-
     if (result?.error) {
       toast.error(result.error);
-      return setLoading(false);
+      setLoading(false);
+      return;
+    }
+
+    if (result?.success) {
+      useAuthStore.getState().setAuth(result.userId, result.role);
+      router.push(result.redirectUrl);
     }
   };
 
