@@ -33,6 +33,14 @@ export type UnitWithOwner = {
   };
 };
 
+export type userInfo = {
+  address: string;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  profile_picture: string;
+};
+
 export type RentalData = {
   id: string;
   unit_id: string;
@@ -43,6 +51,13 @@ export type RentalData = {
   total_price: number;
   status: string;
   created_at: string;
+  unit: {
+    name: string;
+    description: string;
+    id: string;
+    image_url: string;
+  };
+  owner: userInfo;
 };
 
 export type TransactionData = {
@@ -53,4 +68,11 @@ export type TransactionData = {
   status: string;
   proof_of_payment_url: string | null;
   transaction_date: string;
+  unit: {
+    name: string;
+    description: string;
+    id: string;
+    image_url: string;
+  };
+  owner: userInfo;
 };

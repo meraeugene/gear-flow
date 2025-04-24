@@ -3,7 +3,14 @@ import {
   SettingOutlined,
   UsergroupAddOutlined,
 } from "@ant-design/icons";
-import { FiBox, FiPackage, FiEdit, FiLock, FiMail } from "react-icons/fi";
+import {
+  FiEdit,
+  FiLock,
+  FiMail,
+  FiCreditCard,
+  FiShoppingBag,
+  FiPackage,
+} from "react-icons/fi";
 
 export const userDashboardLinks = [
   {
@@ -17,9 +24,14 @@ export const userDashboardLinks = [
     icon: <FiPackage size={18} />,
   },
   {
-    name: "Rental Status",
-    href: "/account/rental-status",
-    icon: <FiBox size={18} />,
+    name: "My Rentals",
+    href: "/account/my-rentals",
+    icon: <FiShoppingBag size={18} />,
+  },
+  {
+    name: "My Payments",
+    href: "/account/my-payments",
+    icon: <FiCreditCard size={18} />,
   },
 ];
 

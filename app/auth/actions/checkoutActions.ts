@@ -1,5 +1,5 @@
 "use server";
-import { RentalData, TransactionData } from "@/types";
+import { RentalData } from "@/types";
 import { createClient } from "@/utils/supabase/server";
 
 export async function createRentalAndTransaction({
@@ -40,7 +40,7 @@ export async function createRentalAndTransaction({
         end_date: endDate,
         delivery_method: deliveryMethod, // (delivery or pickup only) - default pickup
         total_price: totalPrice,
-        // status ('pending', 'ongoing', 'completed', 'cancelled') default -pending
+        // status ('pending', 'ongoing', 'completed', 'cancelled', 'returned') default -pending
       },
     ])
     .select();
@@ -70,8 +70,19 @@ export async function createRentalAndTransaction({
     };
   }
 
+  const { error: unitUpdateError } = await supabase
+    .from("units")
+    .update({ is_available: false })
+    .eq("id", unitId);
+
+  if (unitUpdateError) {
+    console.log("Unit update error:", unitUpdateError.message);
+    return { error: "Failed to update unit availability." };
+  }
+
   return {
-    success: "Rental and transaction successfully created!",
-    redirectUrl: "/account/rental-status",
+    success:
+      "Thank you! Your rental is confirmed. Check your dashboard for details.",
+    redirectUrl: "/account/my-rentals",
   };
 }

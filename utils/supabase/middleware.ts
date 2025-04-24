@@ -45,6 +45,8 @@ export async function updateSession(request: NextRequest) {
   const protectedPages = [
     "/account/dashboard",
     "/account/my-units",
+    "/account/my-payments",
+    "/account/my-rentals",
     "/account/my-units/add-unit",
     "/account/rental-status",
     "/account/settings",

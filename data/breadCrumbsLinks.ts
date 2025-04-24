@@ -14,6 +14,16 @@ export const myUnitsBreadcrumbs = [
   { title: "My Units", href: "/account/my-units" },
 ];
 
+export const myRentalsBreadcrumbs = [
+  { title: "Home", href: "/" },
+  { title: "My Rentals", href: "/account/my-rentals" },
+];
+
+export const myPaymentsBreadcrumbs = [
+  { title: "Home", href: "/" },
+  { title: "My Payments", href: "/account/my-payments" },
+];
+
 export const usersBreadcrumbs = [
   { title: "Home", href: "/" },
   { title: "Users", href: "/admin/manage-user" },

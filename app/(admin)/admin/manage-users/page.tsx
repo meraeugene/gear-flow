@@ -5,25 +5,31 @@ import { usersBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { getUser } from "@/app/auth/actions/authActions";
 import { getAllUsers } from "@/app/auth/actions/usersActions";
 import UsersTable from "./users-table";
+import { AlertComponent } from "@/components/AlertComponent";
 
 const page = async () => {
-  const { user, error: userError } = await getUser();
-  const { data: users, error } = await getAllUsers();
+  const [userResult, usersResult] = await Promise.all([
+    getUser(),
+    getAllUsers(),
+  ]);
+
+  if (userResult.error || usersResult.error) {
+    return (
+      <div className="px-24 py-20">
+        <AlertComponent variant="destructive" message="No users found." />;
+      </div>
+    );
+  }
+
+  const user = userResult.user;
+  const users = usersResult.data;
 
   return (
     <div className="flex min-h-screen">
       <Aside userRole={user.role} />
 
       <main className="flex-1 p-8">
-        {/* Top nav for mobile */}
-        <div className="mb-6 flex items-center justify-between md:hidden">
-          <h2 className="text-2xl font-semibold tracking-tight">Dashboard</h2>
-          <button className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white shadow hover:opacity-90">
-            Menu
-          </button>
-        </div>
-
-        <div className="border-b border-gray-100 pb-4">
+        <div className="mb-6 border-b border-gray-100 pb-6">
           <div className="mb-6 space-y-4">
             <BackButton />
             <BreadcrumbNav items={usersBreadcrumbs} />
@@ -34,8 +40,7 @@ const page = async () => {
           </p>
         </div>
 
-        {/* Items Table */}
-        <UsersTable users={users ?? []} currentUser={user} />
+        <UsersTable users={users ?? []} />
       </main>
     </div>
   );

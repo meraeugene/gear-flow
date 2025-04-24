@@ -42,7 +42,7 @@ const SearchBar = () => {
         onFocus={() => setFocused(true)}
         onBlur={() => setTimeout(() => setFocused(false), 150)}
         className="pr-8 pl-10 text-sm"
-        placeholder="" // Empty placeholder for Spotify-like effect
+        placeholder="What unit are you searching for?"
       />
       {query && (
         <button
