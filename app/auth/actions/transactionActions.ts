@@ -27,7 +27,8 @@ export async function getUserTransaction() {
         last_name,
         profile_picture,
         address,
-        phone_number
+        phone_number,
+        email
       )
     ) 
   )

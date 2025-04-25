@@ -48,3 +48,8 @@ export const unitsBreadcrumbs = [
   { title: "Home", href: "/" },
   { title: "Units", href: "/units" },
 ];
+
+export const lendersBreadcrumbs = [
+  { title: "Home", href: "/" },
+  { title: "Lenders", href: "/lenders" },
+];

@@ -23,18 +23,22 @@ const UserInfoCard = ({ userInfo }: UserInfoCardProps) => {
         />
       </HoverCardTrigger>
       <HoverCardContent>
-        <ul>
-          <li className="text-sm">
-            <span className="font-semibold">Name: </span>
+        <ul className="flex flex-col gap-2">
+          <li className="text-sm text-gray-800">
+            <span className="font-semibold text-black">Name: </span>
             {userInfo.first_name} {userInfo.last_name}
           </li>
-          <li className="text-sm">
-            <span className="font-semibold">Address: </span>
-            {userInfo.address}
+          <li className="text-sm text-gray-800">
+            <span className="font-semibold text-black">Email Address: </span>
+            {userInfo.email}
           </li>
-          <li className="text-sm">
-            <span className="font-semibold">Phone Number: </span>
+          <li className="text-sm text-gray-800">
+            <span className="font-semibold text-black">Phone Number: </span>
             {userInfo.phone_number}
+          </li>
+          <li className="text-sm text-gray-800">
+            <span className="font-semibold text-black">Address: </span>
+            {userInfo.address}
           </li>
         </ul>
       </HoverCardContent>

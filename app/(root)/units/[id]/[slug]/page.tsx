@@ -78,11 +78,14 @@ const page = async ({ params }: Props) => {
               {unit.is_available ? "Available" : "Unavailable"}
             </p>
           </div>
-          <p className="mb-4 text-base">
+          <p className="mb-4 text-base text-gray-500">
             Owner:{" "}
-            <span className="font-medium text-gray-500">
+            <Link
+              href={`/lenders/${unit.owner_id}/${generateSlug(unit.owner.first_name + "-" + unit.owner.last_name)}`}
+              className="font-medium text-gray-700 hover:text-black"
+            >
               {unit.owner.first_name} {unit.owner.last_name}
-            </span>
+            </Link>
           </p>
           <p className="text-base text-gray-600">{unit.description}</p>
 

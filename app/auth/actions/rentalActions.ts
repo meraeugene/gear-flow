@@ -29,7 +29,8 @@ export async function getRentalStatus() {
           last_name,
           profile_picture,
           address,
-          phone_number
+          phone_number,
+          email
         )
       )
     `,

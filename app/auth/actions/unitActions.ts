@@ -47,7 +47,7 @@ export async function createUnit({
   };
 }
 
-export async function getUserUnits() {
+export async function getAuthUserUnits() {
   const supabase = await createClient();
 
   const {
@@ -89,6 +89,51 @@ export async function getUserUnits() {
 
   return {
     data: unitsWithCategory,
+  };
+}
+
+export async function getUserUnitsById(
+  userId: string,
+  currentPage: number = 1,
+  itemsPerPage: number = 6,
+) {
+  const supabase = await createClient();
+
+  const {
+    data,
+    error,
+    count: totalUnitsCount,
+  } = await supabase
+    .from("units")
+    .select(
+      `
+      id,
+      name,
+      price_per_day,
+      image_url,
+      is_available,
+      description,
+      created_at,
+      category:category_id!inner(name)
+    `,
+      { count: "exact" },
+    )
+    .eq("owner_id", userId)
+    .order("created_at", { ascending: false })
+    .range((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage - 1);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  const userUnits = data.map((unit: any) => ({
+    ...unit,
+    category: unit.category?.name || "Uncategorized",
+  }));
+
+  return {
+    userUnits,
+    totalUnitsCount,
   };
 }
 
@@ -227,6 +272,7 @@ export async function getUnitById(unitId: string) {
       is_available,
       description,
       created_at,
+      owner_id,
       category:category_id(id, name),
       owner:owner_id!inner(first_name, last_name)
       `,

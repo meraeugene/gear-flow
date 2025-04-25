@@ -2,10 +2,10 @@ import Image from "next/image";
 import ProfileDropDown from "@/components/ProfileDropdown";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
-import { getUser } from "@/app/auth/actions/authActions";
+import { getAuthUser } from "@/app/auth/actions/authActions";
 
 const Header = async () => {
-  const { user, error } = await getUser();
+  const { user, error } = await getAuthUser();
 
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between bg-white px-24 py-3 shadow-sm">

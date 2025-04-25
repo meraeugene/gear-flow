@@ -179,7 +179,7 @@ export const signOut = async () => {
   redirect("/auth/login");
 };
 
-export const getUser = async () => {
+export const getAuthUser = async () => {
   const supabase = await createClient();
 
   const {

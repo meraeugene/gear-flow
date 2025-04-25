@@ -77,3 +77,24 @@ export async function deleteUser(userId: string) {
     data,
   };
 }
+
+// Get user by id
+export async function getUserById(userId: string) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("users")
+    .select(
+      "first_name, last_name, email, address, phone_number, profile_picture",
+    )
+    .eq("auth_user_id", userId)
+    .single();
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return {
+    data,
+  };
+}

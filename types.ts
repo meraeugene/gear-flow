@@ -39,6 +39,7 @@ export type userInfo = {
   last_name: string;
   phone_number: string;
   profile_picture: string;
+  email: string;
 };
 
 export type RentalData = {

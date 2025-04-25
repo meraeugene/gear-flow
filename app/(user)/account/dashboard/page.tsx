@@ -1,4 +1,4 @@
-import { getUser } from "@/app/auth/actions/authActions";
+import { getAuthUser } from "@/app/auth/actions/authActions";
 import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
@@ -6,7 +6,7 @@ import { dashboardBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { redirect } from "next/navigation";
 
 const page = async () => {
-  const { user, error } = await getUser();
+  const { user, error } = await getAuthUser();
 
   if (error || !user) {
     redirect("/auth/login");

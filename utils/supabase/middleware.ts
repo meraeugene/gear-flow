@@ -1,4 +1,4 @@
-import { getUser } from "@/app/auth/actions/authActions";
+import { getAuthUser } from "@/app/auth/actions/authActions";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
@@ -36,7 +36,7 @@ export async function updateSession(request: NextRequest) {
 
   // IMPORTANT: DO NOT REMOVE auth.getUser()
 
-  const { user, error } = await getUser();
+  const { user, error } = await getAuthUser();
 
   const pathname = request.nextUrl.pathname;
   const url = request.nextUrl.clone();

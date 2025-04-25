@@ -3,12 +3,12 @@ import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
-import { getUserUnits } from "@/app/auth/actions/unitActions";
+import { getAuthUserUnits } from "@/app/auth/actions/unitActions";
 import { myUnitsBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { AlertComponent } from "@/components/AlertComponent";
 
 const page = async () => {
-  const { data: userUnitsData, error } = await getUserUnits();
+  const { data: userUnitsData, error } = await getAuthUserUnits();
 
   if (error) {
     return (
