@@ -99,7 +99,7 @@ export default function RentalRequestsTable({
                 <td className="p-3">{request.total_price}</td>
                 <td className="p-3 uppercase">{request.payment_method}</td>
                 <td className="p-3">
-                  {request.proof_of_payment_url && (
+                  {request.proof_of_payment_url ? (
                     <a
                       href={request.proof_of_payment_url}
                       target="_blank"
@@ -108,6 +108,8 @@ export default function RentalRequestsTable({
                     >
                       View Receipt
                     </a>
+                  ) : (
+                    "N/A"
                   )}
                 </td>
                 <td className="p-3 capitalize">

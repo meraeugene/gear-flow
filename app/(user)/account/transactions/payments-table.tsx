@@ -47,7 +47,7 @@ export default function PaymentsTable({ transactions }: Props) {
                 <td className="p-3">₱{transaction.amount.toLocaleString()}</td>
                 <td className="p-3 uppercase">{transaction.payment_method}</td>
                 <td className="p-3">
-                  {transaction.proof_of_payment_url && (
+                  {transaction.proof_of_payment_url ? (
                     <a
                       href={transaction.proof_of_payment_url}
                       target="_blank"
@@ -56,6 +56,8 @@ export default function PaymentsTable({ transactions }: Props) {
                     >
                       View Receipt
                     </a>
+                  ) : (
+                    "N/A"
                   )}
                 </td>
                 <td className="p-3 capitalize">
