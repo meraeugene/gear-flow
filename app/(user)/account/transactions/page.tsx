@@ -30,7 +30,7 @@ const page = async () => {
             <BackButton />
             <BreadcrumbNav items={myPaymentsBreadcrumbs} />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">My Payments</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Transactions</h1>
           <p className="mt-1 text-base text-gray-600">
             View the status of your payments, including owner, total price,
             payment method, transaction date.

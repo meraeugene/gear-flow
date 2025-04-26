@@ -2,12 +2,12 @@ import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import SendResetPassword from "@/components/forms/SendResetPassword";
-import { getUser } from "@/app/auth/actions/authActions";
+import { getAuthUser } from "@/app/auth/actions/authActions";
 import { resetPasswordBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { AlertComponent } from "@/components/AlertComponent";
 
 const page = async () => {
-  const { user, error } = await getUser();
+  const { user, error } = await getAuthUser();
 
   if (!user || error) {
     return (

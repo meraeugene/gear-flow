@@ -1,15 +1,15 @@
-import { getUser } from "@/app/auth/actions/authActions";
+import { getAuthUser } from "@/app/auth/actions/authActions";
 import { AlertComponent } from "@/components/AlertComponent";
 import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { settingsLinks } from "@/data/asideLinks";
 import { settingsBreadcrumbs } from "@/data/breadCrumbsLinks";
-import { linkDescriptions } from "@/data/settingsLinks";
+import { linkDescriptions } from "@/data/linkDescription";
 import Link from "next/link";
 
 const page = async () => {
-  const { user, error } = await getUser();
+  const { user, error } = await getAuthUser();
 
   if (!user || error) {
     return (

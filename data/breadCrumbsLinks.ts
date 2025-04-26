@@ -3,25 +3,25 @@ export const dashboardBreadcrumbs = [
   { title: "Dashboard", href: "/account/dashboard" },
 ];
 
-export const addUnitsBreadcrumbs = [
-  { title: "Home", href: "/" },
-  { title: "My Units", href: "/account/my-units" },
-  { title: "Add Unit", href: "/account/my-units/add-unit" },
-];
-
 export const myUnitsBreadcrumbs = [
   { title: "Home", href: "/" },
-  { title: "My Units", href: "/account/my-units" },
+  { title: "Units", href: "/account/units" },
+];
+
+export const addUnitsBreadcrumbs = [
+  { title: "Home", href: "/" },
+  { title: "Units", href: "/account/units" },
+  { title: "Add Unit", href: "/account/units/add-unit" },
 ];
 
 export const myRentalsBreadcrumbs = [
   { title: "Home", href: "/" },
-  { title: "My Rentals", href: "/account/my-rentals" },
+  { title: "Rentals", href: "/account/rentals" },
 ];
 
 export const myPaymentsBreadcrumbs = [
   { title: "Home", href: "/" },
-  { title: "My Payments", href: "/account/my-payments" },
+  { title: "Transactions", href: "/account/transcations" },
 ];
 
 export const usersBreadcrumbs = [

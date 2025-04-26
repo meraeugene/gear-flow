@@ -70,7 +70,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <Link href="/account/my-units/add-unit">
+      <Link href="/account/units/add-unit">
         <Button variant="outline" className="my-4 ml-auto cursor-pointer">
           <Plus className="text-gray-400" />
           Add Unit

@@ -100,6 +100,7 @@ export const signup = async (formData: FormData) => {
 
 export const login = async (formData: FormData) => {
   const supabase = await createClient();
+
   const formValues = Object.fromEntries(
     ["email", "password"].map((key) => [
       key,
@@ -149,7 +150,7 @@ export const login = async (formData: FormData) => {
 
   const { data: userDetails, error: userDetailsError } = await supabase
     .from("users")
-    .select("auth_user_id, role") // Add other fields if needed
+    .select("auth_user_id, role")
     .eq("auth_user_id", user.id)
     .single();
 

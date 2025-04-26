@@ -31,7 +31,7 @@ const page = async () => {
             <BackButton />
             <BreadcrumbNav items={myUnitsBreadcrumbs} />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">My Units</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Units</h1>
           <p className="mt-1 text-base text-gray-600">
             Manage and review all your listed rental units here.
           </p>

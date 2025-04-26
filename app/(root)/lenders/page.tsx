@@ -7,6 +7,8 @@ import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { generateSlug } from "@/utils/generateSlug";
 import Image from "next/image";
 import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getInitials } from "@/utils/getInitials";
 
 const page = async () => {
   const { data: lenders, error } = await getAllLenders();

@@ -1,5 +1,5 @@
 import { getUnitById } from "@/app/auth/actions/unitActions";
-import { getUser } from "@/app/auth/actions/authActions";
+import { getAuthUser } from "@/app/auth/actions/authActions";
 import { generateSlug } from "@/utils/generateSlug";
 import { AlertComponent } from "@/components/AlertComponent";
 import UnitRent from "@/components/UnitRent";
@@ -13,7 +13,7 @@ type Props = {
 
 const Page = async ({ params: { id, slug } }: Props) => {
   const [userResult, unitResult] = await Promise.all([
-    getUser(),
+    getAuthUser(),
     getUnitById(id),
   ]);
 

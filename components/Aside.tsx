@@ -9,13 +9,13 @@ import { useAuthStore } from "@/stores/useAuthStore";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { LogoutOutlined } from "@ant-design/icons";
+import { handleClientLogout } from "@/utils/signOutClient";
 
 const Aside = () => {
   const pathname = usePathname();
 
-  const { role } = useAuthStore();
-
-  console.log(role);
+  const { role, logout } = useAuthStore();
 
   // Select links based on user role
   const dashboardLinks =
@@ -26,6 +26,10 @@ const Aside = () => {
     ? settingsLinks
     : dashboardLinks;
 
+  const handleLogout = () => {
+    handleClientLogout();
+    logout();
+  };
   return (
     <div className="flex min-h-screen text-black">
       <aside className="hidden w-72 flex-col p-8 shadow-sm md:flex">
@@ -56,6 +60,13 @@ const Aside = () => {
               </Link>
             );
           })}
+
+          <button
+            onClick={handleLogout}
+            className="flex transform cursor-pointer items-center gap-3 rounded-sm px-4 py-2 text-gray-500 shadow-sm transition-all duration-300 ease-in-out hover:translate-x-1 hover:scale-[1.02] hover:border-l-4 hover:border-l-black hover:text-black hover:shadow-sm"
+          >
+            <LogoutOutlined /> Logout
+          </button>
         </nav>
       </aside>
     </div>

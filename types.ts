@@ -77,3 +77,35 @@ export type TransactionData = {
   };
   owner: userInfo;
 };
+
+export type RentalStatus = "pending" | "ongoing" | "completed" | "cancelled";
+
+export interface Renter {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  address: string;
+  profile_picture: string;
+}
+
+export interface Unit {
+  name: string;
+  image_url: string;
+  owner_id: string;
+  price_per_day: number;
+}
+
+export interface RentalRequest {
+  id: string;
+  start_date: string;
+  end_date: string;
+  status: RentalStatus;
+  total_price: number;
+  unit: Unit;
+  renter: Renter;
+  payment_method: string;
+  payment_status: string;
+  proof_of_payment_url: string;
+  transaction_date: string;
+}

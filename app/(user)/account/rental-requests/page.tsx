@@ -1,21 +1,23 @@
 import Aside from "@/components/Aside";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
-import { myRentalsBreadcrumbs } from "@/data/breadCrumbsLinks";
-import RentalsTable from "./rentals-table";
-import { getRentalStatus } from "@/app/auth/actions/rentalActions";
+import { usersBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { AlertComponent } from "@/components/AlertComponent";
+import { getRentalRequestsForMyUnits } from "@/app/auth/actions/rentalRequestActions";
+import RentalRequestsTable from "./rental-requests-table";
 
 const page = async () => {
-  const { rentals, error: rentalsError } = await getRentalStatus();
+  const { data, error } = await getRentalRequestsForMyUnits();
+  console.log(data);
 
-  if (rentalsError) {
+  if (error) {
     return (
       <div className="px-24 py-20">
         <AlertComponent
           variant="destructive"
-          message="Error fetching rentals."
+          message="No rental requests found."
         />
+        ;
       </div>
     );
   }
@@ -28,17 +30,16 @@ const page = async () => {
         <div className="mb-6 border-b border-gray-100 pb-6">
           <div className="mb-6 space-y-4">
             <BackButton />
-            <BreadcrumbNav items={myRentalsBreadcrumbs} />
+            <BreadcrumbNav items={usersBreadcrumbs} />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">My Rentals</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Rental Requests</h1>
           <p className="mt-1 text-base text-gray-600">
-            View the status of your current and past rentals, including start
-            and end dates, delivery method, rental status, rental date, and
-            total price.
+            Manage and review all your listed rental requests for your units
+            here.
           </p>
         </div>
 
-        <RentalsTable rentals={rentals ?? []} />
+        <RentalRequestsTable rentalRequests={data || []} />
       </main>
     </div>
   );

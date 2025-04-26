@@ -10,6 +10,7 @@ import {
   FiCreditCard,
   FiShoppingBag,
   FiPackage,
+  FiInbox,
 } from "react-icons/fi";
 
 export const userDashboardLinks = [
@@ -19,19 +20,24 @@ export const userDashboardLinks = [
     icon: <AppstoreOutlined size={18} />,
   },
   {
-    name: "My Units",
-    href: "/account/my-units",
+    name: "Units",
+    href: "/account/units",
     icon: <FiPackage size={18} />,
   },
   {
-    name: "My Rentals",
-    href: "/account/my-rentals",
+    name: "Rentals",
+    href: "/account/rentals",
     icon: <FiShoppingBag size={18} />,
   },
   {
-    name: "My Payments",
-    href: "/account/my-payments",
+    name: "Transactions",
+    href: "/account/transactions",
     icon: <FiCreditCard size={18} />,
+  },
+  {
+    name: "Rental Requests",
+    href: "/account/rental-requests",
+    icon: <FiInbox size={18} />,
   },
 ];
 
