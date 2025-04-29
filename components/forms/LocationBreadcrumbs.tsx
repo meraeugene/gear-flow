@@ -1,7 +1,9 @@
+type OptionType = { label: string; value: string | number };
+
 type LocationBreadcrumbsProps = {
   steps: string[];
   step: number;
-  selections: (any | null)[];
+  selections: (OptionType | null)[];
   onStepChange: (index: number) => void;
 };
 

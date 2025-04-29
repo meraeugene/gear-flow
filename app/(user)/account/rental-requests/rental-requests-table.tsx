@@ -14,8 +14,9 @@ import {
 } from "@/components/ui/alert-dialog";
 import { RentalRequest, RentalStatus } from "@/types";
 import { toast } from "sonner";
-import { updateRentalStatus } from "@/app/auth/actions/rentalRequestActions";
+import { updateRentalStatus } from "@/actions/rentalRequestActions";
 import UserInfoCard from "@/components/UserInfoCard";
+import { formatCurrency } from "@/utils/currency/formatCurrency";
 
 type RentalRequestsTableProps = {
   rentalRequests: RentalRequest[];
@@ -27,7 +28,7 @@ export default function RentalRequestsTable({
   const [isPending, startTransition] = useTransition();
   const [selectedRentalId, setSelectedRentalId] = useState<string | null>(null);
   const [selectedActionType, setSelectedActionType] = useState<
-    "accept" | "reject" | null
+    "accept" | "reject" | "complete" | null
   >(null);
 
   const handleUpdateStatus = async (
@@ -37,11 +38,14 @@ export default function RentalRequestsTable({
     try {
       const { error } = await updateRentalStatus(rentalId, newStatus);
       if (error) {
+        console.log(error);
         toast.error(error);
       } else {
         toast.success("Rental request status updated.");
+        window.location.reload();
       }
     } catch (error) {
+      console.log(error);
       toast.error("Failed to update rental request status.");
     }
   };
@@ -52,7 +56,11 @@ export default function RentalRequestsTable({
     startTransition(async () => {
       await handleUpdateStatus(
         selectedRentalId,
-        selectedActionType === "accept" ? "ongoing" : "cancelled",
+        selectedActionType === "accept"
+          ? "ongoing"
+          : selectedActionType === "complete"
+            ? "completed"
+            : "cancelled",
       );
     });
   };
@@ -66,7 +74,7 @@ export default function RentalRequestsTable({
             <th className="p-3">Unit</th>
             <th className="p-3">Price Per Day</th>
             <th className="p-3">Start Date</th>
-            <th className="p-3">End Date</th>
+            <th className="p-3">Return Date</th>
             <th className="p-3">Total Price</th>
             <th className="p-3">Payment Method</th>
             <th className="p-3">Payment Receipt</th>
@@ -93,10 +101,12 @@ export default function RentalRequestsTable({
                   <UserInfoCard userInfo={request.renter} />
                 </td>
                 <td className="p-3">{request.unit.name}</td>
-                <td className="p-3">{request.unit.price_per_day}</td>
+                <td className="p-3">
+                  {formatCurrency(request.unit.price_per_day)}
+                </td>
                 <td className="p-3">{request.start_date}</td>
                 <td className="p-3">{request.end_date}</td>
-                <td className="p-3">{request.total_price}</td>
+                <td className="p-3">{formatCurrency(request.total_price)}</td>
                 <td className="p-3 uppercase">{request.payment_method}</td>
                 <td className="p-3">
                   {request.proof_of_payment_url ? (
@@ -122,7 +132,7 @@ export default function RentalRequestsTable({
                           : "bg-red-100 text-red-600"
                     }`}
                   >
-                    {request.status}
+                    {request.payment_status}
                   </span>
                 </td>
                 <td className="p-3">
@@ -136,14 +146,16 @@ export default function RentalRequestsTable({
                     hour12: true,
                   })}
                 </td>
-                <td className="p-3">
+                <td className="p-3 capitalize">
                   <span
-                    className={`inline-flex items-center justify-center rounded-md px-3 py-1 text-xs font-semibold capitalize ${
+                    className={`inline-flex rounded-md px-3 py-1 text-xs font-semibold ${
                       request.status === "pending"
-                        ? "bg-yellow-100 text-yellow-500"
+                        ? "bg-yellow-100 text-yellow-700"
                         : request.status === "ongoing"
-                          ? "bg-green-100 text-green-500"
-                          : "bg-red-100 text-red-500"
+                          ? "bg-blue-100 text-blue-700"
+                          : request.status === "completed"
+                            ? "bg-green-100 text-green-700"
+                            : "bg-red-100 text-red-600"
                     }`}
                   >
                     {request.status}
@@ -178,8 +190,13 @@ export default function RentalRequestsTable({
                           </AlertDialogHeader>
 
                           <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={handleAction}>
+                            <AlertDialogCancel className="cursor-pointer">
+                              Cancel
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                              className="cursor-pointer"
+                              onClick={handleAction}
+                            >
                               Accept
                             </AlertDialogAction>
                           </AlertDialogFooter>
@@ -212,14 +229,59 @@ export default function RentalRequestsTable({
                           </AlertDialogHeader>
 
                           <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={handleAction}>
+                            <AlertDialogCancel className="cursor-pointer">
+                              Cancel
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                              className="cursor-pointer"
+                              onClick={handleAction}
+                            >
                               Reject
                             </AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>
                       </AlertDialog>
                     </>
+                  )}
+
+                  {request.status === "ongoing" && (
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <button
+                          className="cursor-pointer rounded border border-green-100 bg-green-100 px-3 py-1 text-xs text-green-600 hover:bg-green-300 hover:text-white"
+                          disabled={isPending}
+                          onClick={() => {
+                            setSelectedRentalId(request.id);
+                            setSelectedActionType("complete");
+                          }}
+                        >
+                          Mark as Complete
+                        </button>
+                      </AlertDialogTrigger>
+
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>
+                            Mark as completed?
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Are you sure this rental has been completed?
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+
+                        <AlertDialogFooter>
+                          <AlertDialogCancel className="cursor-pointer">
+                            Cancel
+                          </AlertDialogCancel>
+                          <AlertDialogAction
+                            className="cursor-pointer"
+                            onClick={handleAction}
+                          >
+                            Confirm
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   )}
                 </td>
               </tr>

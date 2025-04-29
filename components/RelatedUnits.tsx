@@ -4,7 +4,6 @@ import { UnitWithOwner } from "@/types";
 import { motion } from "framer-motion";
 import UnitCard from "./UnitCard";
 import { useState } from "react";
-import Link from "next/link";
 import { GrNext, GrPrevious } from "react-icons/gr";
 
 interface RelatedUnitsProps {
@@ -68,7 +67,7 @@ const RelatedUnits = ({ relatedUnitsData }: RelatedUnitsProps) => {
               delay: index * 0.1, // Delay based on index for staggered effect
               ease: "easeInOut", // Smooth easing for a more natural animation
             }}
-            key={unit.id}
+            key={unit.unit_id}
             className="product-card animate-fade-in"
           >
             <UnitCard unitData={unit} />

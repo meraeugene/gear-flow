@@ -2,7 +2,7 @@ import Aside from "@/components/Aside";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
 import { usersBreadcrumbs } from "@/data/breadCrumbsLinks";
-import { getAllUsers } from "@/app/auth/actions/usersActions";
+import { getAllUsers } from "@/actions/usersActions";
 import UsersTable from "./users-table";
 import { AlertComponent } from "@/components/AlertComponent";
 

@@ -1,43 +1,34 @@
-import { getUserUnitsById } from "@/app/auth/actions/unitActions";
-import { getUserById } from "@/app/auth/actions/usersActions";
+import { getLenderUnitsWithProfile } from "@/actions/lenderActions";
 import { AlertComponent } from "@/components/AlertComponent";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import UserUnits from "@/components/UserUnits";
-import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
-import { generateSlug } from "@/utils/generateSlug";
+import { capitalizeFirstLetter } from "@/utils/string/capitalizeFirstLetter";
+import { generateSlug } from "@/utils/string/generateSlug";
 import Image from "next/image";
 
-type Props = {
-  params: {
-    id: string;
-    slug: string;
-  };
-};
+const LenderPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string; slug: string }>;
+}) => {
+  const lenderId = (await params).id;
+  const slug = (await params).slug;
 
-const page = async ({ params }: Props) => {
-  const { id: lenderId, slug } = params;
-
-  const [firstName, lastName] = slug.split("-").map(capitalizeFirstLetter);
-  const capitalizedName = `${firstName} ${lastName}`;
-
-  const [userUnitsResponse, ownerResponse] = await Promise.all([
-    getUserUnitsById(lenderId),
-    getUserById(lenderId),
-  ]);
-
-  const { userUnits, error: userUnitsError } = userUnitsResponse;
-  const { data: owner, error: ownerError } = ownerResponse;
+  const { userUnits, owner, error } = await getLenderUnitsWithProfile(lenderId);
 
   if (
-    userUnitsError ||
-    ownerError ||
-    slug !== generateSlug(owner?.first_name + "-" + owner?.last_name)
+    error ||
+    !owner ||
+    slug !==
+      generateSlug(
+        `${capitalizeFirstLetter(owner.first_name)}-${capitalizeFirstLetter(owner.last_name)}`,
+      )
   ) {
     return (
       <div className="px-24 pt-12 pb-20">
         <AlertComponent
-          message="Error loading user unit data."
+          message={error || "Error loading lender data."}
           variant="destructive"
         />
       </div>
@@ -48,7 +39,7 @@ const page = async ({ params }: Props) => {
     { title: "Home", href: "/" },
     { title: "Lenders", href: "/lenders" },
     {
-      title: capitalizedName,
+      title: `${capitalizeFirstLetter(owner.first_name)} ${capitalizeFirstLetter(owner.last_name)}`,
       href: `/lenders/${lenderId}/${slug}`,
     },
   ];
@@ -71,7 +62,8 @@ const page = async ({ params }: Props) => {
 
         <div className="space-y-3">
           <h1 className="text-3xl font-bold text-gray-800">
-            {capitalizedName}
+            {capitalizeFirstLetter(owner.first_name)}{" "}
+            {capitalizeFirstLetter(owner.last_name)}
           </h1>
 
           <div className="space-y-1 text-gray-600">
@@ -92,10 +84,10 @@ const page = async ({ params }: Props) => {
       </div>
 
       <div className="user-units__container mt-14 border-t border-gray-100 pt-14">
-        <UserUnits units={userUnits || []} />
+        <UserUnits units={userUnits ?? []} />
       </div>
     </div>
   );
 };
 
-export default page;
+export default LenderPage;

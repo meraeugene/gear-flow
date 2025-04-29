@@ -20,17 +20,16 @@ export type Category = {
 };
 
 export type UnitWithOwner = {
-  id: string;
+  unit_id: string;
   name: string;
   image_url: string;
   price_per_day: number;
-  category: string;
+  category_id: string;
+  category_name: string;
   is_available: "available" | "unavailable";
   description: string;
-  owner?: {
-    first_name: string;
-    last_name: string;
-  };
+  owner_first_name: string;
+  owner_last_name: string;
 };
 
 export type userInfo = {
@@ -43,7 +42,7 @@ export type userInfo = {
 };
 
 export type RentalData = {
-  id: string;
+  rental_id: string;
   unit_id: string;
   renter_id: string;
   start_date: string;
@@ -52,29 +51,19 @@ export type RentalData = {
   total_price: number;
   status: string;
   created_at: string;
-  unit: {
-    name: string;
-    description: string;
-    id: string;
-    image_url: string;
-  };
+  unit_name: string;
   owner: userInfo;
 };
 
 export type TransactionData = {
-  id: string;
+  transaction_id: string;
   rental_id: string;
   amount: number;
   payment_method: string;
   status: string;
   proof_of_payment_url: string | null;
   transaction_date: string;
-  unit: {
-    name: string;
-    description: string;
-    id: string;
-    image_url: string;
-  };
+  unit_name: string;
   owner: userInfo;
 };
 
@@ -109,3 +98,8 @@ export interface RentalRequest {
   proof_of_payment_url: string;
   transaction_date: string;
 }
+
+export type RentalRecord = {
+  status: RentalStatus;
+  unit_id: string;
+};

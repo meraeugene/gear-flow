@@ -2,7 +2,7 @@ import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import SendResetPassword from "@/components/forms/SendResetPassword";
-import { getAuthUser } from "@/app/auth/actions/authActions";
+import { getAuthUser } from "@/actions/authActions";
 import { resetPasswordBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { AlertComponent } from "@/components/AlertComponent";
 

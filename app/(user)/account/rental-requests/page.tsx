@@ -1,14 +1,13 @@
 import Aside from "@/components/Aside";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
-import { usersBreadcrumbs } from "@/data/breadCrumbsLinks";
+import { rentalRequestBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { AlertComponent } from "@/components/AlertComponent";
-import { getRentalRequestsForMyUnits } from "@/app/auth/actions/rentalRequestActions";
+import { getRentalRequestsForMyUnits } from "@/actions/rentalRequestActions";
 import RentalRequestsTable from "./rental-requests-table";
 
 const page = async () => {
   const { data, error } = await getRentalRequestsForMyUnits();
-  console.log(data);
 
   if (error) {
     return (
@@ -30,7 +29,7 @@ const page = async () => {
         <div className="mb-6 border-b border-gray-100 pb-6">
           <div className="mb-6 space-y-4">
             <BackButton />
-            <BreadcrumbNav items={usersBreadcrumbs} />
+            <BreadcrumbNav items={rentalRequestBreadcrumbs} />
           </div>
           <h1 className="text-3xl font-bold text-gray-900">Rental Requests</h1>
           <p className="mt-1 text-base text-gray-600">
@@ -39,7 +38,7 @@ const page = async () => {
           </p>
         </div>
 
-        <RentalRequestsTable rentalRequests={data || []} />
+        <RentalRequestsTable rentalRequests={data ?? []} />
       </main>
     </div>
   );

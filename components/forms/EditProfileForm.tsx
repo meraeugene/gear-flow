@@ -17,8 +17,8 @@ import {
 import { toast } from "sonner";
 import Image from "next/image";
 import Loader from "../Loader";
-import { uploadImage } from "@/utils/uploadImage";
-import { editProfile } from "@/app/auth/actions/profileActions";
+import { cloudinaryUploadImage } from "@/lib/services/cloudinaryUploadImage";
+import { editProfile } from "@/actions/profileActions";
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
@@ -87,16 +87,19 @@ export default function EditProfileForm({
 
       // Upload profile picture to Cloudinary
       if (values.profilePicture?.[0]) {
-        const imageUrl = await uploadImage(values.profilePicture[0]);
+        const imageUrl = await cloudinaryUploadImage(values.profilePicture[0]);
         formData.append("profilePictureUrl", imageUrl);
       }
 
       const result = await editProfile(formData);
-      result?.error
-        ? toast.error(result.error)
-        : toast.success(result.success || "Profile updated");
-    } catch (err: any) {
-      toast.error(err.message || "Something went wrong");
+
+      if (result?.error) {
+        toast.error(result.error);
+      } else {
+        toast.success(result.success || "Profile updated");
+      }
+    } catch (err) {
+      console.log(err);
     } finally {
       setIsLoading(false);
     }
@@ -112,7 +115,7 @@ export default function EditProfileForm({
         <FormField
           control={form.control}
           name="profilePicture"
-          render={({ field }) => (
+          render={({}) => (
             <FormItem>
               <FormLabel>Profile Picture</FormLabel>
               <div className="flex items-center gap-4">

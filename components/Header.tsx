@@ -2,7 +2,7 @@ import Image from "next/image";
 import ProfileDropDown from "@/components/ProfileDropdown";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
-import { getAuthUser } from "@/app/auth/actions/authActions";
+import { getAuthUser } from "@/actions/authActions";
 
 const Header = async () => {
   const { user, error } = await getAuthUser();
@@ -14,6 +14,7 @@ const Header = async () => {
           src="/assets/images/no-bg-logo.png"
           width={80}
           height={80}
+          priority
           alt="logo"
           className="h-auto w-auto"
         />

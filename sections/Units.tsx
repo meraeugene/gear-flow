@@ -75,7 +75,7 @@ const Units = ({ unitsData, unitTitle, href }: UnitsProps) => {
               delay: index * 0.1, // Delay based on index for staggered effect
               ease: "easeInOut", // Smooth easing for a more natural animation
             }}
-            key={unit.id}
+            key={unit.unit_id}
             className="product-card animate-fade-in"
           >
             <UnitCard unitData={unit} />

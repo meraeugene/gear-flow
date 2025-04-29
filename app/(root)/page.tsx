@@ -1,25 +1,21 @@
 import Categories from "@/sections/Categories";
-import Carousel from "@/components/ui/carousel";
 import Units from "@/sections/Units";
 import NewArrival from "@/sections/NewArrival";
 import Banner from "@/sections/Banner";
 import HowItWorks from "@/sections/HowItWorks";
 import Faqs from "@/sections/Faqs";
 import { carouselData } from "@/data/carousel";
-import { getAllCategories } from "../auth/actions/categoryActions";
-import { getAllOtherUnits, getNewArrivals } from "../auth/actions/unitActions";
+import { getAllCategories } from "../../actions/categoryActions";
+import { getAllOtherUnits, getNewArrivals } from "../../actions/unitActions";
+import Carousel from "@/components/ui/carousel";
 
 export default async function page() {
-  const [categoriesResponse, unitsResponse, newArrivalResponse] =
+  const [{ data: categories }, { data: units }, { data: newArrivals }] =
     await Promise.all([
       getAllCategories(),
       getAllOtherUnits(),
       getNewArrivals(),
     ]);
-
-  const categories = categoriesResponse.data ?? [];
-  const units = unitsResponse.data ?? [];
-  const newArrivals = newArrivalResponse.data ?? [];
 
   return (
     <div>
@@ -30,15 +26,15 @@ export default async function page() {
       </div>
 
       <div className="px-24 py-20">
-        <Categories categoriesData={categories} />
+        <Categories categoriesData={categories ?? []} />
       </div>
 
       <div className="px-24 py-20">
-        <NewArrival newArrivalsData={newArrivals} />
+        <NewArrival newArrivalsData={newArrivals ?? []} />
       </div>
 
       <div className="px-24 py-20">
-        <Units unitTitle="Units" unitsData={units} href="/units" />
+        <Units unitTitle="Units" unitsData={units ?? []} href="/units" />
       </div>
 
       <div className="py-20">

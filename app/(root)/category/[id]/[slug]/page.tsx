@@ -1,41 +1,40 @@
-import { getUnitsByCategory } from "@/app/auth/actions/unitActions";
+import { getUnitsByCategory } from "@/actions/categoryActions";
 import { AlertComponent } from "@/components/AlertComponent";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import CategoryBanner from "@/components/CategoryBanner";
 import CategoryUnits from "@/components/CategoryUnits";
-import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
-import { generateSlug } from "@/utils/generateSlug";
+import { capitalizeFirstLetter } from "@/utils/string/capitalizeFirstLetter";
+import { generateSlug } from "@/utils/string/generateSlug";
 
-type Props = {
-  params: {
-    id: string;
-    slug: string;
-  };
-};
+const CategoryPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string; slug: string }>;
+}) => {
+  const id = (await params).id;
+  const slug = (await params).slug;
 
-const page = async ({ params }: Props) => {
-  const { id, slug } = params;
+  const { units, error } = await getUnitsByCategory(id);
 
-  const { data, error } = await getUnitsByCategory(id);
-
-  if (!data || error || slug !== generateSlug(data[0]?.category || ""))
+  if (!units || error || slug !== generateSlug(units[0]?.category_name ?? "")) {
     return (
       <div className="px-24 py-20">
-        <AlertComponent variant="destructive" message="No units found." />;
+        <AlertComponent variant="destructive" message="No units found." />
       </div>
     );
+  }
 
   const breadcrumbs = [
     { title: "Home", href: "/" },
     { title: "Category", href: "/units" },
     {
       title: capitalizeFirstLetter(slug),
-      href: `/category/${id}/${slug}}`,
+      href: `/category/${id}/${slug}`,
     },
   ];
 
-  const categoryName = data[0]?.category.toLowerCase() || "";
+  const categoryName = units[0]?.category_name.toLowerCase() ?? "";
 
   return (
     <div className="px-24 py-20">
@@ -46,9 +45,9 @@ const page = async ({ params }: Props) => {
 
       <CategoryBanner categoryName={categoryName} />
 
-      <CategoryUnits unitsData={data} />
+      <CategoryUnits unitsData={units} />
     </div>
   );
 };
 
-export default page;
+export default CategoryPage;

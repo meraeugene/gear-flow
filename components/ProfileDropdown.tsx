@@ -7,7 +7,7 @@ import {
   LogoutOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import { handleClientLogout } from "@/utils/signOutClient";
+import { handleClientLogout } from "@/lib/supabase/signOutClient";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getInitials } from "@/utils/getInitials";
+import { getInitials } from "@/utils/string/getInitials";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 const menuItems = [
@@ -76,7 +76,7 @@ const ProfileDropDown = ({
 
     window.addEventListener("keydown", handleShortcut);
     return () => window.removeEventListener("keydown", handleShortcut);
-  }, [router]);
+  }, [router, logout]);
 
   const handleClick = (action: string) => {
     if (action === "logout") {

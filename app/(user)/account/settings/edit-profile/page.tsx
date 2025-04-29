@@ -2,7 +2,7 @@ import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import EditProfileForm from "@/components/forms/EditProfileForm";
-import { getAuthUser } from "@/app/auth/actions/authActions";
+import { getAuthUser } from "@/actions/authActions";
 import { editProfileBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { AlertComponent } from "@/components/AlertComponent";
 
@@ -39,12 +39,12 @@ const page = async () => {
           <div className="mt-6">
             <EditProfileForm
               defaultValues={{
-                firstName: user.first_name || "",
-                lastName: user.last_name || "",
-                phoneNumber: user.phone_number || "",
-                profilePictureUrl: user.profile_picture || "",
-                address: user.address || "",
-                email: user.email || "",
+                firstName: user.first_name ?? "",
+                lastName: user.last_name ?? "",
+                phoneNumber: user.phone_number ?? "",
+                profilePictureUrl: user.profile_picture ?? "",
+                address: user.address ?? "",
+                email: user.email ?? "",
               }}
             />
           </div>

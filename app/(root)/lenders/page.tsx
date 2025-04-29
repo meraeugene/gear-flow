@@ -1,14 +1,12 @@
-import { getAllLenders } from "@/app/auth/actions/lenderActions";
+import { getAllLenders } from "@/actions/lenderActions";
 import { AlertComponent } from "@/components/AlertComponent";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { lendersBreadcrumbs } from "@/data/breadCrumbsLinks";
-import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
-import { generateSlug } from "@/utils/generateSlug";
+import { capitalizeFirstLetter } from "@/utils/string/capitalizeFirstLetter";
+import { generateSlug } from "@/utils/string/generateSlug";
 import Image from "next/image";
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getInitials } from "@/utils/getInitials";
 
 const page = async () => {
   const { data: lenders, error } = await getAllLenders();

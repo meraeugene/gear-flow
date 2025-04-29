@@ -12,11 +12,7 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
-import {
-  banUser,
-  deleteUser,
-  unbanUser,
-} from "@/app/auth/actions/usersActions";
+import { banUser, deleteUser, unbanUser } from "@/actions/usersActions";
 import { toast } from "sonner";
 import { User } from "@/types";
 
@@ -54,20 +50,24 @@ export default function UsersTable({ users }: Props) {
   };
 
   return (
-    <div className="w-full overflow-x-auto rounded-md border-t border-r border-l border-gray-100">
+    <div className="w-full overflow-x-auto border-t border-r border-l border-gray-200">
       <table className="min-w-full bg-white text-left text-sm">
-        <thead className="border-b border-gray-100 bg-gray-50">
+        <thead className="border-b border-gray-200 hover:bg-gray-50">
           <tr>
             <th className="p-3">Name</th>
             <th className="p-3">Email</th>
             <th className="p-3">Role</th>
             <th className="p-3">Status</th>
+            <th className="p-3">Created At</th>
             <th className="p-3 text-right">Actions</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.auth_user_id} className="border-b border-gray-100">
+            <tr
+              key={user.auth_user_id}
+              className="border-b border-gray-200 hover:bg-gray-50"
+            >
               <td className="p-3">
                 {user.first_name} {user.last_name}
               </td>
@@ -93,6 +93,17 @@ export default function UsersTable({ users }: Props) {
                 >
                   {user.is_banned ? "Banned" : "Active"}
                 </span>
+              </td>
+              <td className="p-3">
+                {new Date(user.created_at).toLocaleString("en-US", {
+                  weekday: "short",
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                })}
               </td>
               <td className="space-x-2 p-3 text-right">
                 {user.role !== "admin" && (
@@ -128,8 +139,13 @@ export default function UsersTable({ users }: Props) {
                         </AlertDialogHeader>
 
                         <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction onClick={handleAction}>
+                          <AlertDialogCancel className="cursor-pointer">
+                            Cancel
+                          </AlertDialogCancel>
+                          <AlertDialogAction
+                            className="cursor-pointer"
+                            onClick={handleAction}
+                          >
                             {user.is_banned ? "Unban" : "Confirm"}
                           </AlertDialogAction>
                         </AlertDialogFooter>
@@ -157,8 +173,13 @@ export default function UsersTable({ users }: Props) {
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction onClick={handleAction}>
+                          <AlertDialogCancel className="cursor-pointer">
+                            Cancel
+                          </AlertDialogCancel>
+                          <AlertDialogAction
+                            className="cursor-pointer"
+                            onClick={handleAction}
+                          >
                             Delete
                           </AlertDialogAction>
                         </AlertDialogFooter>

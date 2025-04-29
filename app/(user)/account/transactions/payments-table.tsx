@@ -35,11 +35,11 @@ export default function PaymentsTable({ transactions }: Props) {
           ) : (
             transactions.map((transaction) => (
               <tr
-                key={transaction.id}
+                key={transaction.transaction_id}
                 className="border-b border-gray-200 hover:bg-gray-50"
               >
                 <td className="p-3">
-                  {transaction.unit?.name ?? "Unknown Unit"}
+                  {transaction.unit_name ?? "Unknown Unit"}
                 </td>
                 <td className="p-3">
                   <UserInfoCard userInfo={transaction.owner} />

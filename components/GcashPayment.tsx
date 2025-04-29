@@ -76,7 +76,9 @@ const GcashPayment = ({ onBack, onFileSelect }: GcashPaymentProps) => {
             className="mx-auto flex h-52 max-w-md cursor-pointer flex-col items-center justify-center rounded border-2 border-dashed border-gray-300 bg-white text-base font-semibold text-slate-500"
           >
             {previewUrl ? (
-              <img
+              <Image
+                height={300}
+                width={300}
                 src={previewUrl}
                 alt="Proof Preview"
                 className="h-full w-full rounded object-contain"

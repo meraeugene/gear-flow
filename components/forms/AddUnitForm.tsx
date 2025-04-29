@@ -1,9 +1,5 @@
 "use client";
 
-interface AddUnitFormProps {
-  userId: string;
-}
-
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,9 +19,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import Loader from "../Loader";
-import { uploadImage } from "@/utils/uploadImage";
-import { createUnit } from "@/app/auth/actions/unitActions";
+import { cloudinaryUploadImage } from "@/lib/services/cloudinaryUploadImage";
+import { createUnit } from "@/actions/unitActions";
 import { Category } from "@/types";
+import Image from "next/image";
+import { IoClose } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 // Image validation constants
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -69,6 +68,7 @@ export default function AddUnitForm({ categories }: AddUnitForm) {
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -87,7 +87,7 @@ export default function AddUnitForm({ categories }: AddUnitForm) {
     setLoading(true);
 
     if (image) {
-      const imageUrl = await uploadImage(image);
+      const imageUrl = await cloudinaryUploadImage(image);
       const res = await createUnit({
         name: data.name,
         price: data.price,
@@ -107,6 +107,7 @@ export default function AddUnitForm({ categories }: AddUnitForm) {
           fileInputRef.current.value = "";
         }
         setLoading(false);
+        router.push("/account/units");
       }
     }
   }
@@ -176,27 +177,50 @@ export default function AddUnitForm({ categories }: AddUnitForm) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Upload Image</FormLabel>
-              <FormControl>
-                <Input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    field.onChange(file);
-                    if (file) setPreview(URL.createObjectURL(file));
-                  }}
-                />
-              </FormControl>
-              {preview && (
-                <img
-                  src={preview}
-                  alt="Preview"
-                  className="mt-2 h-32 w-auto rounded-md border object-cover"
-                />
+
+              {preview ? (
+                <FormControl>
+                  <div className="relative h-40 w-40">
+                    <Image
+                      src={preview}
+                      alt="Preview"
+                      fill
+                      className="rounded-md border object-cover"
+                    />
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="destructive"
+                      className="absolute top-2 right-2 h-5 w-5 cursor-pointer bg-red-700 p-2"
+                      onClick={() => {
+                        setPreview(null);
+                        field.onChange(undefined);
+                        if (fileInputRef.current) {
+                          fileInputRef.current.value = "";
+                        }
+                      }}
+                    >
+                      <IoClose />
+                    </Button>
+                  </div>
+                </FormControl>
+              ) : (
+                <FormControl>
+                  <Input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      field.onChange(file);
+                      if (file) setPreview(URL.createObjectURL(file));
+                    }}
+                  />
+                </FormControl>
               )}
+
               <FormDescription>
-                Accepted formats: JPG, JPEG, PNG, WEBP. Max size: 2MB.
+                Accepted formats: JPG, JPEG, PNG, WEBP. Max size: 5MB.
               </FormDescription>
               <FormMessage />
             </FormItem>

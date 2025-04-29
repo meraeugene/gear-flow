@@ -3,7 +3,7 @@ import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
 import { myRentalsBreadcrumbs } from "@/data/breadCrumbsLinks";
 import RentalsTable from "./rentals-table";
-import { getRentalStatus } from "@/app/auth/actions/rentalActions";
+import { getRentalStatus } from "@/actions/rentalActions";
 import { AlertComponent } from "@/components/AlertComponent";
 
 const page = async () => {

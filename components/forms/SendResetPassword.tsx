@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
 import Loader from "../Loader";
-import { sendResetPasswordLink } from "@/app/auth/actions/resetPasswordActions";
+import { sendResetPasswordLink } from "@/actions/resetPasswordActions";
 
 const SendResetPassword = ({ email }: { email: string }) => {
   const [loading, setLoading] = useState(false);

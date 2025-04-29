@@ -1,12 +1,14 @@
-import { getAllCategories } from "@/app/auth/actions/categoryActions";
-import { getUnitsByCategory } from "@/app/auth/actions/unitActions";
+import {
+  getAllCategories,
+  getUnitsByCategory,
+} from "@/actions/categoryActions";
 import { AlertComponent } from "@/components/AlertComponent";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { unitsBreadcrumbs } from "@/data/breadCrumbsLinks";
 import Units from "@/sections/Units";
 import { Category } from "@/types";
-
+import { generateSlug } from "@/utils/string/generateSlug";
 const page = async () => {
   const { data: categories, error } = await getAllCategories();
 
@@ -28,7 +30,7 @@ const page = async () => {
 
       return {
         category,
-        units: unitsResponse?.data || [],
+        units: unitsResponse?.units || [],
       };
     }),
   );
@@ -47,7 +49,7 @@ const page = async () => {
           return (
             <Units
               key={category.id}
-              href={`/category/${category.id}/${category.slug || category.name.toLowerCase().replace(/\s+/g, "-")}`}
+              href={`/category/${category.id}/${generateSlug(category.name)}`}
               unitsData={units}
               unitTitle={category.name}
             />

@@ -3,11 +3,13 @@ import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
 import { myPaymentsBreadcrumbs } from "@/data/breadCrumbsLinks";
 import PaymentsTable from "./payments-table";
-import { getUserTransaction } from "@/app/auth/actions/transactionActions";
+import { getUserTransaction } from "@/actions/transactionActions";
 import { AlertComponent } from "@/components/AlertComponent";
 
 const page = async () => {
   const { transactions, error: transactionsError } = await getUserTransaction();
+
+  console.log(transactions);
 
   if (transactionsError) {
     return (

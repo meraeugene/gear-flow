@@ -1,27 +1,22 @@
 export const carouselData = [
   {
-    title: "Explore the Outdoors",
-    button: "Discover More",
-    src: "https://example.com/images/outdoors.jpg",
+    title: "Anker Solix Solar Generator Kit",
+    button: "View Details",
+    src: "/assets/images/featured/f1.jpg",
   },
   {
-    title: "Adventure Awaits",
-    button: "Start Exploring",
-    src: "https://example.com/images/adventure.jpg",
+    title: "Apple Vision Pro",
+    button: "View Details",
+    src: "/assets/images/featured/f2.jpg",
   },
   {
-    title: "Gear Up for Travel",
-    button: "Shop Now",
-    src: "https://example.com/images/travel-gear.jpg",
+    title: "Meta Quest 3",
+    button: "View Details",
+    src: "/assets/images/featured/f3.jpg",
   },
   {
-    title: "Top Electronics Deals",
-    button: "Check Offers",
-    src: "https://example.com/images/electronics.jpg",
-  },
-  {
-    title: "Home Essentials Sale",
-    button: "View Collection",
-    src: "https://example.com/images/home-essentials.jpg",
+    title: "DJI Air 3",
+    button: "View Details",
+    src: "/assets/images/featured/f4.jpg",
   },
 ];

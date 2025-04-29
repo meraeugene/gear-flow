@@ -16,7 +16,7 @@ export default function RentalsTable({ rentals }: Props) {
             <th className="p-3">Unit</th>
             <th className="p-3">Owner</th>
             <th className="p-3">Start Date</th>
-            <th className="p-3">End Date</th>
+            <th className="p-3">Return Date</th>
             <th className="p-3">Delivery Method</th>
             <th className="p-3">Status</th>
             <th className="p-3">Total Price</th>
@@ -36,10 +36,10 @@ export default function RentalsTable({ rentals }: Props) {
           ) : (
             rentals.map((rental) => (
               <tr
-                key={rental.id}
+                key={rental.rental_id}
                 className="border-b border-gray-200 hover:bg-gray-50"
               >
-                <td className="p-3">{rental.unit?.name ?? "Unknown Unit"}</td>
+                <td className="p-3">{rental.unit_name ?? "Unknown Unit"}</td>
                 <td className="p-3">
                   <UserInfoCard userInfo={rental.owner} />
                 </td>

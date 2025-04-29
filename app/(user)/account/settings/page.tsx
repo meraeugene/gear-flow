@@ -1,12 +1,9 @@
-import { getAuthUser } from "@/app/auth/actions/authActions";
+import { getAuthUser } from "@/actions/authActions";
 import { AlertComponent } from "@/components/AlertComponent";
 import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
-import { settingsLinks } from "@/data/asideLinks";
 import { settingsBreadcrumbs } from "@/data/breadCrumbsLinks";
-import { linkDescriptions } from "@/data/linkDescription";
-import Link from "next/link";
 
 const page = async () => {
   const { user, error } = await getAuthUser();
@@ -55,24 +52,6 @@ const page = async () => {
               <strong>Address:</strong> {user.address || "Not provided"}
             </p>
           </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {settingsLinks.slice(1).map(({ name, href, icon }) => (
-            <Link
-              href={href}
-              key={href}
-              className="shadow-backdrop-blur-md space-y-3 rounded-lg border border-l-4 border-l-black p-4 shadow-sm transition hover:shadow-md"
-            >
-              <div className="flex w-fit items-center gap-4">
-                <span className="text-gray-500">{icon}</span>
-                <span>{name}</span>
-              </div>
-              <p className="border-t border-gray-100 pt-3 text-sm text-gray-600">
-                {linkDescriptions[href]}
-              </p>
-            </Link>
-          ))}
         </div>
       </main>
     </div>

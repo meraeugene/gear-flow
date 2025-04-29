@@ -11,7 +11,7 @@ import Intro from "@/components/Intro";
 import LocationBreadcrumbs from "@/components/forms/LocationBreadcrumbs";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
-import { insertAddress } from "@/app/auth/actions/profileActions";
+import { insertAddress } from "@/actions/profileActions";
 
 const LocationForm = () => {
   const router = useRouter();
@@ -78,6 +78,7 @@ const LocationForm = () => {
         router.push(redirectUrl || "/");
       }
     } catch (error) {
+      console.log(error);
       toast.error("Something went wrong while updating the address.");
     } finally {
       setLoading(false);
@@ -132,7 +133,11 @@ const LocationForm = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          step === 2 ? handleFinish() : handleContinue();
+          if (step === 2) {
+            handleFinish();
+          } else {
+            handleContinue();
+          }
         }}
         className="flex w-[75%] flex-col"
       >

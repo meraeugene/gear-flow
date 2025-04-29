@@ -11,7 +11,7 @@ import TextField from "@/components/forms/TextField";
 import PasswordField from "@/components/forms/PasswordField";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { useRouter } from "next/navigation";
-import { signup } from "../actions/authActions";
+import { signup } from "../../../actions/authActions";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -88,7 +88,7 @@ export default function SignupPage() {
             alt="logo"
           />
           <h1 className="mt-1 text-xl font-medium">Create a New Account</h1>
-          <p>You're just one step away.</p>
+          <p>You&apos;re just one step away.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">

@@ -2,21 +2,21 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { formatCurrency } from "@/utils/formatCurrency";
+import { formatCurrency } from "@/utils/currency/formatCurrency";
 import { Truck, Package, Wallet2, HandCoins } from "lucide-react";
 import { toast } from "sonner";
 import { UnitWithOwner, User } from "@/types";
-import { calculateTotal } from "@/utils/calculateRental";
-import { getArrivalDate } from "@/utils/getArrivalDate";
-import { getReturnDate } from "@/utils/getReturnDate";
+import { calculateTotal } from "@/lib/rentals/calculateRental";
+import { getArrivalDate } from "@/lib/rentals/getArrivalDate";
+import { getReturnDate } from "@/lib/rentals/getReturnDate";
 import BackButton from "./BackButton";
 import BreadcrumbNav from "./BreadcrumbNav";
-import { generateSlug } from "@/utils/generateSlug";
+import { generateSlug } from "@/utils/string/generateSlug";
 import GcashPayment from "./GcashPayment";
 import { motion } from "framer-motion";
-import { uploadImage } from "@/utils/uploadImage";
+import { cloudinaryUploadImage } from "@/lib/services/cloudinaryUploadImage";
 import Loader from "./Loader";
-import { createRentalAndTransaction } from "@/app/auth/actions/checkoutActions";
+import { createRentalAndTransaction } from "@/actions/checkoutActions";
 import { useRouter } from "next/navigation";
 
 interface UnitCheckoutClientProps {
@@ -26,6 +26,8 @@ interface UnitCheckoutClientProps {
 
 export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
   const router = useRouter();
+
+  console.log(user);
 
   const [deliveryMethod, setDeliveryMethod] = useState("delivery");
   const [paymentMethod, setPaymentMethod] = useState("cod");
@@ -44,11 +46,11 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
     { title: "Units", href: "/units" },
     {
       title: unit.name,
-      href: `/units/${unit.id}/${generateSlug(unit.name)}`,
+      href: `/units/${unit.unit_id}/${generateSlug(unit.name)}`,
     },
     {
       title: "Rent",
-      href: `/rent/${unit.id}/${generateSlug(unit.name)}`,
+      href: `/rent/${unit.unit_id}/${generateSlug(unit.name)}`,
     },
   ];
 
@@ -61,10 +63,12 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
 
     try {
       const proofUrl =
-        paymentMethod === "gcash" ? await uploadImage(proofOfPayment!) : "";
+        paymentMethod === "gcash"
+          ? await cloudinaryUploadImage(proofOfPayment!)
+          : "";
 
       const result = await createRentalAndTransaction({
-        unitId: unit.id,
+        unitId: unit.unit_id,
         startDate,
         endDate,
         deliveryMethod,
@@ -83,8 +87,8 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
         setIsLoading(false);
         router.push(result.redirectUrl);
       }
-    } catch (err: any) {
-      toast.error(err.message || "Failed to create rental and transaction.");
+    } catch (err) {
+      console.log(err);
     } finally {
       setIsLoading(false);
     }

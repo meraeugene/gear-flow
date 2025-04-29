@@ -3,25 +3,27 @@
 import { useState, useEffect, useTransition } from "react";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { searchUnits } from "@/app/auth/actions/unitActions";
+import { searchUnits } from "@/actions/unitActions";
 import { UnitWithOwner } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { generateSlug } from "@/utils/generateSlug";
+import { generateSlug } from "@/utils/string/generateSlug";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
   const [results, setResults] = useState<UnitWithOwner[]>([]);
-  const [isPending, startTransition] = useTransition(); // Using isPending
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     const delay = setTimeout(() => {
-      if (query.trim()) {
+      const trimmedQuery = query.trim(); // Trim spaces
+
+      if (trimmedQuery) {
         startTransition(async () => {
-          const res = await searchUnits(query);
+          const res = await searchUnits(trimmedQuery);
           if (!res.error) {
-            setResults(res.searchUnits || []);
+            setResults(res.data || []);
           }
         });
       } else {
@@ -47,7 +49,7 @@ const SearchBar = () => {
       {query && (
         <button
           onClick={() => setQuery("")}
-          className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+          className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-2xl text-gray-400 hover:text-gray-600"
         >
           ×
         </button>
@@ -63,14 +65,15 @@ const SearchBar = () => {
             className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white shadow-md"
           >
             {isPending ? (
-              <div className="flex items-center justify-center py-2">
+              <div className="flex items-center justify-center gap-3 py-2">
+                <span className="text-sm">Searching...</span>
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-500 border-t-transparent" />
               </div>
             ) : (
               results.map((unit) => (
                 <Link
-                  href={`/units/${unit.id}/${generateSlug(unit.name)}`}
-                  key={unit.id}
+                  href={`/units/${unit.unit_id}/${generateSlug(unit.name)}/${unit.category_id}`}
+                  key={unit.unit_id}
                   className="flex cursor-pointer items-center gap-3 px-4 py-2 hover:bg-gray-100"
                   onMouseDown={() => {
                     setQuery(unit.name);
@@ -80,7 +83,7 @@ const SearchBar = () => {
                   <div className="flex flex-col text-sm">
                     <span className="font-medium">{unit.name}</span>
                     <span className="text-muted-foreground text-xs">
-                      {unit.category} • ₱{unit.price_per_day}/day
+                      {unit.category_name} • ₱{unit.price_per_day}/day
                     </span>
                   </div>
                 </Link>

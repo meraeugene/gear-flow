@@ -1,4 +1,4 @@
-import { getAuthUser } from "@/app/auth/actions/authActions";
+import { getAuthUser } from "@/actions/authActions";
 import LocationForm from "@/components/forms/LocationForm";
 import { redirect } from "next/navigation";
 

@@ -1,5 +1,5 @@
 import { UnitWithOwner } from "@/types";
-import { generateSlug } from "@/utils/generateSlug";
+import { generateSlug } from "@/utils/string/generateSlug";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,7 +22,9 @@ const NewArrival = ({ newArrivalsData }: NewArrivalProps) => {
       <div className="grid h-[40rem] grid-cols-5 grid-rows-6 gap-4">
         {/* First Image (index 0) */}
         <div className="col-span-3 row-span-6">
-          <Link href={`/units/${newArrivalsData[0]?.id}/${firstSlug}`}>
+          <Link
+            href={`/units/${newArrivalsData[0]?.unit_id}/${firstSlug}/${newArrivalsData[0]?.category_id}`}
+          >
             <Image
               className="h-full w-full object-cover"
               src={newArrivalsData[0]?.image_url || "/assets/images/ps5.jpg"} // First item
@@ -35,7 +37,9 @@ const NewArrival = ({ newArrivalsData }: NewArrivalProps) => {
 
         {/* Second Image (index 1) */}
         <div className="col-span-2 col-start-4 row-span-3">
-          <Link href={`/units/${newArrivalsData[1]?.id}/${secondSlug}`}>
+          <Link
+            href={`/units/${newArrivalsData[1]?.unit_id}/${secondSlug}/${newArrivalsData[1].category_id}`}
+          >
             <Image
               className="h-full w-full object-cover"
               src={newArrivalsData[1]?.image_url || "/assets/images/camera.jpg"} // Second item
@@ -48,7 +52,9 @@ const NewArrival = ({ newArrivalsData }: NewArrivalProps) => {
 
         {/* Third Image (index 2) */}
         <div className="col-span-2 col-start-4 row-span-3 row-start-4">
-          <Link href={`/units/${newArrivalsData[2]?.id}/${thirdSlug}`}>
+          <Link
+            href={`/units/${newArrivalsData[2]?.unit_id}/${thirdSlug}/${newArrivalsData[2].category_id}`}
+          >
             <Image
               className="h-full w-full object-cover"
               src={newArrivalsData[2]?.image_url || "/assets/images/alexa.jpg"} // Third item

@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Category } from "@/types";
-import { generateSlug } from "@/utils/generateSlug";
+import { generateSlug } from "@/utils/string/generateSlug";
 import Link from "next/link";
 
 const CategoryCard = ({ name, image_url, description, id }: Category) => {

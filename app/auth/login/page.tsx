@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import Loader from "@/components/Loader";
 import PasswordField from "@/components/forms/PasswordField";
 import TextField from "@/components/forms/TextField";
-import { login } from "../actions/authActions";
+import { login } from "../../../actions/authActions";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useRouter } from "next/navigation";
 

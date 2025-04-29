@@ -6,9 +6,9 @@ import { useState } from "react";
 import { toast } from "sonner";
 import Loader from "@/components/Loader";
 import TextField from "@/components/forms/TextField";
-import { sendResetPasswordLink } from "../actions/resetPasswordActions";
+import { sendResetPasswordLink } from "../../../actions/resetPasswordActions";
 
-export default function page() {
+export default function Page() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,9 +42,9 @@ export default function page() {
         <div className="w-full">
           <div className="mt-3 mb-8 flex w-full flex-col items-center justify-center gap-1">
             <h1 className="text-xl font-medium">Reset Password</h1>
-            <p>Enter your email and we'll send you a reset link.</p>
+            <p>Enter your email and we&apos;ll send you a reset link.</p>
           </div>
-
+          &apos;
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <TextField
               id="email"
@@ -60,7 +60,6 @@ export default function page() {
               {loading ? <Loader /> : "Send Reset Link"}
             </button>
           </form>
-
           <Link
             href="/auth/login"
             className="mt-6 flex w-full cursor-pointer items-center justify-center text-center text-sm text-gray-500 hover:text-gray-700"

@@ -3,7 +3,7 @@ import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { addUnitsBreadcrumbs } from "@/data/breadCrumbsLinks";
-import { getAllCategories } from "@/app/auth/actions/categoryActions";
+import { getAllCategories } from "@/actions/categoryActions";
 import { AlertComponent } from "@/components/AlertComponent";
 
 const page = async () => {
@@ -41,7 +41,7 @@ const page = async () => {
         </div>
 
         <div className="w-1/2">
-          <AddUnitForm categories={categories || []} />
+          <AddUnitForm categories={categories ?? []} />
         </div>
       </main>
     </div>
