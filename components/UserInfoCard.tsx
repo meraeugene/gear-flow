@@ -20,6 +20,7 @@ const UserInfoCard = ({ userInfo }: UserInfoCardProps) => {
           <AvatarImage
             className="h-full w-full object-cover"
             src={userInfo.profile_picture}
+            alt="profile pic"
           />
           <AvatarFallback className="text-sm">
             {getInitials(fullName)}
