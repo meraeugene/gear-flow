@@ -49,6 +49,7 @@ const Units = ({ unitsData, unitTitle, href }: UnitsProps) => {
             onClick={prevPage}
             disabled={currentPage === 1}
             className="circle-button"
+            aria-label="Previous Page"
           >
             <GrPrevious />
           </button>
@@ -58,6 +59,7 @@ const Units = ({ unitsData, unitTitle, href }: UnitsProps) => {
               currentPage === Math.ceil(unitsData.length / itemsPerPage)
             }
             className="circle-button"
+            aria-label="Next Page"
           >
             <GrNext />
           </button>
