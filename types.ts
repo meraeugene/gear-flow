@@ -42,7 +42,7 @@ export type userInfo = {
 };
 
 export type RentalData = {
-  rental_id: string;
+  id: string;
   unit_id: string;
   renter_id: string;
   start_date: string;

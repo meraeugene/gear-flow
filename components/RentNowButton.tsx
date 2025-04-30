@@ -37,7 +37,7 @@ const RentNowButton = ({
   };
 
   return (
-    <Link href={`/rent/${unitId}/${unitSlug}/${categoryId}`}>
+    <Link href={`/rent/${unitId}/${unitSlug}`}>
       <button
         className={`h-[50px] w-full rounded-sm border transition duration-200 ${
           isAvailable

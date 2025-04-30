@@ -5,22 +5,27 @@ import {
 } from "@/components/ui/hover-card";
 import { userInfo } from "@/types";
 import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getInitials } from "@/utils/string/getInitials";
 
 interface UserInfoCardProps {
   userInfo: userInfo;
 }
 
 const UserInfoCard = ({ userInfo }: UserInfoCardProps) => {
+  const fullName = userInfo.first_name + " " + userInfo.last_name;
   return (
     <HoverCard>
-      <HoverCardTrigger className="cursor-pointer">
-        <Image
-          src={userInfo.profile_picture}
-          alt="profile"
-          width={30}
-          height={30}
-          className="rounded-full"
-        />
+      <HoverCardTrigger className="h-8 w-8 cursor-pointer">
+        <Avatar className="h-8 w-8 cursor-pointer border border-gray-300">
+          <AvatarImage
+            className="h-full w-full object-cover"
+            src={userInfo.profile_picture}
+          />
+          <AvatarFallback className="text-sm">
+            {getInitials(fullName)}
+          </AvatarFallback>
+        </Avatar>
       </HoverCardTrigger>
       <HoverCardContent>
         <ul className="flex flex-col gap-2">

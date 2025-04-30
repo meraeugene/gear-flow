@@ -294,3 +294,51 @@ export async function getUnitDetailsWithRelated(
     return { error: "Error in getUnitDetailsWithRelated" };
   }
 }
+
+export async function getUnitDetailsWithUserInfo(unitId: string) {
+  try {
+    const supabase = await createServerSupabaseClient();
+
+    // Step 1: Fetch the main unit from the view
+    const { data: unit, error: unitError } = await supabase
+      .from("unit_details")
+      .select("*")
+      .eq("unit_id", unitId)
+      .single();
+
+    if (unitError) {
+      console.log(unitError);
+      return { error: unitError.message };
+    }
+
+    // Step 2: Get auth user and fetch their user data
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return { error: "User not authenticated." };
+    }
+
+    // Fetch full user profile from the "users" table using the auth_user_id
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("auth_user_id", user.id)
+      .single(); // Expecting only one user record
+
+    // Handle possible query error
+    if (error) {
+      return { error: error.message };
+    }
+
+    return {
+      unit,
+      userData: data,
+    };
+  } catch (error) {
+    console.log(error);
+    return { error: "Error in getUnitDetailsWithUserInfo" };
+  }
+}

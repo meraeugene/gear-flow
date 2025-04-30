@@ -9,7 +9,7 @@ import RelatedUnits from "@/components/RelatedUnits";
 import RentNowButton from "@/components/RentNowButton";
 import { getUnitDetailsWithRelated } from "@/actions/unitActions";
 
-const UnitPage = async ({
+const page = async ({
   params,
 }: {
   params: Promise<{ id: string; categoryId: string; slug: string }>;
@@ -114,4 +114,4 @@ const UnitPage = async ({
   );
 };
 
-export default UnitPage;
+export default page;

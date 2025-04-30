@@ -10,6 +10,7 @@ export async function getUserTransaction() {
   } = await supabase.auth.getUser();
 
   if (authError || !user) {
+    console.log(authError);
     return { error: "User not authenticated." };
   }
 

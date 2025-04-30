@@ -90,8 +90,11 @@ const ProfileDropDown = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar className="cursor-pointer border border-gray-300">
-          <AvatarImage width={40} height={40} src={profilePicture} />
+        <Avatar className="h-8 w-8 cursor-pointer border border-gray-300">
+          <AvatarImage
+            className="h-full w-full object-cover"
+            src={profilePicture}
+          />
           <AvatarFallback className="text-sm">
             {getInitials(fullName)}
           </AvatarFallback>

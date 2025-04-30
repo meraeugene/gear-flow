@@ -16,6 +16,7 @@ import {
   FiShoppingBag,
   FiPackage,
   FiInbox,
+  FiEdit2,
 } from "react-icons/fi";
 
 const userDashboardLinks = [
@@ -51,6 +52,11 @@ const settingsLinks = [
     name: "Account Settings",
     href: "/account/settings",
     icon: <FiEdit size={18} />,
+  },
+  {
+    name: "Edit Profile",
+    href: "/account/settings/edit-profile",
+    icon: <FiEdit2 size={18} />,
   },
   {
     name: "Reset Password",

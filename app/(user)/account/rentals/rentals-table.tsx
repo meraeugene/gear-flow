@@ -36,7 +36,7 @@ export default function RentalsTable({ rentals }: Props) {
           ) : (
             rentals.map((rental) => (
               <tr
-                key={rental.rental_id}
+                key={rental.id}
                 className="border-b border-gray-200 hover:bg-gray-50"
               >
                 <td className="p-3">{rental.unit_name ?? "Unknown Unit"}</td>

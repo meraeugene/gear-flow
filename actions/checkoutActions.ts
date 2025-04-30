@@ -53,7 +53,7 @@ export async function createRentalAndTransaction({
     return { error: rentalError?.message || "Failed to create rental." };
   }
 
-  const rentalId = (rentalData[0] as RentalData).rental_id;
+  const rentalId = (rentalData[0] as RentalData).id;
 
   // Step 2: Create a transaction record for the rental
   const { data: transactionData, error: transactionError } = await supabase
