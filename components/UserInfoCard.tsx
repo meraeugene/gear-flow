@@ -4,7 +4,6 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { userInfo } from "@/types";
-import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getInitials } from "@/utils/string/getInitials";
 

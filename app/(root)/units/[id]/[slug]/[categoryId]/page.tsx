@@ -101,7 +101,6 @@ const page = async ({
             isAvailable={unit.is_available}
             unitId={unitId}
             unitSlug={slug}
-            categoryId={categoryId}
             pricePerDay={unit.price_per_day}
           />
         </div>

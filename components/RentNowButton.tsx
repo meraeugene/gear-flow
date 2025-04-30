@@ -9,14 +9,12 @@ type RentNowButtonProps = {
   unitId: string;
   unitSlug: string;
   pricePerDay: number;
-  categoryId: string;
 };
 
 const RentNowButton = ({
   isAvailable,
   unitId,
   unitSlug,
-  categoryId,
 }: RentNowButtonProps) => {
   const { userId, role } = useAuthStore();
 
