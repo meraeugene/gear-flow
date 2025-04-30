@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Gear Flow | Equipments Rental Website",
     description: "Rent high-quality equipment with ease using Gear Flow.",
-    url: "https://gear-flow.vercel.app/", // Replace with your actual URL
+    url: "https://gear-flow-ph.vercel.app/", // Replace with your actual URL
     siteName: "Gear Flow",
     images: [
       {
