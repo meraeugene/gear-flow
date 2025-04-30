@@ -66,65 +66,63 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   const { src, button, title } = slide;
 
   return (
-    <div className="[perspective:1200px] [transform-style:preserve-3d]">
-      <li
-        ref={slideRef}
-        className="relative z-10 mx-[4vmin] flex h-[70vmin] w-[70vmin] flex-1 flex-col items-center justify-center text-center text-white opacity-100 transition-all duration-300 ease-in-out"
-        onClick={() => handleSlideClick(index)}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+    <li
+      ref={slideRef}
+      className="relative z-10 mx-[4vmin] flex h-[70vmin] w-[70vmin] flex-1 flex-col items-center justify-center text-center text-white opacity-100 transition-all duration-300 ease-in-out [perspective:1200px] [transform-style:preserve-3d]"
+      onClick={() => handleSlideClick(index)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform:
+          current !== index
+            ? "scale(0.98) rotateX(8deg)"
+            : "scale(1) rotateX(0deg)",
+        transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+        transformOrigin: "bottom",
+      }}
+    >
+      <div
+        className="absolute top-0 left-0 h-full w-full overflow-hidden rounded-[1%] bg-[#1D1F2F] transition-all duration-150 ease-out"
         style={{
           transform:
-            current !== index
-              ? "scale(0.98) rotateX(8deg)"
-              : "scale(1) rotateX(0deg)",
-          transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-          transformOrigin: "bottom",
+            current === index
+              ? "translate3d(calc(var(--x) / 30), calc(var(--y) / 30), 0)"
+              : "none",
         }}
       >
-        <div
-          className="absolute top-0 left-0 h-full w-full overflow-hidden rounded-[1%] bg-[#1D1F2F] transition-all duration-150 ease-out"
+        <Image
+          width={1920}
+          height={1080}
+          className="absolute inset-0 h-[100%] w-[100%] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
           style={{
-            transform:
-              current === index
-                ? "translate3d(calc(var(--x) / 30), calc(var(--y) / 30), 0)"
-                : "none",
+            opacity: current === index ? 1 : 0.5,
           }}
-        >
-          <Image
-            width={1920}
-            height={1080}
-            className="absolute inset-0 h-[100%] w-[100%] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
-            style={{
-              opacity: current === index ? 1 : 0.5,
-            }}
-            alt={title}
-            src={src}
-            onLoad={imageLoaded}
-            loading="eager"
-            decoding="sync"
-          />
-          {current === index && (
-            <div className="absolute inset-0 bg-black/30 transition-all duration-1000" />
-          )}
-        </div>
+          alt={title}
+          src={src}
+          onLoad={imageLoaded}
+          loading="eager"
+          decoding="sync"
+        />
+        {current === index && (
+          <div className="absolute inset-0 bg-black/30 transition-all duration-1000" />
+        )}
+      </div>
 
-        <article
-          className={`relative p-[4vmin] transition-opacity duration-1000 ease-in-out ${
-            current === index ? "visible opacity-100" : "invisible opacity-0"
-          }`}
-        >
-          <h2 className="relative text-lg font-semibold md:text-2xl lg:text-4xl">
-            {title}
-          </h2>
-          <div className="flex justify-center">
-            <button className="mx-auto mt-6 flex h-12 w-fit items-center justify-center rounded-2xl border border-transparent bg-white px-4 py-2 text-xs text-black shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] transition duration-200 hover:shadow-lg sm:text-sm">
-              {button}
-            </button>
-          </div>
-        </article>
-      </li>
-    </div>
+      <article
+        className={`relative p-[4vmin] transition-opacity duration-1000 ease-in-out ${
+          current === index ? "visible opacity-100" : "invisible opacity-0"
+        }`}
+      >
+        <h2 className="relative text-lg font-semibold md:text-2xl lg:text-4xl">
+          {title}
+        </h2>
+        <div className="flex justify-center">
+          <button className="mx-auto mt-6 flex h-12 w-fit items-center justify-center rounded-2xl border border-transparent bg-white px-4 py-2 text-xs text-black shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] transition duration-200 hover:shadow-lg sm:text-sm">
+            {button}
+          </button>
+        </div>
+      </article>
+    </li>
   );
 };
 

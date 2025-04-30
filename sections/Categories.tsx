@@ -53,6 +53,7 @@ const Categories = ({ categoriesData }: CategoriesProps) => {
             onClick={prevPage}
             disabled={currentPage === 1}
             className="circle-button"
+            aria-label="Previous Page"
           >
             <GrPrevious />
           </button>
@@ -62,6 +63,7 @@ const Categories = ({ categoriesData }: CategoriesProps) => {
               currentPage === Math.ceil(categoriesData.length / itemsPerPage)
             }
             className="circle-button"
+            aria-label="Next Page"
           >
             <GrNext />
           </button>

@@ -109,6 +109,7 @@ export const columns: ColumnDef<Category>[] = [
       <Button
         className="cursor-pointer"
         variant="ghost"
+        aria-label="Sort by Name"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
         Name
