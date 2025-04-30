@@ -22,11 +22,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Gear Flow | Equipments Rental Website",
     description: "Rent high-quality equipment with ease using Gear Flow.",
-    url: "https://yourdomain.com", // Replace with your actual URL
+    url: "https://gear-flow.vercel.app/", // Replace with your actual URL
     siteName: "Gear Flow",
     images: [
       {
-        url: "https://yourdomain.com/og-image.jpg", // Replace with your OG image path
+        url: "https://raw.githubusercontent.com/meraeugene/gear-flow/refs/heads/main/public/assets/images/cover.png", // Replace with your OG image path
         width: 1200,
         height: 630,
         alt: "Gear Flow - Rent Equipments Easily",
@@ -38,7 +38,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Gear Flow | Equipments Rental Website",
     description: "Rent high-quality equipment with ease using Gear Flow.",
-    images: ["https://yourdomain.com/og-image.jpg"], // same image as Open Graph
+    images: [
+      "https://raw.githubusercontent.com/meraeugene/gear-flow/refs/heads/main/public/assets/images/cover.png",
+    ], // same image as Open Graph
   },
 };
 
