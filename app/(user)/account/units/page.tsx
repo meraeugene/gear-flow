@@ -1,15 +1,24 @@
+"use client";
+
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
-import { getAuthUserUnits } from "@/actions/unitActions";
 import { AlertComponent } from "@/components/AlertComponent";
 import { unitsBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { Suspense } from "react";
 import GlobalLoader from "@/components/GlobalLoader";
+import useSWR from "swr";
+import { fetcher } from "@/lib/services/swrFetcher";
 
-const page = async () => {
-  const { data: userUnitsData, error } = await getAuthUserUnits();
+const UnitsPage = () => {
+  const { data, error, isLoading } = useSWR("/api/units", fetcher);
+
+  if (isLoading) {
+    return <GlobalLoader />;
+  }
+
+  const { userUnits } = data;
 
   if (error) {
     return (
@@ -37,11 +46,11 @@ const page = async () => {
             </p>
           </div>
 
-          <DataTable columns={columns} data={userUnitsData ?? []} />
+          <DataTable columns={columns} data={userUnits ?? []} />
         </main>
       </div>
     </Suspense>
   );
 };
 
-export default page;
+export default UnitsPage;

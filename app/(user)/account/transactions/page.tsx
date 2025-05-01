@@ -1,16 +1,25 @@
+"use client";
+
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
 import { myPaymentsBreadcrumbs } from "@/data/breadCrumbsLinks";
 import PaymentsTable from "./payments-table";
-import { getUserTransaction } from "@/actions/transactionActions";
 import { AlertComponent } from "@/components/AlertComponent";
 import GlobalLoader from "@/components/GlobalLoader";
 import { Suspense } from "react";
+import useSWR from "swr";
+import { fetcher } from "@/lib/services/swrFetcher";
 
-const page = async () => {
-  const { transactions, error: transactionsError } = await getUserTransaction();
+const TransactionsPage = () => {
+  const { data, error, isLoading } = useSWR("/api/transactions", fetcher);
 
-  if (transactionsError) {
+  if (isLoading) {
+    return <GlobalLoader />;
+  }
+
+  const { transactions } = data;
+
+  if (error) {
     return (
       <div className="px-24 py-20">
         <AlertComponent
@@ -44,4 +53,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default TransactionsPage;

@@ -29,5 +29,5 @@ export async function getRentalStatus() {
   }
 
   // Return the retrieved rentals
-  return { rentals: data };
+  return { data };
 }

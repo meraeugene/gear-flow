@@ -1,16 +1,25 @@
+"use client";
+
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
 import { myRentalsBreadcrumbs } from "@/data/breadCrumbsLinks";
 import RentalsTable from "./rentals-table";
-import { getRentalStatus } from "@/actions/rentalActions";
 import { AlertComponent } from "@/components/AlertComponent";
 import { Suspense } from "react";
 import GlobalLoader from "@/components/GlobalLoader";
+import useSWR from "swr";
+import { fetcher } from "@/lib/services/swrFetcher";
 
-const page = async () => {
-  const { rentals, error: rentalsError } = await getRentalStatus();
+const RentalsPage = () => {
+  const { data, error, isLoading } = useSWR("/api/rentals", fetcher);
 
-  if (rentalsError) {
+  if (isLoading) {
+    return <GlobalLoader />;
+  }
+
+  const { rentals } = data;
+
+  if (error) {
     return (
       <div className="px-24 py-20">
         <AlertComponent
@@ -45,4 +54,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default RentalsPage;

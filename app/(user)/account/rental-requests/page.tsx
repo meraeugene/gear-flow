@@ -1,14 +1,21 @@
+"use client";
+
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
 import { rentalRequestBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { AlertComponent } from "@/components/AlertComponent";
-import { getRentalRequestsForMyUnits } from "@/actions/rentalRequestActions";
 import { Suspense } from "react";
 import GlobalLoader from "@/components/GlobalLoader";
 import RentalRequestsCard from "./rental-requests-card";
+import useSWR from "swr";
+import { fetcher } from "@/lib/services/swrFetcher";
 
-const page = async () => {
-  const { data, error } = await getRentalRequestsForMyUnits();
+const RentalRequestsPage = () => {
+  const { data, error, isLoading } = useSWR("/api/rental-requests", fetcher);
+
+  if (isLoading) {
+    return <GlobalLoader />;
+  }
 
   if (error) {
     return (
@@ -38,11 +45,11 @@ const page = async () => {
         </div>
 
         <div className="overflow-hidden">
-          <RentalRequestsCard rentalRequests={data ?? []} />
+          <RentalRequestsCard rentalRequests={data?.data ?? []} />
         </div>
       </main>
     </Suspense>
   );
 };
 
-export default page;
+export default RentalRequestsPage;

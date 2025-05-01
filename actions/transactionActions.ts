@@ -25,5 +25,5 @@ export async function getUserTransaction() {
     return { error: error.message };
   }
 
-  return { transactions: data };
+  return { data };
 }
