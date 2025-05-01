@@ -66,7 +66,7 @@ export default function RentalRequestsTable({
   };
 
   return (
-    <div className="rounded-md border-t border-r border-l border-gray-100 2xl:w-full">
+    <div className="rounded-md border-t border-r border-l border-gray-100">
       <table className="w-full bg-white text-left text-sm">
         <thead className="border-b border-gray-100 bg-gray-50">
           <tr className="whitespace-nowrap">
