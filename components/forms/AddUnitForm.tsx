@@ -84,7 +84,10 @@ export default function AddUnitForm({ categories }: AddUnitForm) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { image, ...data } = values;
 
-    setLoading(true);
+    if (!image) {
+      toast.error("Image is required.");
+      return;
+    }
 
     if (image) {
       const imageUrl = await cloudinaryUploadImage(image);
