@@ -1,32 +1,41 @@
-import { getAuthUser } from "@/actions/authActions";
+"use client";
+
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { dashboardBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { capitalizeFirstLetter } from "@/utils/string/capitalizeFirstLetter";
 import { redirect } from "next/navigation";
 import { AdminSectionCards } from "@/components/AdminSectionCards";
-import {
-  getAdminUserStats,
-  getUserDashboardStats,
-} from "@/actions/statsAction";
 import { UserSectionCards } from "@/components/UserSectionCards";
+import useSwr from "swr";
+import { fetcher } from "@/lib/services/swrFetcher";
+import GlobalLoader from "@/components/GlobalLoader";
 
-const page = async () => {
-  const [
-    { user, error },
-    { totalUsers, bannedUsers, adminUsers, activeUsers, newUsersThisMonth },
-    { totalRentals, activeRentals, totalUnits, completedRentals, revenue },
-  ] = await Promise.all([
-    getAuthUser(),
-    getAdminUserStats(),
-    getUserDashboardStats(),
-  ]);
+const page = () => {
+  const { data, error, isLoading } = useSwr("/api/stats", fetcher);
+
+  if (isLoading) {
+    return <GlobalLoader />;
+  }
+
+  const { user } = data.user;
+
+  const {
+    totalUsers,
+    bannedUsers,
+    adminUsers,
+    activeUsers,
+    newUsersThisMonth,
+  } = data.adminStats;
+
+  const { totalRentals, activeRentals, totalUnits, completedRentals, revenue } =
+    data.userStats;
 
   if (error || !user) {
     redirect("/auth/login");
   }
 
-  const isAdmin = user.role === "admin";
+  const isAdmin = user?.role === "admin";
 
   return (
     <div className="flex min-h-screen">
