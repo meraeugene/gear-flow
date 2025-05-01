@@ -1,7 +1,6 @@
 "use client";
 
 import { useAuthStore } from "@/stores/useAuthStore";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
