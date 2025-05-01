@@ -22,7 +22,7 @@ const page = async () => {
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen overflow-hidden">
       <Aside />
 
       <main className="flex-1 p-8 pt-11">

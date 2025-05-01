@@ -38,7 +38,9 @@ const page = async () => {
           </p>
         </div>
 
-        <RentalRequestsTable rentalRequests={data ?? []} />
+        <div className="w-[90%] overflow-x-auto">
+          <RentalRequestsTable rentalRequests={data ?? []} />
+        </div>
       </main>
     </div>
   );

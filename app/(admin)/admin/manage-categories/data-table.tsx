@@ -69,7 +69,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
+    <div className="w-[90%] overflow-x-auto">
       <Link href="/admin/manage-categories/add-category">
         <Button variant="outline" className="my-4 ml-auto cursor-pointer">
           <Plus className="text-gray-400" />
