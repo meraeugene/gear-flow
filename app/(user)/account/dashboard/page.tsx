@@ -11,7 +11,7 @@ import useSwr from "swr";
 import { fetcher } from "@/lib/services/swrFetcher";
 import GlobalLoader from "@/components/GlobalLoader";
 
-const page = () => {
+const DashboardPage = () => {
   const { data, error, isLoading } = useSwr("/api/stats", fetcher);
 
   if (isLoading) {
@@ -96,4 +96,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default DashboardPage;
