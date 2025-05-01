@@ -1,4 +1,3 @@
-import Aside from "@/components/Aside";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
@@ -6,6 +5,8 @@ import BackButton from "@/components/BackButton";
 import { AlertComponent } from "@/components/AlertComponent";
 import { categoriesBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { getAllCategories } from "@/actions/categoryActions";
+import { Suspense } from "react";
+import GlobalLoader from "@/components/GlobalLoader";
 
 const page = async () => {
   const { data: categoriesData, error } = await getAllCategories();
@@ -22,9 +23,7 @@ const page = async () => {
   }
 
   return (
-    <div className="flex min-h-screen overflow-hidden">
-      <Aside />
-
+    <Suspense fallback={<GlobalLoader />}>
       <main className="flex-1 p-8 pt-11">
         <div className="border-b border-gray-100 pb-4">
           <div className="mb-6 space-y-4">
@@ -39,7 +38,7 @@ const page = async () => {
 
         <DataTable columns={columns} data={categoriesData ?? []} />
       </main>
-    </div>
+    </Suspense>
   );
 };
 

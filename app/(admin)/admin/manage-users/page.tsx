@@ -1,10 +1,11 @@
-import Aside from "@/components/Aside";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
 import { usersBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { getAllUsers } from "@/actions/usersActions";
 import UsersTable from "./users-table";
 import { AlertComponent } from "@/components/AlertComponent";
+import { Suspense } from "react";
+import GlobalLoader from "@/components/GlobalLoader";
 
 const page = async () => {
   const { data: allUsersData, error } = await getAllUsers();
@@ -18,9 +19,7 @@ const page = async () => {
   }
 
   return (
-    <div className="flex min-h-screen">
-      <Aside />
-
+    <Suspense fallback={<GlobalLoader />}>
       <main className="flex-1 p-8">
         <div className="mb-6 border-b border-gray-100 pb-6">
           <div className="mb-6 space-y-4">
@@ -35,7 +34,7 @@ const page = async () => {
 
         <UsersTable users={allUsersData ?? []} />
       </main>
-    </div>
+    </Suspense>
   );
 };
 
