@@ -2,6 +2,7 @@
 
 import { useAuthStore } from "@/stores/useAuthStore";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 type RentNowButtonProps = {
@@ -17,11 +18,11 @@ const RentNowButton = ({
   unitSlug,
 }: RentNowButtonProps) => {
   const { userId, role } = useAuthStore();
+  const router = useRouter();
 
-  const handleRentNowClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleRentNowClick = () => {
     if (!userId) {
       toast.error("Please login in to rent a unit.");
-      event.preventDefault();
       return;
     }
 
@@ -29,25 +30,24 @@ const RentNowButton = ({
       toast.error(
         "Admin cannot rent a unit. Please create or login to a  user account.",
       );
-      event.preventDefault();
       return;
     }
+
+    router.push(`/rent/${unitId}/${unitSlug}`);
   };
 
   return (
-    <Link href={`/rent/${unitId}/${unitSlug}`}>
-      <button
-        className={`h-[50px] w-full rounded-sm border transition duration-200 ${
-          isAvailable
-            ? "cursor-pointer border-gray-300 hover:bg-gray-100"
-            : "cursor-not-allowed border-gray-200 bg-gray-200"
-        }`}
-        disabled={!isAvailable}
-        onClick={handleRentNowClick}
-      >
-        Rent Now
-      </button>
-    </Link>
+    <button
+      className={`h-[50px] w-full rounded-sm border transition duration-200 ${
+        isAvailable
+          ? "cursor-pointer border-gray-300 hover:bg-gray-100"
+          : "cursor-not-allowed border-gray-200 bg-gray-200"
+      }`}
+      disabled={!isAvailable}
+      onClick={handleRentNowClick}
+    >
+      Rent Now
+    </button>
   );
 };
 
