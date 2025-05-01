@@ -1,5 +1,4 @@
 import AddUnitForm from "@/components/forms/AddUnitForm";
-import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { addUnitsBreadcrumbs } from "@/data/breadCrumbsLinks";
@@ -22,8 +21,6 @@ const page = async () => {
 
   return (
     <div className="flex min-h-screen">
-      <Aside />
-
       <main className="pb1 flex-1 p-8 pt-11 pb-12">
         <div className="space-y-8">
           <div className="mb-6 border-b border-gray-100 pb-4">

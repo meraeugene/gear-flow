@@ -1,4 +1,3 @@
-import Aside from "@/components/Aside";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
 import { myRentalsBreadcrumbs } from "@/data/breadCrumbsLinks";
@@ -22,8 +21,6 @@ const page = async () => {
 
   return (
     <div className="flex min-h-screen">
-      <Aside />
-
       <main className="flex-1 p-8">
         <div className="mb-6 border-b border-gray-100 pb-6">
           <div className="mb-6 space-y-4">

@@ -1,6 +1,5 @@
 import { getAuthUser } from "@/actions/authActions";
 import { AlertComponent } from "@/components/AlertComponent";
-import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { settingsBreadcrumbs } from "@/data/breadCrumbsLinks";
@@ -21,8 +20,6 @@ const page = async () => {
 
   return (
     <div className="flex min-h-screen">
-      <Aside />
-
       <main className="flex-1 p-8">
         <div className="mb-6 border-b border-gray-100 pb-4">
           <div className="mb-6 space-y-4">

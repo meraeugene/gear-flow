@@ -1,6 +1,5 @@
 import { getAllCategories } from "@/actions/categoryActions";
 import { AlertComponent } from "@/components/AlertComponent";
-import Aside from "@/components/Aside";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import EditUnitForm from "@/components/forms/EditUnitForm";
@@ -24,7 +23,6 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <div className="flex min-h-screen">
-      <Aside />
       <main className="flex-1 p-8 pt-11 pb-12">
         <div className="space-y-8">
           <div className="mb-6 border-b border-gray-100 pb-4">
