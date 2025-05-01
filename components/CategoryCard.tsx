@@ -13,7 +13,7 @@ const CategoryCard = ({ name, image_url, description, id }: Category) => {
       <Link
         href={`/category/${id}/${slug}`}
         className={cn(
-          "card relative mx-auto flex h-[20rem] max-w-sm cursor-pointer flex-col items-center justify-center overflow-hidden rounded-md bg-cover p-4 shadow-xl",
+          "card relative mx-auto flex h-[17rem] max-w-sm cursor-pointer flex-col items-center justify-center overflow-hidden rounded-md bg-cover p-4 shadow-xl",
         )}
         style={{ backgroundImage: `url(${image_url})` }}
       >

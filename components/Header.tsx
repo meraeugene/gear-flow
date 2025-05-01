@@ -12,11 +12,11 @@ const Header = async () => {
       <Link href="/" className="logo">
         <Image
           src="/assets/images/no-bg-logo.png"
-          width={80}
-          height={80}
+          width={60}
+          height={60}
           priority
-          alt="logo"
           className="h-auto w-auto"
+          alt="logo"
         />
       </Link>
 
