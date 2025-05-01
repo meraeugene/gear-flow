@@ -2,6 +2,7 @@
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import Image from "next/image";
 import { useState, useRef, useId, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface SlideData {
   title: string;
@@ -117,9 +118,15 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
           {title}
         </h2>
         <div className="flex justify-center">
-          <button className="mx-auto mt-6 flex h-12 w-fit items-center justify-center rounded-2xl border border-transparent bg-white px-4 py-2 text-xs text-black shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] transition duration-200 hover:shadow-lg sm:text-sm">
+          <motion.button
+            initial={{ scale: 0.95 }}
+            animate={{ scale: 1 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+            className="mx-auto mt-6 flex h-12 w-fit cursor-pointer items-center justify-center rounded-xl border border-transparent bg-white px-4 py-2 text-xs text-black shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] transition duration-200 hover:shadow-lg sm:text-sm"
+          >
             {button}
-          </button>
+          </motion.button>
         </div>
       </article>
     </li>

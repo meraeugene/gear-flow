@@ -27,8 +27,6 @@ interface UnitCheckoutClientProps {
 export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
   const router = useRouter();
 
-  console.log(user);
-
   const [deliveryMethod, setDeliveryMethod] = useState("delivery");
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [daysOfRent, setDaysOfRent] = useState(1);
@@ -46,7 +44,7 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
     { title: "Units", href: "/units" },
     {
       title: unit.name,
-      href: `/units/${unit.unit_id}/${generateSlug(unit.name)}`,
+      href: `/units/${unit.unit_id}/${generateSlug(unit.name)}/${unit.category_id}`,
     },
     {
       title: "Rent",
@@ -262,8 +260,7 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
                 alt={unit.name}
                 height={1080}
                 width={1980}
-                objectFit="cover"
-                className="w-[20rem] rounded-md object-center"
+                className="w-[20rem] rounded-md object-cover object-center"
               />
               <h1 className="text-2xl font-medium">{unit.name}</h1>
             </div>

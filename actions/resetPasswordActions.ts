@@ -5,15 +5,6 @@ import { createServerSupabaseClient } from "@/lib/supabase/serverClient";
 export const sendResetPasswordLink = async (formData: FormData) => {
   const supabase = await createServerSupabaseClient();
 
-  const {
-    data: { user },
-    error: authError,
-  } = await supabase.auth.getUser();
-
-  if (authError || !user) {
-    return { error: "User not authenticated." };
-  }
-
   const email = formData.get("email")?.toString().trim();
 
   if (!email) {

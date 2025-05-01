@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CategoryCard from "@/components/CategoryCard";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Link from "next/link";
@@ -14,7 +14,24 @@ interface CategoriesProps {
 const Categories = ({ categoriesData }: CategoriesProps) => {
   // Pagination state
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 5;
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      const width = window.innerWidth;
+      if (width >= 1536) {
+        setItemsPerPage(5); // 2xl
+      } else if (width >= 1280) {
+        setItemsPerPage(4); // xl
+      } else {
+        setItemsPerPage(3); // default fallback
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
 
   // Calculate the categories to display for the current page
   const indexOfLastCategory = currentPage * itemsPerPage;
@@ -70,7 +87,7 @@ const Categories = ({ categoriesData }: CategoriesProps) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-3 gap-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5">
         {currentCategories.map((category, index) => (
           <motion.div
             key={category.id}

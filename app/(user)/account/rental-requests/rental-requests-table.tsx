@@ -66,10 +66,10 @@ export default function RentalRequestsTable({
   };
 
   return (
-    <div className="w-full overflow-x-auto rounded-md border-t border-r border-l border-gray-100">
-      <table className="min-w-full bg-white text-left text-sm">
+    <div className="w-[80%] overflow-x-auto rounded-md border-t border-r border-l border-gray-100 2xl:w-full">
+      <table className="w-full bg-white text-left text-sm">
         <thead className="border-b border-gray-100 bg-gray-50">
-          <tr>
+          <tr className="whitespace-nowrap">
             <th className="p-3">Renter</th>
             <th className="p-3">Unit</th>
             <th className="p-3">Price Per Day</th>
@@ -100,11 +100,11 @@ export default function RentalRequestsTable({
                 <td className="p-3">
                   <UserInfoCard userInfo={request.renter} />
                 </td>
-                <td className="p-3">{request.unit.name}</td>
+                <td className="p-3 whitespace-nowrap">{request.unit.name}</td>
                 <td className="p-3">
                   {formatCurrency(request.unit.price_per_day)}
                 </td>
-                <td className="p-3">{request.start_date}</td>
+                <td className="p-3 whitespace-nowrap">{request.start_date}</td>
                 <td className="p-3">{request.end_date}</td>
                 <td className="p-3">{formatCurrency(request.total_price)}</td>
                 <td className="p-3 uppercase">{request.payment_method}</td>
@@ -135,7 +135,7 @@ export default function RentalRequestsTable({
                     {request.payment_status}
                   </span>
                 </td>
-                <td className="p-3">
+                <td className="p-3 whitespace-nowrap">
                   {new Date(request.transaction_date).toLocaleString("en-US", {
                     weekday: "short",
                     year: "numeric",
@@ -161,7 +161,7 @@ export default function RentalRequestsTable({
                     {request.status}
                   </span>
                 </td>
-                <td className="space-x-2 p-3 text-right">
+                <td className="space-x-2 p-3 text-right whitespace-nowrap">
                   {request.status === "pending" && (
                     <>
                       <AlertDialog>
