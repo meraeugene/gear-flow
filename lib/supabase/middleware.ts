@@ -48,7 +48,7 @@ export async function updateSession(request: NextRequest) {
 
   // Define path groups
   const protectedPages = [
-    "/account/complete-profile",
+    "/complete-profile",
     "/account/dashboard",
     "/account/rental-requests",
     "/account/rentals",
@@ -71,10 +71,9 @@ export async function updateSession(request: NextRequest) {
     !userWithCompleteInfo.address &&
     !error &&
     (pathname === "/" ||
-      (protectedPages.includes(pathname) &&
-        pathname !== "/account/complete-profile"))
+      (protectedPages.includes(pathname) && pathname !== "/complete-profile"))
   ) {
-    url.pathname = "/account/complete-profile";
+    url.pathname = "/complete-profile";
     return NextResponse.redirect(url);
   }
 
