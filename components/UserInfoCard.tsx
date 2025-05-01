@@ -6,17 +6,25 @@ import {
 import { userInfo } from "@/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getInitials } from "@/utils/string/getInitials";
+import clsx from "clsx";
 
 interface UserInfoCardProps {
   userInfo: userInfo;
+  className?: string; // ✅ optional class override
 }
 
-const UserInfoCard = ({ userInfo }: UserInfoCardProps) => {
-  const fullName = userInfo.first_name + " " + userInfo.last_name;
+const UserInfoCard = ({ userInfo, className }: UserInfoCardProps) => {
+  const fullName = `${userInfo.first_name} ${userInfo.last_name}`;
+
   return (
     <HoverCard>
-      <HoverCardTrigger className="h-8 w-8 cursor-pointer">
-        <Avatar className="h-8 w-8 cursor-pointer border border-gray-300">
+      <HoverCardTrigger className="cursor-pointer">
+        <Avatar
+          className={clsx(
+            "h-8 w-8 cursor-pointer border border-gray-300",
+            className,
+          )}
+        >
           <AvatarImage
             className="h-full w-full object-cover"
             src={userInfo.profile_picture}
@@ -31,7 +39,7 @@ const UserInfoCard = ({ userInfo }: UserInfoCardProps) => {
         <ul className="flex flex-col gap-2">
           <li className="text-sm text-gray-800">
             <span className="font-semibold text-black">Name: </span>
-            {userInfo.first_name} {userInfo.last_name}
+            {fullName}
           </li>
           <li className="text-sm text-gray-800">
             <span className="font-semibold text-black">Email Address: </span>

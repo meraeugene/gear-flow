@@ -3,9 +3,9 @@ import BackButton from "@/components/BackButton";
 import { rentalRequestBreadcrumbs } from "@/data/breadCrumbsLinks";
 import { AlertComponent } from "@/components/AlertComponent";
 import { getRentalRequestsForMyUnits } from "@/actions/rentalRequestActions";
-import RentalRequestsTable from "./rental-requests-table";
 import { Suspense } from "react";
 import GlobalLoader from "@/components/GlobalLoader";
+import RentalRequestsCard from "./rental-requests-card";
 
 const page = async () => {
   const { data, error } = await getRentalRequestsForMyUnits();
@@ -24,27 +24,23 @@ const page = async () => {
 
   return (
     <Suspense fallback={<GlobalLoader />}>
-      <div className="flex min-h-screen">
-        <main className="flex-1 p-8">
-          <div className="mb-6 border-b border-gray-100 pb-6">
-            <div className="mb-6 space-y-4">
-              <BackButton />
-              <BreadcrumbNav items={rentalRequestBreadcrumbs} />
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              Rental Requests
-            </h1>
-            <p className="mt-1 text-base text-gray-600">
-              Manage and review all your listed rental requests for your units
-              here.
-            </p>
+      <main className="overflow-hidden p-8">
+        <div className="mb-6 border-b border-gray-100 pb-6">
+          <div className="mb-6 space-y-4">
+            <BackButton />
+            <BreadcrumbNav items={rentalRequestBreadcrumbs} />
           </div>
+          <h1 className="text-3xl font-bold text-gray-900">Rental Requests</h1>
+          <p className="mt-1 text-base text-gray-600">
+            Manage and review all your listed rental requests for your units
+            here.
+          </p>
+        </div>
 
-          <div className="w-[95%] overflow-x-auto">
-            <RentalRequestsTable rentalRequests={data ?? []} />
-          </div>
-        </main>
-      </div>
+        <div className="overflow-hidden">
+          <RentalRequestsCard rentalRequests={data ?? []} />
+        </div>
+      </main>
     </Suspense>
   );
 };

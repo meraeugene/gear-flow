@@ -10,8 +10,6 @@ import { Suspense } from "react";
 const page = async () => {
   const { transactions, error: transactionsError } = await getUserTransaction();
 
-  console.log(transactions);
-
   if (transactionsError) {
     return (
       <div className="px-24 py-20">
