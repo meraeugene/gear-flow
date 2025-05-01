@@ -2,6 +2,8 @@ import { generateSlug } from "@/utils/string/generateSlug";
 import { AlertComponent } from "@/components/AlertComponent";
 import UnitRent from "@/components/UnitRent";
 import { getUnitDetailsWithUserInfo } from "@/actions/unitActions";
+import { Suspense } from "react";
+import GlobalLoader from "@/components/GlobalLoader";
 
 const page = async ({
   params,
@@ -21,7 +23,11 @@ const page = async ({
     );
   }
 
-  return <UnitRent user={userData} unit={unit} />;
+  return (
+    <Suspense fallback={<GlobalLoader />}>
+      <UnitRent user={userData} unit={unit} />
+    </Suspense>
+  );
 };
 
 export default page;

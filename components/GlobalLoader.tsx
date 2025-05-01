@@ -1,4 +1,4 @@
-const loading = () => {
+const GlobalLoader = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-center px-20">
       <div className="loading">
@@ -19,4 +19,4 @@ const loading = () => {
   );
 };
 
-export default loading;
+export default GlobalLoader;

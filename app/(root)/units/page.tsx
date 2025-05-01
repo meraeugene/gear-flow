@@ -5,10 +5,12 @@ import {
 import { AlertComponent } from "@/components/AlertComponent";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
+import GlobalLoader from "@/components/GlobalLoader";
 import { unitsBreadcrumbs } from "@/data/breadCrumbsLinks";
 import Units from "@/sections/Units";
 import { Category } from "@/types";
 import { generateSlug } from "@/utils/string/generateSlug";
+import { Suspense } from "react";
 const page = async () => {
   const { data: categories, error } = await getAllCategories();
 
@@ -36,7 +38,7 @@ const page = async () => {
   );
 
   return (
-    <div>
+    <Suspense fallback={<GlobalLoader />}>
       <div className="space-y-7 px-24 pt-12">
         <BackButton />
         <BreadcrumbNav items={unitsBreadcrumbs} />
@@ -56,7 +58,7 @@ const page = async () => {
           );
         })}
       </div>
-    </div>
+    </Suspense>
   );
 };
 

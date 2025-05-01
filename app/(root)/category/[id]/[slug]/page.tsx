@@ -4,8 +4,10 @@ import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import CategoryBanner from "@/components/CategoryBanner";
 import CategoryUnits from "@/components/CategoryUnits";
+import GlobalLoader from "@/components/GlobalLoader";
 import { capitalizeFirstLetter } from "@/utils/string/capitalizeFirstLetter";
 import { generateSlug } from "@/utils/string/generateSlug";
+import { Suspense } from "react";
 
 const CategoryPage = async ({
   params,
@@ -37,16 +39,18 @@ const CategoryPage = async ({
   const categoryName = units[0]?.category_name.toLowerCase() ?? "";
 
   return (
-    <div className="px-24 py-20">
-      <div className="space-y-7">
-        <BackButton />
-        <BreadcrumbNav items={breadcrumbs} />
+    <Suspense fallback={<GlobalLoader />}>
+      <div className="px-24 py-20">
+        <div className="space-y-7">
+          <BackButton />
+          <BreadcrumbNav items={breadcrumbs} />
+        </div>
+
+        <CategoryBanner categoryName={categoryName} />
+
+        <CategoryUnits unitsData={units} />
       </div>
-
-      <CategoryBanner categoryName={categoryName} />
-
-      <CategoryUnits unitsData={units} />
-    </div>
+    </Suspense>
   );
 };
 
