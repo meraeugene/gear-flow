@@ -1,6 +1,6 @@
 const GlobalLoader = () => {
   return (
-    <div className="flex h-screen flex-col items-center justify-center px-20">
+    <div className="flex h-screen flex-col items-center justify-center">
       <div className="loading">
         <div className="loading-wide">
           <div className="l1 color"></div>

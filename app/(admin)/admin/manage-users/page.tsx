@@ -1,14 +1,21 @@
+"use client";
+
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
 import { usersBreadcrumbs } from "@/data/breadCrumbsLinks";
-import { getAllUsers } from "@/actions/usersActions";
 import UsersTable from "./users-table";
 import { AlertComponent } from "@/components/AlertComponent";
 import { Suspense } from "react";
 import GlobalLoader from "@/components/GlobalLoader";
+import useSWR from "swr";
+import { fetcher } from "@/lib/services/swrFetcher";
 
-const page = async () => {
-  const { data: allUsersData, error } = await getAllUsers();
+const AdminUsersPage = () => {
+  const { data, error, isLoading } = useSWR("/api/users", fetcher);
+
+  if (isLoading) {
+    return <GlobalLoader />;
+  }
 
   if (error) {
     return (
@@ -32,10 +39,10 @@ const page = async () => {
           </p>
         </div>
 
-        <UsersTable users={allUsersData ?? []} />
+        <UsersTable users={data.data ?? []} />
       </main>
     </Suspense>
   );
 };
 
-export default page;
+export default AdminUsersPage;

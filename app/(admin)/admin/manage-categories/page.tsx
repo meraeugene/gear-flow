@@ -1,15 +1,22 @@
+"use client";
+
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import BackButton from "@/components/BackButton";
 import { AlertComponent } from "@/components/AlertComponent";
 import { categoriesBreadcrumbs } from "@/data/breadCrumbsLinks";
-import { getAllCategories } from "@/actions/categoryActions";
 import { Suspense } from "react";
 import GlobalLoader from "@/components/GlobalLoader";
+import useSWR from "swr";
+import { fetcher } from "@/lib/services/swrFetcher";
 
-const page = async () => {
-  const { data: categoriesData, error } = await getAllCategories();
+const AdminCategoriesPage = () => {
+  const { data, error, isLoading } = useSWR("/api/categories", fetcher);
+
+  if (isLoading) {
+    return <GlobalLoader />;
+  }
 
   if (error) {
     return (
@@ -36,10 +43,10 @@ const page = async () => {
           </p>
         </div>
 
-        <DataTable columns={columns} data={categoriesData ?? []} />
+        <DataTable columns={columns} data={data?.data ?? []} />
       </main>
     </Suspense>
   );
 };
 
-export default page;
+export default AdminCategoriesPage;
