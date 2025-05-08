@@ -26,7 +26,7 @@ const GcashPayment = ({ onBack, onFileSelect }: GcashPaymentProps) => {
   }, [previewUrl]);
 
   return (
-    <div className="gcash-payment__container w-full pr-18">
+    <div className="gcash-payment__container w-full md:pr-18">
       <button
         onClick={onBack}
         className="inline-flex cursor-pointer items-center gap-2 text-sm transition-transform duration-200 hover:-translate-x-1"

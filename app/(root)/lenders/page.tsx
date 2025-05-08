@@ -15,7 +15,7 @@ const page = async () => {
 
   if (error) {
     return (
-      <div className="px-24 pt-12 pb-20">
+      <div className="px-4 py-10 md:px-24">
         <AlertComponent
           message="Error loading lenders data."
           variant="destructive"

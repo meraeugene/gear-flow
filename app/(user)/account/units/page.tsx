@@ -22,7 +22,7 @@ const UnitsPage = () => {
 
   if (error) {
     return (
-      <div className="px-24 py-20">
+      <div className="px-4 py-10 md:px-24">
         <AlertComponent
           variant="destructive"
           message="Error fetching user units."
@@ -33,22 +33,22 @@ const UnitsPage = () => {
 
   return (
     <Suspense fallback={<GlobalLoader />}>
-      <div className="flex min-h-screen">
-        <main className="flex-1 p-8 pt-11">
-          <div className="border-b border-gray-100 pb-4">
-            <div className="mb-6 space-y-4">
-              <BackButton />
-              <BreadcrumbNav items={unitsBreadcrumbs} />
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900">Units</h1>
-            <p className="mt-1 text-base text-gray-600">
-              Manage and review all your listed rental units here.
-            </p>
+      <main className="p-4 pt-0">
+        <div className="mb-6 border-b border-gray-100 pb-6">
+          <div className="my-6 space-y-4">
+            <BackButton />
+            <BreadcrumbNav items={unitsBreadcrumbs} />
           </div>
+          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">
+            Units
+          </h1>
+          <p className="mt-1 text-sm text-gray-600 md:text-base">
+            Manage and review all your listed rental units here.
+          </p>
+        </div>
 
-          <DataTable columns={columns} data={userUnits ?? []} />
-        </main>
-      </div>
+        <DataTable columns={columns} data={userUnits ?? []} />
+      </main>
     </Suspense>
   );
 };

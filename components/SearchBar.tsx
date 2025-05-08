@@ -9,7 +9,21 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { generateSlug } from "@/utils/string/generateSlug";
 
-const SearchBar = () => {
+interface SearchBarProps {
+  mainClassName?: string;
+  inputClassName?: string;
+  searchClassName?: string;
+  closeClassName?: string;
+  resultClassName?: string;
+}
+
+const SearchBar = ({
+  mainClassName,
+  inputClassName,
+  searchClassName,
+  closeClassName,
+  resultClassName,
+}: SearchBarProps) => {
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
   const [results, setResults] = useState<UnitWithOwner[]>([]);
@@ -35,21 +49,23 @@ const SearchBar = () => {
   }, [query]);
 
   return (
-    <div className="relative w-[350px]">
-      <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+    <div className={`relative w-[350px] md:block ${mainClassName}`}>
+      <Search
+        className={`text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 ${searchClassName}`}
+      />
       <Input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => setFocused(true)}
         onBlur={() => setTimeout(() => setFocused(false), 150)}
-        className="pr-8 pl-10 text-sm"
+        className={`pr-8 pl-10 text-sm ${inputClassName}`}
         placeholder="What unit are you searching for?"
       />
       {query && (
         <button
           onClick={() => setQuery("")}
-          className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-2xl text-gray-400 hover:text-gray-600"
+          className={`absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-2xl text-gray-400 hover:text-gray-600 ${closeClassName}`}
         >
           ×
         </button>
@@ -62,7 +78,7 @@ const SearchBar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.2 }}
-            className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white shadow-md"
+            className={`absolute z-10 max-h-67 w-full overflow-auto bg-white shadow-md ${resultClassName ?? "mt-1 rounded-md"}`}
           >
             {isPending ? (
               <div className="flex items-center justify-center gap-3 py-2">

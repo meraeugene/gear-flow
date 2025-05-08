@@ -23,8 +23,12 @@ const Categories = ({ categoriesData }: CategoriesProps) => {
         setItemsPerPage(5); // 2xl
       } else if (width >= 1280) {
         setItemsPerPage(4); // xl
+      } else if (width >= 1024) {
+        setItemsPerPage(4); // lg
+      } else if (width >= 768) {
+        setItemsPerPage(3); // Tablet
       } else {
-        setItemsPerPage(3); // default fallback
+        setItemsPerPage(1); // Mobile
       }
     };
 
@@ -56,30 +60,29 @@ const Categories = ({ categoriesData }: CategoriesProps) => {
 
   return (
     <div>
-      <p className="text-base">Categories</p>
-
-      <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-2xl">Browse by Category</h1>
-
+      <div className="mb-8 flex flex-col flex-wrap justify-between gap-4 md:flex-row md:items-center">
+        <h1 className="text-2xl sm:text-3xl">Categories</h1>
+        <div className="hidden md:block" />
         <div className="next-prev__buttons flex items-center gap-3">
-          <Link href="/units" className="mr-2">
+          <Link href="/units" className="mr-2 text-sm sm:text-base">
             View All
           </Link>
-
+          {/* Previous Page Button */}
           <button
             onClick={prevPage}
             disabled={currentPage === 1}
-            className="circle-button"
+            className="circle-button text-lg sm:text-xl"
             aria-label="Previous Page"
           >
             <GrPrevious />
           </button>
+          {/* Next Page Button */}
           <button
             onClick={nextPage}
             disabled={
               currentPage === Math.ceil(categoriesData.length / itemsPerPage)
             }
-            className="circle-button"
+            className="circle-button text-lg sm:text-xl"
             aria-label="Next Page"
           >
             <GrNext />
@@ -87,7 +90,7 @@ const Categories = ({ categoriesData }: CategoriesProps) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5">
         {currentCategories.map((category, index) => (
           <motion.div
             key={category.id}

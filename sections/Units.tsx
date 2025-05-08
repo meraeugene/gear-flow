@@ -35,30 +35,32 @@ const Units = ({ unitsData, unitTitle, href }: UnitsProps) => {
 
   return (
     <div>
-      <h1 className="text-2xl">Explore Our {unitTitle}</h1>
-
-      <div className="mb-8 flex items-center justify-between">
-        <p className="text-base">{unitTitle}</p>
+      <div className="mb-8 flex flex-col flex-wrap justify-between gap-4 md:flex-row md:items-center">
+        {/* Heading with responsive font size */}
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl">{unitTitle}</h1>
 
         <div className="next-prev__buttons flex items-center gap-3">
-          <Link href={href} className="mr-2">
+          {/* View All link with responsive font size */}
+          <Link href={href} className="mr-2 text-sm sm:text-base">
             View All
           </Link>
 
+          {/* Previous Page Button */}
           <button
             onClick={prevPage}
             disabled={currentPage === 1}
-            className="circle-button"
+            className="circle-button text-lg sm:text-xl"
             aria-label="Previous Page"
           >
             <GrPrevious />
           </button>
+          {/* Next Page Button */}
           <button
             onClick={nextPage}
             disabled={
               currentPage === Math.ceil(unitsData.length / itemsPerPage)
             }
-            className="circle-button"
+            className="circle-button text-lg sm:text-xl"
             aria-label="Next Page"
           >
             <GrNext />
@@ -66,7 +68,7 @@ const Units = ({ unitsData, unitTitle, href }: UnitsProps) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-x-4 gap-y-10">
+      <div className="grid grid-cols-1 gap-x-4 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
         {currentUnits.map((unit, index) => (
           <motion.div
             initial={{ opacity: 0.3 }} // Start from right with 0 opacity

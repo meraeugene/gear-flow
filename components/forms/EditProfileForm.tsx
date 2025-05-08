@@ -138,7 +138,7 @@ export default function EditProfileForm({
                     <Input
                       type="file"
                       accept="image/*"
-                      className="w-full max-w-[200px]" // Restrict width of the input
+                      className="w-full max-w-[250px]" // Restrict width of the input
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (file) {

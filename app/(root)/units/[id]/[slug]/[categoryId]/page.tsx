@@ -23,7 +23,7 @@ const page = async ({
 
   if (error || slug !== generateSlug(unit.name) || !unit) {
     return (
-      <div className="px-24 py-20">
+      <div className="px-4 py-10 md:px-24">
         <AlertComponent variant="destructive" message="No unit found." />
       </div>
     );
@@ -39,15 +39,15 @@ const page = async ({
   ];
 
   return (
-    <main className="px-24 pt-12 pb-24">
+    <main className="px-4 pt-12 pb-24 lg:px-12 xl:px-24">
       <div className="space-y-7">
         <BackButton />
         <BreadcrumbNav items={breadcrumbs} />
       </div>
 
-      <div className="mx-auto flex max-w-[85rem] justify-center gap-12 space-y-6 md:mt-12">
+      <div className="mx-auto mt-12 flex max-w-[85rem] flex-col justify-center gap-2 space-y-6 md:flex-row md:gap-12">
         <div className="w-full">
-          <div className="relative h-[35rem] overflow-hidden rounded-lg shadow-lg">
+          <div className="relative h-[25rem] overflow-hidden shadow-lg md:h-[20rem] lg:h-[25rem] xl:h-[35rem]">
             <Image
               src={unit.image_url}
               alt={unit.name}

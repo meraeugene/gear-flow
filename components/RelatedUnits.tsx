@@ -3,7 +3,7 @@
 import { UnitWithOwner } from "@/types";
 import { motion } from "framer-motion";
 import UnitCard from "./UnitCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GrNext, GrPrevious } from "react-icons/gr";
 
 interface RelatedUnitsProps {
@@ -12,7 +12,26 @@ interface RelatedUnitsProps {
 
 const RelatedUnits = ({ relatedUnitsData }: RelatedUnitsProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 3;
+  const [itemsPerPage, setItemsPerPage] = useState<number>(3);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      const width = window.innerWidth;
+      if (width >= 1280) {
+        setItemsPerPage(3); // xl
+      } else if (width >= 1024) {
+        setItemsPerPage(3); // lg
+      } else if (width >= 768) {
+        setItemsPerPage(2); // Tablet
+      } else {
+        setItemsPerPage(1); // Mobile
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
 
   const indexOfLastUnit = currentPage * itemsPerPage;
   const indexOfFirstUnit = indexOfLastUnit - itemsPerPage;
@@ -36,7 +55,7 @@ const RelatedUnits = ({ relatedUnitsData }: RelatedUnitsProps) => {
   return (
     <div className="mt-24">
       <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-3xl font-semibold">Related Units</h1>
+        <h1 className="text-2xl font-semibold md:text-3xl">Related Units</h1>
         <div className="next-prev__buttons flex items-center gap-3">
           <button
             onClick={prevPage}
@@ -56,7 +75,7 @@ const RelatedUnits = ({ relatedUnitsData }: RelatedUnitsProps) => {
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-x-4 gap-y-10">
+      <div className="grid grid-cols-1 gap-x-4 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
         {currentUnits.map((unit, index) => (
           <motion.div
             initial={{ opacity: 0.3 }} // Start from right with 0 opacity

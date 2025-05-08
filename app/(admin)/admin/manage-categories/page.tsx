@@ -20,7 +20,7 @@ const AdminCategoriesPage = () => {
 
   if (error) {
     return (
-      <div className="px-24 py-20">
+      <div className="p-4 md:px-24">
         <AlertComponent
           variant="destructive"
           message="Error fetching user units."
@@ -31,9 +31,9 @@ const AdminCategoriesPage = () => {
 
   return (
     <Suspense fallback={<GlobalLoader />}>
-      <main className="flex-1 p-8 pt-11">
-        <div className="border-b border-gray-100 pb-4">
-          <div className="mb-6 space-y-4">
+      <main className="p-4 pt-0">
+        <div className="mb-6 border-b border-gray-100 pb-6">
+          <div className="my-6 space-y-4">
             <BackButton />
             <BreadcrumbNav items={categoriesBreadcrumbs} />
           </div>

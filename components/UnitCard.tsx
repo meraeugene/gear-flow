@@ -23,7 +23,7 @@ const UnitCard: React.FC<UnitCardProps> = ({ unitData }) => {
   return (
     <article>
       <Link prefetch={true} href={`/units/${unit_id}/${slug}/${category_id}`}>
-        <div className="image h-[25rem] overflow-hidden rounded-md border">
+        <div className="image h-[15rem] overflow-hidden border md:h-[25rem] lg:h-[20rem] xl:h-[25rem]">
           <Image
             className="h-full w-full object-cover"
             src={image_url}

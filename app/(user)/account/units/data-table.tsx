@@ -71,12 +71,12 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <Link href="/account/units/add-unit">
-        <Button variant="outline" className="my-4 ml-auto cursor-pointer">
+        <Button variant="outline" className="mb-4 ml-auto cursor-pointer">
           <Plus className="text-gray-400" />
           Add Unit
         </Button>
       </Link>
-      <div className="mb-4 flex items-center">
+      <div className="mb-4 flex items-center gap-4">
         <div className="relative max-w-sm">
           <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
           <Input
@@ -116,7 +116,7 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="overflow-x-auto rounded-md border lg:max-w-[45rem] xl:max-w-full">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

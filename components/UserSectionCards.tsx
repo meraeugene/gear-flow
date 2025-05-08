@@ -68,7 +68,7 @@ export function UserSectionCards({
   }, [revenue]);
   return (
     <div>
-      <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card @container/main grid w-full grid-cols-5 flex-col gap-6 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs">
+      <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card @container/main grid w-full grid-cols-1 flex-col gap-6 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs md:grid-cols-3 lg:grid-cols-3">
         {/* REVENUE */}
         <Card className="@container/card">
           <CardHeader className="relative">

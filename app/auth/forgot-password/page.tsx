@@ -30,8 +30,8 @@ export default function Page() {
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center px-4">
-      <div className="mt-8 flex min-w-[23em] flex-col items-center">
+    <div className="mx-auto flex h-screen w-[90%] flex-col items-center justify-center px-4">
+      <div className="mt-8 flex flex-col items-center">
         <Image
           src="/assets/images/logo.png"
           width={65}
@@ -40,11 +40,12 @@ export default function Page() {
         />
 
         <div className="w-full">
-          <div className="mt-3 mb-8 flex w-full flex-col items-center justify-center gap-1">
+          <div className="mt-3 mb-8 flex w-full flex-col items-center justify-center gap-1 text-center">
             <h1 className="text-xl font-medium">Reset Password</h1>
-            <p>Enter your email and we&apos;ll send you a reset link.</p>
+            <p className="text-sm md:text-base">
+              Enter your email and we&apos;ll send you a reset link.
+            </p>
           </div>
-          &apos;
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <TextField
               id="email"

@@ -3,9 +3,9 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="bg-black text-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-10 text-sm">
+      <div className="mx-auto flex flex-col justify-between gap-8 px-4 py-10 text-sm md:max-w-7xl md:flex-row md:items-center lg:px-12">
         {/* About Gearflow */}
-        <div className="w-[30%]">
+        <div className="md:w-[30%]">
           <h2 className="mb-4 text-xl font-semibold">Gearflow</h2>
           <p className="text-gray-400">
             Your trusted platform for renting, managing, and finding

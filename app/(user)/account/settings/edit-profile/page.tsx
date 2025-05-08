@@ -12,7 +12,7 @@ const page = async () => {
 
   if (!user || error) {
     return (
-      <div className="px-24 py-20">
+      <div className="px-4 py-10 md:px-24">
         <AlertComponent
           variant="destructive"
           message="User is not authenticated."
@@ -23,34 +23,34 @@ const page = async () => {
 
   return (
     <Suspense fallback={<GlobalLoader />}>
-      <div className="flex min-h-screen">
-        <main className="flex-1 p-8">
-          <div className="mb-6 space-y-4 border-b border-gray-100 pb-4">
-            <BackButton />
-            <BreadcrumbNav items={editProfileBreadcrumbs} />
+      <main className="p-4">
+        <div className="mt-4 mb-6 space-y-4 border-b border-gray-100 pb-4">
+          <BackButton />
+          <BreadcrumbNav items={editProfileBreadcrumbs} />
+        </div>
+
+        <section>
+          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">
+            Edit Profile
+          </h1>
+          <p className="mt-1 text-sm text-gray-600 md:text-base">
+            Update your account information below.
+          </p>
+
+          <div className="mt-6">
+            <EditProfileForm
+              defaultValues={{
+                firstName: user.first_name ?? "",
+                lastName: user.last_name ?? "",
+                phoneNumber: user.phone_number ?? "",
+                profilePictureUrl: user.profile_picture ?? "",
+                address: user.address ?? "",
+                email: user.email ?? "",
+              }}
+            />
           </div>
-
-          <section className="mb-10">
-            <h1 className="text-3xl font-bold text-gray-900">Edit Profile</h1>
-            <p className="mt-1 text-base text-gray-600">
-              Update your account information below.
-            </p>
-
-            <div className="mt-6">
-              <EditProfileForm
-                defaultValues={{
-                  firstName: user.first_name ?? "",
-                  lastName: user.last_name ?? "",
-                  phoneNumber: user.phone_number ?? "",
-                  profilePictureUrl: user.profile_picture ?? "",
-                  address: user.address ?? "",
-                  email: user.email ?? "",
-                }}
-              />
-            </div>
-          </section>
-        </main>
-      </div>
+        </section>
+      </main>
     </Suspense>
   );
 };

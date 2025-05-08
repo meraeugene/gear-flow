@@ -28,7 +28,7 @@ const LenderPage = async ({
       )
   ) {
     return (
-      <div className="px-24 pt-12 pb-20">
+      <div className="px-4 py-10 md:px-24">
         <AlertComponent
           message={error || "Error loading lender data."}
           variant="destructive"

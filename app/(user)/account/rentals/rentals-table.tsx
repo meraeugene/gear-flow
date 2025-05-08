@@ -9,10 +9,10 @@ type Props = {
 
 export default function RentalsTable({ rentals }: Props) {
   return (
-    <div className="w-full overflow-x-auto rounded-md border-t border-r border-l border-gray-200">
-      <table className="min-w-full bg-white text-left text-sm">
+    <div className="w-full overflow-x-auto rounded-md border border-gray-200 lg:max-w-[45rem] xl:max-w-full">
+      <table className="w-full bg-white text-left text-sm">
         <thead className="border-b border-gray-200 hover:bg-gray-50">
-          <tr>
+          <tr className="whitespace-nowrap">
             <th className="p-3">Unit</th>
             <th className="p-3">Owner</th>
             <th className="p-3">Start Date</th>
@@ -37,7 +37,7 @@ export default function RentalsTable({ rentals }: Props) {
             rentals.map((rental) => (
               <tr
                 key={rental.id}
-                className="border-b border-gray-200 hover:bg-gray-50"
+                className="border-b border-gray-200 whitespace-nowrap hover:bg-gray-50"
               >
                 <td className="p-3">{rental.unit_name ?? "Unknown Unit"}</td>
                 <td className="p-3">

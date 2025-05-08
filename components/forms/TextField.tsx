@@ -20,7 +20,7 @@ const TextField: React.FC<TextFieldProps> = ({
   required,
 }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex w-full flex-col">
       <label htmlFor={id} className="mb-1 text-sm font-medium text-gray-700">
         {label}
       </label>

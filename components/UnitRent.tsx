@@ -94,13 +94,13 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
 
   return (
     <div>
-      <div className="space-y-7 px-24 pt-12">
+      <div className="space-y-7 px-4 pt-12 lg:px-12 xl:px-24">
         <BackButton />
         <BreadcrumbNav items={breadcrumbs} />
       </div>
 
-      <main className="mx-auto max-w-[85rem] px-24 pt-14 pb-28">
-        <div className="flex space-y-6">
+      <main className="mx-auto w-full px-4 pt-14 pb-28 md:max-w-[85rem] lg:px-12 xl:px-24">
+        <div className="flex flex-col space-y-6 md:flex-row">
           {/* Fill up Section */}
           {paymentMethod !== "gcash" && (
             <motion.div
@@ -108,7 +108,7 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.8 }}
-              className="mb-0 flex w-full flex-col gap-10 pr-18"
+              className="mb-0 flex w-full flex-col gap-10 md:pr-8 lg:pr-18"
             >
               <div className="space-y-4">
                 <h1 className="mb-4 text-lg font-semibold">
@@ -156,7 +156,7 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
               </div>
 
               <div className="space-y-4">
-                <h1 className="mb-4 text-lg font-semibold">
+                <h1 className="mb-4 font-semibold md:text-lg">
                   How many days will you rent this unit?
                 </h1>
 
@@ -175,7 +175,7 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
               </div>
 
               <div className="space-y-4">
-                <h1 className="mb-4 text-lg font-semibold">
+                <h1 className="mb-4 font-semibold md:text-lg">
                   How would you like to get your unit?
                 </h1>
                 <button
@@ -202,7 +202,7 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
               </div>
 
               <div className="space-y-4">
-                <h1 className="mb-4 text-lg font-semibold">
+                <h1 className="mb-4 font-semibold md:text-lg">
                   How would you like to pay?
                 </h1>
                 <button
@@ -252,7 +252,7 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
-            className="sticky top-26 flex w-full flex-col self-start border-l pl-18"
+            className="top-26 flex w-full flex-col self-start pt-18 md:border-l md:pl-8 lg:sticky lg:pl-18"
           >
             <div className="flex flex-col items-center justify-center gap-2">
               <Image
@@ -260,7 +260,7 @@ export default function UnitRent({ user, unit }: UnitCheckoutClientProps) {
                 alt={unit.name}
                 height={1080}
                 width={1980}
-                className="w-[20rem] rounded-md object-cover object-center"
+                className="object-cover object-center md:w-[20rem]"
               />
               <h1 className="text-2xl font-medium">{unit.name}</h1>
             </div>

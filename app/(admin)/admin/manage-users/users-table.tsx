@@ -50,10 +50,10 @@ export default function UsersTable({ users }: Props) {
   };
 
   return (
-    <div className="w-full overflow-x-auto border-t border-r border-l border-gray-200">
-      <table className="min-w-full bg-white text-left text-sm">
+    <div className="w-full overflow-x-auto border-t border-r border-l border-gray-200 lg:max-w-[45rem] xl:max-w-full">
+      <table className="w-full bg-white text-left text-sm">
         <thead className="border-b border-gray-200 hover:bg-gray-50">
-          <tr>
+          <tr className="whitespace-nowrap">
             <th className="p-3">Name</th>
             <th className="p-3">Email</th>
             <th className="p-3">Role</th>
@@ -66,7 +66,7 @@ export default function UsersTable({ users }: Props) {
           {users.map((user) => (
             <tr
               key={user.auth_user_id}
-              className="border-b border-gray-200 hover:bg-gray-50"
+              className="border-b border-gray-200 whitespace-nowrap hover:bg-gray-50"
             >
               <td className="p-3">
                 {user.first_name} {user.last_name}

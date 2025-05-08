@@ -45,7 +45,7 @@ export default function ResetPasswordPage() {
 
   return (
     <div className="flex h-screen flex-col items-center justify-center px-4">
-      <div className="mt-8 flex min-w-[23em] flex-col items-center">
+      <div className="mt-8 flex w-full flex-col items-center md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5">
         <div className="h-full w-full">
           <div className="flex items-center justify-center">
             <Image

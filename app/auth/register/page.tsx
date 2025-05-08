@@ -78,8 +78,8 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex h-full flex-col items-center justify-center py-10">
-      <div className="max-w-[28em]">
+    <div className="mx-auto flex h-full w-[85%] flex-col items-center justify-center py-10 md:w-[60%] lg:w-[45%] xl:w-[35%] 2xl:w-[25%]">
+      <div className="w-full">
         <div className="mb-8 flex w-full flex-col items-center justify-center gap-2 border-b border-gray-300 pb-4">
           <Image
             src="/assets/images/logo.png"
@@ -93,7 +93,7 @@ export default function SignupPage() {
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {/* First & Last Name */}
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center">
             <TextField id="firstName" name="firstName" label="First Name" />
             <TextField id="lastName" name="lastName" label="Last Name" />
           </div>

@@ -32,23 +32,23 @@ const TransactionsPage = () => {
 
   return (
     <Suspense fallback={<GlobalLoader />}>
-      <div className="flex min-h-screen">
-        <main className="flex-1 p-8">
-          <div className="mb-6 border-b border-gray-100 pb-6">
-            <div className="mb-6 space-y-4">
-              <BackButton />
-              <BreadcrumbNav items={myPaymentsBreadcrumbs} />
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900">Transactions</h1>
-            <p className="mt-1 text-base text-gray-600">
-              View the status of your payments, including owner, total price,
-              payment method, transaction date.
-            </p>
+      <main className="p-4 pt-0">
+        <div className="mb-6 border-b border-gray-100 pb-6">
+          <div className="my-6 space-y-4">
+            <BackButton />
+            <BreadcrumbNav items={myPaymentsBreadcrumbs} />
           </div>
+          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">
+            Transactions
+          </h1>
+          <p className="mt-1 text-sm text-gray-600 md:text-base">
+            View the status of your payments, including owner, total price,
+            payment method, transaction date.
+          </p>
+        </div>
 
-          <PaymentsTable transactions={transactions ?? []} />
-        </main>
-      </div>
+        <PaymentsTable transactions={transactions ?? []} />
+      </main>
     </Suspense>
   );
 };

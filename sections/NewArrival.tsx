@@ -14,20 +14,21 @@ const NewArrival = ({ newArrivalsData }: NewArrivalProps) => {
 
   return (
     <div>
-      <div className="heading mb-10 flex flex-col items-center justify-center">
-        <p className="text-base">Featured</p>
-        <h1 className="text-3xl">New Arrivals</h1>
+      <div className="heading mb-6 flex flex-col items-center text-center">
+        <p className="text-sm sm:text-base">Featured</p>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl">New Arrivals</h1>
       </div>
 
-      <div className="grid h-[40rem] grid-cols-5 grid-rows-6 gap-4">
-        {/* First Image (index 0) */}
-        <div className="col-span-3 row-span-6">
+      {/* Responsive layout */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:h-[40rem] lg:grid-cols-5 lg:grid-rows-6">
+        {/* First Image */}
+        <div className="h-64 md:col-span-2 md:h-auto lg:col-span-3 lg:row-span-6">
           <Link
             href={`/units/${newArrivalsData[0]?.unit_id}/${firstSlug}/${newArrivalsData[0]?.category_id}`}
           >
             <Image
               className="h-full w-full object-cover"
-              src={newArrivalsData[0]?.image_url || "/assets/images/ps5.jpg"} // First item
+              src={newArrivalsData[0]?.image_url || "/assets/images/ps5.jpg"}
               alt={newArrivalsData[0]?.name || "First Item"}
               width={1920}
               height={1080}
@@ -35,14 +36,14 @@ const NewArrival = ({ newArrivalsData }: NewArrivalProps) => {
           </Link>
         </div>
 
-        {/* Second Image (index 1) */}
-        <div className="col-span-2 col-start-4 row-span-3">
+        {/* Second Image */}
+        <div className="h-64 md:h-auto lg:col-span-2 lg:col-start-4 lg:row-span-3">
           <Link
-            href={`/units/${newArrivalsData[1]?.unit_id}/${secondSlug}/${newArrivalsData[1].category_id}`}
+            href={`/units/${newArrivalsData[1]?.unit_id}/${secondSlug}/${newArrivalsData[1]?.category_id}`}
           >
             <Image
               className="h-full w-full object-cover"
-              src={newArrivalsData[1]?.image_url || "/assets/images/camera.jpg"} // Second item
+              src={newArrivalsData[1]?.image_url || "/assets/images/camera.jpg"}
               alt={newArrivalsData[1]?.name || "Second Item"}
               width={1920}
               height={1080}
@@ -50,14 +51,14 @@ const NewArrival = ({ newArrivalsData }: NewArrivalProps) => {
           </Link>
         </div>
 
-        {/* Third Image (index 2) */}
-        <div className="col-span-2 col-start-4 row-span-3 row-start-4">
+        {/* Third Image */}
+        <div className="h-64 md:h-auto lg:col-span-2 lg:col-start-4 lg:row-span-3 lg:row-start-4">
           <Link
-            href={`/units/${newArrivalsData[2]?.unit_id}/${thirdSlug}/${newArrivalsData[2].category_id}`}
+            href={`/units/${newArrivalsData[2]?.unit_id}/${thirdSlug}/${newArrivalsData[2]?.category_id}`}
           >
             <Image
               className="h-full w-full object-cover"
-              src={newArrivalsData[2]?.image_url || "/assets/images/alexa.jpg"} // Third item
+              src={newArrivalsData[2]?.image_url || "/assets/images/alexa.jpg"}
               alt={newArrivalsData[2]?.name || "Third Item"}
               width={1920}
               height={1080}

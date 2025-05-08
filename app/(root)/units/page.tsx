@@ -16,7 +16,7 @@ const page = async () => {
 
   if (error || !categories) {
     return (
-      <div className="px-24 py-20">
+      <div className="px-4 py-10 md:px-24">
         <AlertComponent
           variant="destructive"
           message="Failed to load categories."
@@ -39,12 +39,12 @@ const page = async () => {
 
   return (
     <Suspense fallback={<GlobalLoader />}>
-      <div className="space-y-7 px-24 pt-12">
+      <div className="space-y-7 px-4 pt-12 lg:px-12 xl:px-24">
         <BackButton />
         <BreadcrumbNav items={unitsBreadcrumbs} />
       </div>
 
-      <div className="flex flex-col gap-14 px-24 py-20 pt-12">
+      <div className="flex flex-col gap-14 px-4 py-20 pt-12 lg:px-12 xl:px-24">
         {categoryUnitPairs.map(({ category, units }) => {
           if (!units || units.length === 0) return null;
 

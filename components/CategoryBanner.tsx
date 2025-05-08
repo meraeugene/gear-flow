@@ -11,7 +11,7 @@ const CategoryBanner = ({ categoryName }: CategoryBannerProps) => {
 
   return (
     <div
-      className="relative mt-20 flex h-[300px] w-full items-center justify-center overflow-hidden rounded-xl text-white"
+      className="relative mt-20 flex h-[150px] w-full items-center justify-center overflow-hidden text-white md:h-[200px] xl:h-[250px]"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
@@ -22,7 +22,7 @@ const CategoryBanner = ({ categoryName }: CategoryBannerProps) => {
       <div className="absolute inset-0 bg-black opacity-70"></div>
 
       {/* Text */}
-      <h1 className="relative z-10 text-6xl font-bold tracking-widest uppercase">
+      <h1 className="relative z-10 text-3xl font-bold tracking-widest uppercase lg:text-6xl">
         {categoryName}
       </h1>
     </div>

@@ -21,7 +21,7 @@ const CategoryPage = async ({
 
   if (!units || error || slug !== generateSlug(units[0]?.category_name ?? "")) {
     return (
-      <div className="px-24 py-20">
+      <div className="px-4 py-10 md:px-24">
         <AlertComponent variant="destructive" message="No units found." />
       </div>
     );
@@ -40,7 +40,7 @@ const CategoryPage = async ({
 
   return (
     <Suspense fallback={<GlobalLoader />}>
-      <div className="px-24 py-20">
+      <div className="px-4 py-20 lg:px-12 xl:px-24">
         <div className="space-y-7">
           <BackButton />
           <BreadcrumbNav items={breadcrumbs} />

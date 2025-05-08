@@ -20,10 +20,12 @@ const Banner = () => {
 
       {/* Centered Text Content */}
       <div className="relative z-20 flex h-full w-full flex-col items-center justify-center px-4 text-center text-white">
-        <h1 className="mb-2 text-6xl font-medium tracking-wider uppercase">
+        <h1 className="mb-2 text-4xl tracking-wider uppercase sm:text-4xl md:text-5xl lg:text-6xl">
           Don't let it sit
         </h1>
-        <h2 className="text-3xl">Share it, rent it, repeat.</h2>
+        <h2 className="text-xl font-light sm:text-xl md:text-2xl lg:text-3xl">
+          Share it, rent it, repeat.
+        </h2>
       </div>
     </div>
   );

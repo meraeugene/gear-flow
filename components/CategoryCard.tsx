@@ -9,11 +9,11 @@ const CategoryCard = ({ name, image_url, description, id }: Category) => {
   const slug = generateSlug(name);
 
   return (
-    <div className="group/card w-full max-w-xs">
+    <div className="group/card w-full">
       <Link
         href={`/category/${id}/${slug}`}
         className={cn(
-          "card relative mx-auto flex h-[17rem] max-w-sm cursor-pointer flex-col items-center justify-center overflow-hidden rounded-md bg-cover p-4 shadow-xl",
+          "card relative mx-auto flex h-[17rem] max-w-sm cursor-pointer flex-col items-center justify-center overflow-hidden bg-cover p-4 shadow-xl lg:h-[15rem] xl:h-[20rem]",
         )}
         style={{ backgroundImage: `url(${image_url})` }}
       >

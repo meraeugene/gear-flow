@@ -25,23 +25,23 @@ export default async function page() {
         <Carousel slides={carouselData} />
       </div>
 
-      <div className="px-24 py-20">
+      <div className="p-4 py-20 lg:px-12 xl:px-24">
         <Categories categoriesData={categories ?? []} />
       </div>
 
-      <div className="px-24 py-20">
+      <div className="p-4 py-20 md:px-16 lg:px-12 xl:px-24">
         <NewArrival newArrivalsData={newArrivals ?? []} />
       </div>
 
-      <div className="px-24 py-20">
-        <Units unitTitle="Units" unitsData={units ?? []} href="/units" />
+      <div className="p-4 py-20 lg:px-12 xl:px-24">
+        <Units unitTitle="Units" href="/units" unitsData={units ?? []} />
       </div>
 
-      <div className="py-20">
+      <div className="p-4 py-20 lg:px-12 xl:px-24">
         <HowItWorks />
       </div>
 
-      <div className="py-20">
+      <div className="p-4 py-20 lg:px-12 xl:px-24">
         <Faqs />
       </div>
     </div>

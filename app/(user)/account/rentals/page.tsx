@@ -32,24 +32,24 @@ const RentalsPage = () => {
 
   return (
     <Suspense fallback={<GlobalLoader />}>
-      <div className="flex min-h-screen">
-        <main className="flex-1 p-8">
-          <div className="mb-6 border-b border-gray-100 pb-6">
-            <div className="mb-6 space-y-4">
-              <BackButton />
-              <BreadcrumbNav items={myRentalsBreadcrumbs} />
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900">Rentals</h1>
-            <p className="mt-1 text-base text-gray-600">
-              View the status of your current and past rentals, including start
-              and end dates, delivery method, rental status, rental date, and
-              total price.
-            </p>
+      <main className="w-full p-4 pt-0">
+        <div className="mb-6 border-b border-gray-100 pb-6">
+          <div className="my-6 space-y-4">
+            <BackButton />
+            <BreadcrumbNav items={myRentalsBreadcrumbs} />
           </div>
+          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">
+            Rentals
+          </h1>
+          <p className="mt-1 text-sm text-gray-600 md:text-base">
+            View the status of your current and past rentals, including start
+            and end dates, delivery method, rental status, rental date, and
+            total price.
+          </p>
+        </div>
 
-          <RentalsTable rentals={rentals ?? []} />
-        </main>
-      </div>
+        <RentalsTable rentals={rentals ?? []} />
+      </main>
     </Suspense>
   );
 };

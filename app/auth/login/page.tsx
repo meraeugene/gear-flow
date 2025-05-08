@@ -36,8 +36,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center px-4">
-      <div className="mt-8 flex min-w-[23em] flex-col items-center">
+    <div className="mx-auto flex h-screen w-[85%] flex-col items-center justify-center md:w-[50%] lg:w-[35%] xl:w-[25%] 2xl:w-[20%]">
+      <div className="mt-8 flex w-full flex-col items-center">
         <Image
           src="/assets/images/logo.png"
           width={65}

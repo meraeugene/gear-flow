@@ -17,7 +17,7 @@ const page = async ({
 
   if (error || slug !== generateSlug(unit.name)) {
     return (
-      <div className="px-24 py-20">
+      <div className="px-4 py-20 md:px-24 lg:px-12">
         <AlertComponent variant="destructive" message="No unit found." />
       </div>
     );

@@ -202,7 +202,7 @@ export default function EditCategoryForm({
           <Input
             ref={fileInputRef}
             type="file"
-            className="w-[200px]"
+            className="w-[250px]"
             accept="image/*"
             onChange={handleImageChange}
           />
