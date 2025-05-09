@@ -48,13 +48,13 @@ const LenderPage = async ({
 
   return (
     <Suspense fallback={<GlobalLoader />}>
-      <div className="px-24 pt-12 pb-20">
+      <div className="px-4 py-12 lg:px-12 xl:px-24">
         <div className="space-y-7">
           <BackButton />
           <BreadcrumbNav items={breadcrumbs} />
         </div>
 
-        <div className="profile__container mt-12 ml-32 flex items-start gap-10">
+        <div className="profile__container mt-12 flex flex-col items-start gap-10 md:ml-32 md:flex-row">
           <Image
             src={owner?.profile_picture || ""}
             width={160}

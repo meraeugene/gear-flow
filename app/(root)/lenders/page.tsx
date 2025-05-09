@@ -26,7 +26,7 @@ const page = async () => {
 
   return (
     <Suspense fallback={<GlobalLoader />}>
-      <div className="px-24 pt-12 pb-20">
+      <div className="min-h-screen px-4 py-12 lg:px-12 xl:px-24">
         <div className="space-y-7">
           <BackButton />
           <BreadcrumbNav items={lendersBreadcrumbs} />
@@ -34,7 +34,7 @@ const page = async () => {
 
         <div className="lenders__container">
           <h1 className="my-12 text-3xl">Lenders</h1>
-          <div className="grid grid-cols-7 gap-8">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
             {lenders?.map((lender) => (
               <Link
                 href={`/lenders/${lender.auth_user_id}/${generateSlug(lender.first_name + "-" + lender.last_name)}`}
