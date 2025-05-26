@@ -8,7 +8,7 @@ import { LogoutOutlined, TagsOutlined } from "@ant-design/icons";
 import { handleClientLogout } from "@/lib/supabase/signOutClient";
 import { UsergroupAddOutlined, AppstoreOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import { FiEdit, FiLock, FiMail } from "react-icons/fi";
+import { FiEdit, FiLock } from "react-icons/fi";
 
 export const adminDashboardLinks = [
   {

@@ -11,7 +11,6 @@ import { AppstoreOutlined } from "@ant-design/icons";
 import {
   FiEdit,
   FiLock,
-  FiMail,
   FiCreditCard,
   FiShoppingBag,
   FiPackage,
