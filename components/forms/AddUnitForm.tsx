@@ -90,6 +90,7 @@ export default function AddUnitForm({ categories }: AddUnitForm) {
     }
 
     if (image) {
+      setLoading(true);
       const imageUrl = await cloudinaryUploadImage(image);
       const res = await createUnit({
         name: data.name,
