@@ -26,10 +26,7 @@ export default function RentalsTable({ rentals }: Props) {
         <tbody>
           {rentals.length === 0 ? (
             <tr>
-              <td
-                colSpan={8}
-                className="border-b border-gray-200 p-3 text-center text-gray-500"
-              >
+              <td colSpan={8} className="p-3 text-center text-gray-500">
                 You have no active rentals .
               </td>
             </tr>
