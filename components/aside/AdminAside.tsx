@@ -39,11 +39,11 @@ export const settingsLinks = [
     href: "/account/settings/reset-password",
     icon: <FiLock size={18} />,
   },
-  {
-    name: "Reset Email",
-    href: "/account/settings/change-email",
-    icon: <FiMail size={18} />,
-  },
+  // {
+  //   name: "Reset Email",
+  //   href: "/account/settings/change-email",
+  //   icon: <FiMail size={18} />,
+  // },
 ];
 
 const AdminAside = () => {

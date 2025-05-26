@@ -60,9 +60,13 @@ export async function updateSession(request: NextRequest) {
     "/account/units",
     "/account/units/add-unit",
     "/account/reset-password",
+    "/admin/manage-users",
+    "/admin/manage-categories",
+    "/admin/manage-categories/add-category",
+    "/admin/manage-categories/edit-category",
   ];
   const authPages = ["/auth/login", "/auth/register"];
-  const adminPages = ["/admin/manage-users"];
+  const adminPages = ["/admin/manage-users", "/admin/manage-categories"];
 
   // Redirect users who are logged in but haven't completed their profile (no address)
   // This applies both when they visit "/" or any protected page (except /account/complete-profile)
@@ -94,7 +98,7 @@ export async function updateSession(request: NextRequest) {
     // If the user is not an admin and tries to access admin-only pages
     if (
       userWithCompleteInfo.role !== "admin" &&
-      adminPages.includes(pathname)
+      adminPages.some((p) => pathname.startsWith(p))
     ) {
       url.pathname = "/account/dashboard";
       return NextResponse.redirect(url);
