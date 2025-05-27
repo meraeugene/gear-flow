@@ -39,7 +39,7 @@ const RentNowButton = ({
     <button
       className={`h-[50px] w-full rounded-sm border transition duration-200 ${
         isAvailable
-          ? "cursor-pointer border-gray-300 hover:bg-gray-100"
+          ? "cursor-pointer border-gray-200 hover:bg-gray-100"
           : "cursor-not-allowed border-gray-200 bg-gray-200"
       }`}
       disabled={!isAvailable}

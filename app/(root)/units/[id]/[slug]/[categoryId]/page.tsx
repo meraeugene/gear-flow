@@ -47,7 +47,7 @@ const page = async ({
 
       <div className="mx-auto mt-12 flex max-w-[85rem] flex-col justify-center gap-2 space-y-6 md:flex-row md:gap-12">
         <div className="w-full">
-          <div className="relative h-[25rem] overflow-hidden shadow-lg md:h-[20rem] lg:h-[25rem] xl:h-[35rem]">
+          <div className="relative h-[25rem] overflow-hidden md:h-[20rem] lg:h-[25rem] xl:h-[35rem]">
             <Image
               src={unit.image_url}
               alt={unit.name}
