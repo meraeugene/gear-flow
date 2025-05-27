@@ -37,7 +37,7 @@ const HowItWorks = () => {
                 <h1 className="text-lg font-semibold sm:text-xl lg:text-2xl">
                   {titles[index]}
                 </h1>
-                <p className="max-w-xs text-sm text-gray-700 sm:text-base md:text-xs lg:text-sm xl:text-lg">
+                <p className="max-w-xs text-sm text-gray-700 sm:text-base md:text-xs lg:text-sm xl:text-base">
                   {descriptions[index]}
                 </p>
               </div>
