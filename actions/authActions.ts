@@ -93,7 +93,7 @@ export const signup = async (formData: FormData) => {
 
   return {
     insertData,
-    success: "Signup success. Please verify your account via your email.",
+    success: `Signup success. Please verify your account via the email: ${email}.`,
     redirectUrl: "/auth/login",
   };
 };
