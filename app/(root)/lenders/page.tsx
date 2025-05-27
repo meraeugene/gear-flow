@@ -44,10 +44,10 @@ const page = async () => {
                 <Image
                   src={lender.profile_picture}
                   alt="profile picture"
-                  width={150}
-                  height={150}
-                  layout="intrinsic"
-                  className="w-[13rem] rounded-full object-cover"
+                  width={200}
+                  height={200}
+                  className="rounded-full object-cover"
+                  style={{ width: "200px", height: "200px" }}
                 />
                 <div className="info__container flex flex-col items-center justify-center">
                   <h1 className="mt-4 text-base font-semibold">

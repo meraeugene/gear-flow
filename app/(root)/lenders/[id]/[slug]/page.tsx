@@ -61,6 +61,7 @@ const LenderPage = async ({
             height={160}
             className="rounded-full object-cover"
             alt="profile picture"
+            style={{ width: "160px", height: "160px" }}
           />
 
           <div className="space-y-3">
