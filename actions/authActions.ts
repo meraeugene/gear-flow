@@ -196,7 +196,7 @@ export const signOut = async () => {
   revalidatePath("/", "layout");
 
   // Redirect the user to the login page
-  redirect("/auth/login");
+  redirect("/");
 };
 
 // Server-side action to fetch the authenticated user's full profile
