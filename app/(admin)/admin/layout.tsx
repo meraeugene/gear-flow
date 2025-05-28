@@ -1,8 +1,8 @@
 import { getAuthUser } from "@/actions/authActions";
-import AdminDashboardNavbar from "@/components/dashboardNavbar/AdminDashboardNavbar";
+import AdminDashboardNavbar from "@/components/dashboard-navbar/AdminDashboardNavbar";
 import AdminAside from "@/components/aside/AdminAside";
 import UserAside from "@/components/aside/UserAside";
-import UserDashboardNavbar from "@/components/dashboardNavbar/UserDashboardNavbar";
+import UserDashboardNavbar from "@/components/dashboard-navbar/UserDashboardNavbar";
 
 export default async function AccountLayout({
   children,

@@ -9,12 +9,13 @@ import GlobalLoader from "@/components/GlobalLoader";
 import { Suspense } from "react";
 import useSWR from "swr";
 import { fetcher } from "@/lib/services/swrFetcher";
+import TransactionSkeletonLoading from "@/components/skeleton-loading/transactions/TransactionSkeletonLoading";
 
 const TransactionsPage = () => {
   const { data, error, isLoading } = useSWR("/api/transactions", fetcher);
 
   if (isLoading) {
-    return <GlobalLoader />;
+    return <TransactionSkeletonLoading />;
   }
 
   const { transactions } = data;

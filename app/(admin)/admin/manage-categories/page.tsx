@@ -10,12 +10,13 @@ import { Suspense } from "react";
 import GlobalLoader from "@/components/GlobalLoader";
 import useSWR from "swr";
 import { fetcher } from "@/lib/services/swrFetcher";
+import ManageCategoriesSkeletonLoading from "@/components/skeleton-loading/manage-categories/ManageCategoriesSkeletonLoading";
 
 const AdminCategoriesPage = () => {
   const { data, error, isLoading } = useSWR("/api/categories", fetcher);
 
   if (isLoading) {
-    return <GlobalLoader />;
+    return <ManageCategoriesSkeletonLoading />;
   }
 
   if (error) {

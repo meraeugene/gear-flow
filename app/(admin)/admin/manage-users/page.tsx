@@ -9,12 +9,13 @@ import { Suspense } from "react";
 import GlobalLoader from "@/components/GlobalLoader";
 import useSWR from "swr";
 import { fetcher } from "@/lib/services/swrFetcher";
+import ManageUsersSkeletonLoading from "@/components/skeleton-loading/manage-users/ManageUsersSkeletonLoading";
 
 const AdminUsersPage = () => {
   const { data, error, isLoading } = useSWR("/api/users", fetcher);
 
   if (isLoading) {
-    return <GlobalLoader />;
+    return <ManageUsersSkeletonLoading />;
   }
 
   if (error) {

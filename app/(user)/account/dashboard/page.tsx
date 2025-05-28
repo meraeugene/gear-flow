@@ -9,7 +9,7 @@ import { AdminSectionCards } from "@/components/AdminSectionCards";
 import { UserSectionCards } from "@/components/UserSectionCards";
 import useSwr from "swr";
 import { fetcher } from "@/lib/services/swrFetcher";
-import DashboardSkeletonLoading from "@/components/skeletonLoading/dashboard/DashboardSkeletonLoading";
+import DashboardSkeletonLoading from "@/components/skeleton-loading/dashboard/DashboardSkeletonLoading";
 
 const DashboardPage = () => {
   const { data, error, isLoading } = useSwr("/api/stats", fetcher);

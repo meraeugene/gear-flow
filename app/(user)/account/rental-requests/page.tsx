@@ -9,12 +9,13 @@ import GlobalLoader from "@/components/GlobalLoader";
 import RentalRequestsCard from "./rental-requests-card";
 import useSWR from "swr";
 import { fetcher } from "@/lib/services/swrFetcher";
+import RentalRequestSkeleton from "@/components/skeleton-loading/rental-request/RentalRequestSkeleton";
 
 const RentalRequestsPage = () => {
   const { data, error, isLoading } = useSWR("/api/rental-requests", fetcher);
 
   if (isLoading) {
-    return <GlobalLoader />;
+    return <RentalRequestSkeleton />;
   }
 
   if (error) {

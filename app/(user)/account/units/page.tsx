@@ -10,12 +10,13 @@ import { Suspense } from "react";
 import GlobalLoader from "@/components/GlobalLoader";
 import useSWR from "swr";
 import { fetcher } from "@/lib/services/swrFetcher";
+import UnitsSkeletonLoading from "@/components/skeleton-loading/units/UnitsSkeletonLoading";
 
 const UnitsPage = () => {
   const { data, error, isLoading } = useSWR("/api/units", fetcher);
 
   if (isLoading) {
-    return <GlobalLoader />;
+    return <UnitsSkeletonLoading />;
   }
 
   const { userUnits } = data;

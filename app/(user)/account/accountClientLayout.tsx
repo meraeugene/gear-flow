@@ -1,10 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import AdminDashboardNavbar from "@/components/dashboardNavbar/AdminDashboardNavbar";
+import AdminDashboardNavbar from "@/components/dashboard-navbar/AdminDashboardNavbar";
 import AdminAside from "@/components/aside/AdminAside";
 import UserAside from "@/components/aside/UserAside";
-import UserDashboardNavbar from "@/components/dashboardNavbar/UserDashboardNavbar";
+import UserDashboardNavbar from "@/components/dashboard-navbar/UserDashboardNavbar";
 
 export default function AccountClientLayout({
   role,

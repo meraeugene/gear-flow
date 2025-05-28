@@ -9,12 +9,13 @@ import { Suspense } from "react";
 import GlobalLoader from "@/components/GlobalLoader";
 import useSWR from "swr";
 import { fetcher } from "@/lib/services/swrFetcher";
+import RentalsSkeletonLoading from "@/components/skeleton-loading/rentals/RentalsSkeletonLoading";
 
 const RentalsPage = () => {
   const { data, error, isLoading } = useSWR("/api/rentals", fetcher);
 
   if (isLoading) {
-    return <GlobalLoader />;
+    return <RentalsSkeletonLoading />;
   }
 
   const { rentals } = data;
