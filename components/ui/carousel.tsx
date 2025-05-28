@@ -2,7 +2,7 @@
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import Image from "next/image";
 import { useState, useRef, useId, useEffect } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 
 interface SlideData {
   title: string;
@@ -64,7 +64,8 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
     event.currentTarget.style.opacity = "1";
   };
 
-  const { src, button, title } = slide;
+  // const { src, button, title } = slide;
+  const { src, title } = slide;
 
   return (
     <li
@@ -117,7 +118,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
         <h2 className="relative text-lg font-semibold md:text-2xl lg:text-4xl">
           {title}
         </h2>
-        <div className="flex justify-center">
+        {/* <div className="flex justify-center">
           <motion.button
             initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
@@ -127,7 +128,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
           >
             {button}
           </motion.button>
-        </div>
+        </div> */}
       </article>
     </li>
   );
