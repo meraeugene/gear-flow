@@ -9,13 +9,13 @@ import { AdminSectionCards } from "@/components/AdminSectionCards";
 import { UserSectionCards } from "@/components/UserSectionCards";
 import useSwr from "swr";
 import { fetcher } from "@/lib/services/swrFetcher";
-import GlobalLoader from "@/components/GlobalLoader";
+import DashboardSkeletonLoading from "@/components/skeletonLoading/dashboard/DashboardSkeletonLoading";
 
 const DashboardPage = () => {
   const { data, error, isLoading } = useSwr("/api/stats", fetcher);
 
   if (isLoading) {
-    return <GlobalLoader />;
+    return <DashboardSkeletonLoading />;
   }
 
   const { user } = data.user;
