@@ -181,7 +181,7 @@ export default function EditCategoryForm({
                 width={128}
                 height={128}
                 priority
-                className="rounded-md object-cover"
+                className="h-[128px] w-[128px] rounded-md object-cover"
               />
 
               <Button

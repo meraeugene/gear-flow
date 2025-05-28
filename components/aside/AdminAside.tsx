@@ -9,6 +9,7 @@ import { handleClientLogout } from "@/lib/supabase/signOutClient";
 import { UsergroupAddOutlined, AppstoreOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { FiEdit, FiLock } from "react-icons/fi";
+import { mutate } from "swr";
 
 export const adminDashboardLinks = [
   {
@@ -57,6 +58,7 @@ const AdminAside = () => {
 
   const handleLogout = async () => {
     setIsLoggingOut(true);
+    mutate("/api/stats", null, { revalidate: false });
     await handleClientLogout();
     logout();
     setIsLoggingOut(false);

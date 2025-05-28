@@ -17,6 +17,7 @@ import {
   FiInbox,
   FiEdit2,
 } from "react-icons/fi";
+import { mutate } from "swr";
 
 export const userDashboardLinks = [
   {
@@ -80,6 +81,7 @@ const UserAside = () => {
 
   const handleLogout = async () => {
     setIsLoggingOut(true);
+    mutate("/api/stats", null, { revalidate: false });
     await handleClientLogout();
     logout();
     setIsLoggingOut(false);

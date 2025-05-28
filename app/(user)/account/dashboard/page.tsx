@@ -14,11 +14,17 @@ import DashboardSkeletonLoading from "@/components/skeleton-loading/dashboard/Da
 const DashboardPage = () => {
   const { data, error, isLoading } = useSwr("/api/stats", fetcher);
 
-  if (isLoading) {
+  const user = data?.user?.user;
+
+  if ((isLoading && !data) || !user) {
     return <DashboardSkeletonLoading />;
   }
 
-  const { user } = data.user;
+  if (error || !user) {
+    redirect("/auth/login");
+  }
+
+  const isAdmin = user.role === "admin";
 
   const {
     totalUsers,
@@ -30,12 +36,6 @@ const DashboardPage = () => {
 
   const { totalRentals, activeRentals, totalUnits, completedRentals, revenue } =
     data.userStats;
-
-  if (error || !user) {
-    redirect("/auth/login");
-  }
-
-  const isAdmin = user?.role === "admin";
 
   return (
     <main className="p-4 pt-0">
