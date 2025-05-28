@@ -15,6 +15,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { handleClientLogout } from "@/lib/supabase/signOutClient";
 import { LogoutOutlined } from "@ant-design/icons";
+import { mutate } from "swr";
 
 const UserDashboardNavbar = () => {
   const { logout } = useAuthStore();
@@ -28,6 +29,7 @@ const UserDashboardNavbar = () => {
 
   const handleLogout = async () => {
     setIsLoggingOut(true);
+    mutate("/api/stats", null, { revalidate: false });
     await handleClientLogout();
     logout();
     setIsLoggingOut(false);
