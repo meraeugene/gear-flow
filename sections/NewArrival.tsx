@@ -27,7 +27,7 @@ const NewArrival = ({ newArrivalsData }: NewArrivalProps) => {
             href={`/units/${newArrivalsData[0]?.unit_id}/${firstSlug}/${newArrivalsData[0]?.category_id}`}
           >
             <Image
-              className="h-full w-full object-cover"
+              className="h-full w-full border object-cover"
               src={newArrivalsData[0]?.image_url || "/assets/images/ps5.jpg"}
               alt={newArrivalsData[0]?.name || "First Item"}
               width={1920}
@@ -42,7 +42,7 @@ const NewArrival = ({ newArrivalsData }: NewArrivalProps) => {
             href={`/units/${newArrivalsData[1]?.unit_id}/${secondSlug}/${newArrivalsData[1]?.category_id}`}
           >
             <Image
-              className="h-full w-full object-cover"
+              className="h-full w-full border object-cover"
               src={newArrivalsData[1]?.image_url || "/assets/images/camera.jpg"}
               alt={newArrivalsData[1]?.name || "Second Item"}
               width={1920}
@@ -57,7 +57,7 @@ const NewArrival = ({ newArrivalsData }: NewArrivalProps) => {
             href={`/units/${newArrivalsData[2]?.unit_id}/${thirdSlug}/${newArrivalsData[2]?.category_id}`}
           >
             <Image
-              className="h-full w-full object-cover"
+              className="h-full w-full border object-cover"
               src={newArrivalsData[2]?.image_url || "/assets/images/alexa.jpg"}
               alt={newArrivalsData[2]?.name || "Third Item"}
               width={1920}

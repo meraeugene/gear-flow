@@ -34,7 +34,7 @@ const page = async () => {
 
         <div className="lenders__container">
           <h1 className="my-12 text-3xl">Lenders</h1>
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
             {lenders?.map((lender) => (
               <Link
                 href={`/lenders/${lender.auth_user_id}/${generateSlug(lender.first_name + "-" + lender.last_name)}`}
@@ -44,10 +44,10 @@ const page = async () => {
                 <Image
                   src={lender.profile_picture}
                   alt="profile picture"
-                  width={200}
-                  height={200}
+                  width={150}
+                  height={150}
                   className="rounded-full object-cover"
-                  style={{ width: "200px", height: "200px" }}
+                  style={{ width: "150px", height: "150px" }}
                 />
                 <div className="info__container flex flex-col items-center justify-center">
                   <h1 className="mt-4 text-base font-semibold">
