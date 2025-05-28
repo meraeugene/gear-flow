@@ -48,7 +48,7 @@ export async function getLenderUnitsWithProfile(
       .from("public_units")
       .select("*", { count: "exact" })
       .eq("owner_id", lenderId)
-      .order("created_at", { ascending: false }) // Most recent first
+      .order("created_at", { ascending: true }) // Most recent first
       .range((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage - 1);
 
     if (unitsError) {

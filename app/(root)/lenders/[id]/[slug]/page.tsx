@@ -3,7 +3,7 @@ import { AlertComponent } from "@/components/AlertComponent";
 import BackButton from "@/components/BackButton";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import GlobalLoader from "@/components/GlobalLoader";
-import UserUnits from "@/components/UserUnits";
+import InfiniteUserUnits from "@/components/InfiniteUserUnits";
 import { capitalizeFirstLetter } from "@/utils/string/capitalizeFirstLetter";
 import { generateSlug } from "@/utils/string/generateSlug";
 import Image from "next/image";
@@ -17,7 +17,7 @@ const LenderPage = async ({
   const lenderId = (await params).id;
   const slug = (await params).slug;
 
-  const { userUnits, owner, error } = await getLenderUnitsWithProfile(lenderId);
+  const { owner, error } = await getLenderUnitsWithProfile(lenderId);
 
   if (
     error ||
@@ -88,7 +88,7 @@ const LenderPage = async ({
         </div>
 
         <div className="user-units__container mt-14 border-t border-gray-100 pt-14">
-          <UserUnits units={userUnits ?? []} />
+          <InfiniteUserUnits lenderId={lenderId} />
         </div>
       </div>
     </Suspense>

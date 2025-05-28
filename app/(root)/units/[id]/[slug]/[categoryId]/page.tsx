@@ -83,7 +83,7 @@ const page = async ({
             Owner:{" "}
             <Link
               href={`/lenders/${unit.owner_id}/${generateSlug(unit.owner_first_name + "-" + unit.owner_last_name)}`}
-              className="font-medium text-gray-700 hover:text-black"
+              className="font-medium text-gray-700 hover:text-black hover:underline"
             >
               {unit.owner_first_name} {unit.owner_last_name}
             </Link>
